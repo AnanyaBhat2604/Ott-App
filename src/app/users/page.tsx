@@ -1,9 +1,9 @@
 import Image from "next/image";
 
-export default function Home() {
+export default function Users() {
   return (
     <main>
-      <h1>Hello World</h1>
+      <h1>Users</h1>
     </main>
   );
 }
