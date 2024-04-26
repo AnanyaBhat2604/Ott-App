@@ -30,9 +30,19 @@ const config: Config = {
       padding: {
         normal: "60px 40px",
       },
-
       borderRadius: {
         normal: "8px",
+      },
+      fontSize: {
+        xs: "14px",
+        sm: "16px",
+        lg: "32px",
+      },
+
+      fontWeight: {
+        normal: "400",
+        sembold: "600",
+        bold: "700",
       },
     },
   },
