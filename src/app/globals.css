@@ -16,7 +16,21 @@
   }
 }
 
-body {}
+body {
+
+}
+
+@layer components {
+  .auth-bg {
+    @apply bg-auth-pattern relative before:bg-auth-gradient before:absolute before:inset-0 h-screen z-0;
+  }
+
+  .center-div{
+    @apply flex items-center justify-center;
+  }
+
+
+}
 
 @layer utilities {
   .text-balance {
