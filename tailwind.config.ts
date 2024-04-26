@@ -31,6 +31,7 @@ const config: Config = {
         normal: "60px 40px",
       },
       borderRadius: {
+        sm: "4px",
         normal: "8px",
       },
       fontSize: {

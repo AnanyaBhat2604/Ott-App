@@ -20,27 +20,53 @@ const InputWithDropdown = () => {
     setFocus(false);
   };
 
+  const selectStyles = {
+    "& fieldset": {
+      border: "none",
+    },
+    "& .MuiSelect-select": {
+      paddingRight: "17px",
+      paddingLeft: "17px",
+      paddingTop: "15px",
+      paddingBottom: "15px",
+    },
+  };
+
+  const inputStyles = {
+    "& fieldset": {
+      border: "none",
+    },
+    "& input[type=number]": {
+      MozAppearance: "textfield",
+    },
+    "& input[type=number]::-webkit-outer-spin-button": {
+      WebkitAppearance: "none",
+      margin: 0,
+    },
+    "& input[type=number]::-webkit-inner-spin-button": {
+      WebkitAppearance: "none",
+      margin: 0,
+    },
+  };
+
   return (
     <div className="relative flex">
-      <div className={`${focus && "border-red-600"} border-normal`}>
+      <div
+        className={`border-cod-gray border-normal rounded-sm ${
+          focus && "border-dodger-blue"
+        }`}
+      >
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
           value={10}
           // onChange={handleChange}
-          className="w-[114px]"
+          className={`w-[114px] border-cod-gray border-r rounded-none`}
           onFocus={handleFocus}
-          // onBlur={handleBlur}
           onClose={() => {
             setTimeout(() => {
               handleBlur();
             }, 0);
           }}
-          sx={{
-            "& fieldset": {
-              border: "none",
-            },
-          }}
+          sx={selectStyles}
         >
           <MenuItem value={10}>Ten</MenuItem>
           <MenuItem value={20}>Twenty</MenuItem>
@@ -50,11 +76,13 @@ const InputWithDropdown = () => {
           placeholder="Input"
           onFocus={handleFocus}
           onBlur={handleBlur}
-          sx={{
-            "& fieldset": {
-              border: "none",
+          type="number"
+          inputProps={{
+            style: {
+              padding: "15px 20px",
             },
           }}
+          sx={{ ...inputStyles }}
         />
       </div>
     </div>
