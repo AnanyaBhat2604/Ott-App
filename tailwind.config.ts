@@ -33,6 +33,7 @@ const config: Config = {
         normal: "1px",
       },
       padding: {
+        small: "14px 20px",
         normal: "60px 40px",
       },
       borderRadius: {

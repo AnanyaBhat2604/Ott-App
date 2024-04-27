@@ -5,10 +5,15 @@ import strings from "@/assets/strings/strings.json";
 import InputWithDropdown from "@/components/InputWithDropdown/InputWithDropdown";
 import countryCodes from "@/assets/data/country-codes.json";
 import { InputWithDropDown } from "@/interfaces/componentTypes";
+import ButtonComponent from "@/components/ButtonComponent/ButtonComponent";
 
 const Login = () => {
   const onInputChange = ({ dropdownValue, inputValue }: InputWithDropDown) => {
     console.log("object:", dropdownValue, inputValue);
+  };
+
+  const buttonClick = () => {
+    alert("Button clicked");
   };
   return (
     <div className="flex flex-col text-white items-center ">
@@ -26,6 +31,9 @@ const Login = () => {
           placeholderName={strings.phoneNumber}
           inputType={"number"}
         />
+      </div>
+      <div className="w-full mt-[24px]">
+        <ButtonComponent name={strings.continue} onClick={buttonClick} />
       </div>
     </div>
   );
