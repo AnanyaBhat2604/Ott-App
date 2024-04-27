@@ -31,10 +31,32 @@ body {
   .center-div {
     @apply flex items-center justify-center;
   }
+
+  .error-text {
+    @apply text-cinnabar text-xs leading-normal pt-[6px];
+  }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.scrollbar-custom::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-track {
+  display: none;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background-color: theme("colors.dove-gray");
+  border-radius: 4px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb:hover {
+  background-color: theme("colors.dodger-blue");
+  transform: scale(1.1);
 }

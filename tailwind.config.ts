@@ -15,6 +15,10 @@ const config: Config = {
         white: "#FFFFFF",
         "cod-gray": "#161616B2",
         "dodger-blue": "#1D78FF",
+        cinnabar: "#E13740",
+        "gray-light": "#808080B2",
+        tundora: "#4D4D4D",
+        "bay-of-many": "#264C85",
       },
       backgroundImage: {
         "auth-pattern": "url('/assets/images/background-poster.png')",
@@ -22,6 +26,7 @@ const config: Config = {
           "linear-gradient(90deg, rgba(23, 32, 63, 0.8) 0%, rgba(18, 23, 47, 0.5) 59.5%, rgba(17, 25, 56, 0.9) 100%), linear-gradient(0.04deg, rgba(0, 0, 0, 0) 0.04%, rgba(0, 0, 0, 0.5) 26.74%, #262626 92.11%)",
       },
       height: {
+        // @ts-ignore
         screen: ["100vh", "100dvh"],
       },
       borderWidth: {
@@ -44,6 +49,10 @@ const config: Config = {
         normal: "400",
         sembold: "600",
         bold: "700",
+      },
+
+      lineHeight: {
+        normal: "24px",
       },
     },
   },
