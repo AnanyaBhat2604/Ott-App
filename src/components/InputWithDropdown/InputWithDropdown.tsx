@@ -43,13 +43,19 @@ const InputWithDropdown = ({
   error,
   placeholderName,
   inputType = "string",
+  name,
 }: {
   dropdownArray: { label: string; value: string }[];
   defaultDropdownValue?: string;
-  onChange: ({ dropdownValue, inputValue }: InputWithDropDown) => void;
+  onChange: ({
+    [name]: { dropdownValue, inputValue },
+  }: {
+    [key: string]: InputWithDropDown;
+  }) => void;
   error?: string;
   placeholderName?: string;
   inputType?: string;
+  name: string;
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const menuRef = useRef<HTMLInputElement>(null);
@@ -62,7 +68,9 @@ const InputWithDropdown = ({
   });
 
   useEffect(() => {
-    onChange(inputdata);
+    const data = { [name]: inputdata };
+
+    onChange(data);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputdata]);
 
@@ -111,7 +119,7 @@ const InputWithDropdown = ({
               className: "bg-tundora text-white scrollbar-custom",
               sx: {
                 width: `${inputRef.current?.clientWidth}px`,
-                maxHeight: "200px",
+                maxHeight: "250px",
                 marginTop: "10px",
                 paddingTop: 0,
 

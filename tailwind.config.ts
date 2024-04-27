@@ -48,7 +48,8 @@ const config: Config = {
 
       fontWeight: {
         normal: "400",
-        sembold: "600",
+        thick: "500",
+        semibold: "600",
         bold: "700",
       },
 

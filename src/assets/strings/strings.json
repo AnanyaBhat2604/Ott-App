@@ -2,7 +2,9 @@
   "login": "Login",
   "signUp": " Sign up",
   "phone": "Phone",
+  "email": "Email",
   "signInWithEmail": "Sign in with email",
+  "signInWithPhoneNumber": "Sign in with phone number",
   "phoneNumber": "Phone number",
   "continue": "Continue",
   "dontHaveAccount": "Don’t have an account?"
