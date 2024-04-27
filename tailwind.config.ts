@@ -19,6 +19,7 @@ const config: Config = {
         "gray-light": "#808080B2",
         tundora: "#4D4D4D",
         "bay-of-many": "#264C85",
+        "wild-sand": "#F4F4F4",
       },
       backgroundImage: {
         "auth-pattern": "url('/assets/images/background-poster.png')",
@@ -41,6 +42,7 @@ const config: Config = {
         normal: "8px",
       },
       fontSize: {
+        xxs: "12px",
         xs: "14px",
         sm: "16px",
         lg: "32px",

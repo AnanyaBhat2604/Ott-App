@@ -43,6 +43,10 @@ body {
   }
 }
 
+.scrollbar-custom {
+  scrollbar-gutter: stable both-edges;
+}
+
 .scrollbar-custom::-webkit-scrollbar {
   width: 6px;
 }
