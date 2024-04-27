@@ -1,5 +1,9 @@
-import { TextField } from "@mui/material";
-import React, { useState } from "react";
+import { constants } from "@/assets/constants/constants";
+import { InputAdornment, TextField } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import EyeIcon from "../../../public/assets/icons/eye.svg";
+import EyeSlashIcon from "../../../public/assets/icons/eye-slash.svg";
+import Image from "next/image";
 
 const inputStyles = {
   "& fieldset": {
@@ -32,13 +36,14 @@ const InputComponent = ({
   onChange: (data: any) => void;
 }) => {
   const [focus, setFocus] = useState(false);
+  const [inputType, setInputType] = useState(type);
 
   return (
     <div className="flex flex-col w-[528px]">
       <TextField
         name={name}
         placeholder={placeholder}
-        type={type}
+        type={inputType}
         onChange={(event: any) => {
           onChange({ [event.target.name]: event.target.value });
         }}
@@ -51,9 +56,33 @@ const InputComponent = ({
             color: "white",
           },
         }}
+        InputProps={
+          type === constants.PASSWORD
+            ? {
+                endAdornment: (
+                  <InputAdornment position="end" className="cursor-pointer">
+                    {inputType === "password" ? (
+                      <Image
+                        src={EyeIcon}
+                        alt=""
+                        onClick={() => setInputType("text")}
+                      />
+                    ) : (
+                      <Image
+                        src={EyeSlashIcon}
+                        alt=""
+                        onClick={() => setInputType("password")}
+                      />
+                    )}
+                  </InputAdornment>
+                ),
+              }
+            : {}
+        }
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
         sx={{ ...inputStyles }}
+        autoComplete="off"
       />
       {error && <div className="error-text">{error}</div>}
     </div>

@@ -1,11 +1,15 @@
 {
   "login": "Login",
   "signUp": " Sign up",
+  "signIn": "Sign in",
   "phone": "Phone",
   "email": "Email",
+  "password": "Password",
   "signInWithEmail": "Sign in with email",
+  "signUpWithEmail": "Sign up with email",
   "signInWithPhoneNumber": "Sign in with phone number",
   "phoneNumber": "Phone number",
   "continue": "Continue",
-  "dontHaveAccount": "Don’t have an account?"
+  "dontHaveAccount": "Don’t have an account?",
+  "alreadyHaveAnAccount": "Already have an account?"
 }

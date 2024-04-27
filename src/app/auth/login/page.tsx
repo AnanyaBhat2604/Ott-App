@@ -13,7 +13,6 @@ import InputComponent from "@/components/InputComponent/InputComponent";
 
 const Login = () => {
   const searchParams = useSearchParams();
-
   const loginWithEmail = searchParams.get("email");
 
   const onSubmit = (event: any) => {
