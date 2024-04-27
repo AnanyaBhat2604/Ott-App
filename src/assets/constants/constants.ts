@@ -3,13 +3,14 @@ import FacebookIcon from "../../../public/assets/icons/facebook.svg";
 import AppleIcon from "../../../public/assets/icons/apple.svg";
 import GoogleIcon from "../../../public/assets/icons/google.svg";
 import EmailIcon from "../../../public/assets/icons/email.svg";
+import { LoginOption } from "@/interfaces/componentTypes";
 
 export const constants = {
   TRUE: "true",
   PASSWORD: "password",
 };
 
-export const loginOptions = [
+export const loginOptions: LoginOption[] = [
   {
     name: "facebook",
     icon: FacebookIcon,

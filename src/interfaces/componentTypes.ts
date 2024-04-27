@@ -9,3 +9,9 @@ export interface ButtonComponentType {
   onClick?: () => void;
   type?: "button" | "reset" | "submit";
 }
+
+export interface LoginOption {
+  name: string;
+  icon: string;
+  text: string;
+}
