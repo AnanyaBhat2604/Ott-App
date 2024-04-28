@@ -44,7 +44,7 @@ body {
 }
 
 .scrollbar-custom {
-  scrollbar-gutter: stable both-edges;
+  scrollbar-gutter: stable;
 }
 
 .scrollbar-custom::-webkit-scrollbar {
