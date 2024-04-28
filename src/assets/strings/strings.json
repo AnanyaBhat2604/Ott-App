@@ -21,5 +21,8 @@
   "yourDetails": "Your details",
   "firstName": "First name",
   "lastName": "Last name",
-  "state": "State"
+  "state": "State",
+  "pleaseEnter": "Please enter",
+  "phoneNumValidation": "*Phone number must contain only digits",
+  "emailValidation": "*Invalid email format"
 }

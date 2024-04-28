@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import EyeIcon from "../../../public/assets/icons/eye.svg";
 import EyeSlashIcon from "../../../public/assets/icons/eye-slash.svg";
 import Image from "next/image";
+import { validateInput } from "@/utils/validation";
 
 const inputStyles = {
   "& fieldset": {
@@ -23,20 +24,41 @@ const inputStyles = {
 };
 
 const InputComponent = ({
-  error,
+  validationRequired,
+  validationType,
   type = "text",
   placeholder,
   name,
   onChange,
 }: {
-  error?: string;
+  validationRequired?: boolean;
   type?: string;
   placeholder: string;
   name: string;
-  onChange: (data: any) => void;
+  validationType?: string;
+  onChange: (data: any, hasError: boolean) => void;
 }) => {
   const [focus, setFocus] = useState(false);
   const [inputType, setInputType] = useState(type);
+  const [error, setError] = useState("");
+
+  const handleChange = (event: any) => {
+    let hasError = false;
+    if (validationRequired) {
+      const errorMessage = validateInput(
+        event.target.name,
+        event.target.value,
+        validationType
+      );
+      if (errorMessage) {
+        hasError = true;
+      } else {
+        hasError = false;
+      }
+      setError(errorMessage);
+    }
+    onChange({ [event.target.name]: event.target.value }, hasError);
+  };
 
   return (
     <div className="flex flex-col w-[528px]">
@@ -44,9 +66,7 @@ const InputComponent = ({
         name={name}
         placeholder={placeholder}
         type={inputType}
-        onChange={(event: any) => {
-          onChange({ [event.target.name]: event.target.value });
-        }}
+        onChange={handleChange}
         className={`text-white text-sm !border-normal !border-solid !rounded-sm ${
           focus ? "!border-dodger-blue" : "!border-gray-light"
         }`}

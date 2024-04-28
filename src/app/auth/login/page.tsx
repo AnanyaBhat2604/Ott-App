@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import strings from "@/assets/strings/strings.json";
 import InputWithDropdown from "@/components/InputWithDropdown/InputWithDropdown";
 import countryCodes from "@/assets/data/country-codes.json";
-import { InputWithDropDown } from "@/interfaces/componentTypes";
 import ButtonComponent from "@/components/ButtonComponent/ButtonComponent";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -14,36 +13,39 @@ import { frontendRoutes } from "@/assets/constants/frontend-routes";
 
 const Login = () => {
   const [formData, setFormData] = useState({});
-
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
+  const [errorFields, setErrorFields] = useState({});
 
   const searchParams = useSearchParams();
   const loginWithEmail = searchParams.get("email");
 
   const onSubmit = (event: any) => {
     event.preventDefault();
+
     alert("Button clicked");
   };
 
-  const onInputChange = (data: any) => {
-    setFormData((prevState) => {
-      const nextState = { ...prevState };
-      if (loginWithEmail) {
-        if ("phone" in nextState) {
-          delete nextState["phone"];
-        }
-      } else {
-        if ("email" in nextState) {
-          delete nextState["email"];
-        }
+  const onInputChange = (data: any, hasError: boolean) => {
+    const removeField = (fields: any) => {
+      const nextState = { ...fields };
+      if (loginWithEmail && "phone" in nextState) {
+        delete nextState["phone"];
+      } else if (!loginWithEmail && "email" in nextState) {
+        delete nextState["email"];
       }
-      return {
-        ...nextState,
-        ...data,
-      };
-    });
+      return nextState;
+    };
+
+    setFormData((prevState) => ({
+      ...removeField(prevState),
+      ...data,
+    }));
+
+    const key = Object.keys(data)[0];
+
+    setErrorFields((prev) => ({
+      ...removeField(prev),
+      [key]: hasError,
+    }));
   };
 
   const renderLoginWithEmail = () => {
@@ -60,6 +62,8 @@ const Login = () => {
             placeholder={strings.email}
             name={"email"}
             onChange={onInputChange}
+            validationRequired
+            validationType="email"
           />
         </div>
       </>
@@ -83,7 +87,8 @@ const Login = () => {
             dropdownArray={countryCodes}
             defaultDropdownValue={countryCodes[0].value}
             onChange={onInputChange}
-            error={""}
+            validationRequired
+            validationType="phone"
             placeholderName={strings.phoneNumber}
             inputType={"number"}
             name={"phone"}

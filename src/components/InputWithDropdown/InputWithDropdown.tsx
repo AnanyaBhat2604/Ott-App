@@ -4,6 +4,7 @@ import { InputWithDropDown } from "@/interfaces/componentTypes";
 import { MenuItem, Select, TextField } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import tailwindConfig from "../../../tailwind.config";
+import { validateInput } from "@/utils/validation";
 
 const selectStyles = {
   "& fieldset": {
@@ -40,27 +41,34 @@ const InputWithDropdown = ({
   dropdownArray = [],
   defaultDropdownValue,
   onChange,
-  error,
   placeholderName,
   inputType = "string",
   name,
+  validationRequired,
+  validationType,
 }: {
   dropdownArray: { label: string; value: string }[];
   defaultDropdownValue?: string;
-  onChange: ({
-    [name]: { dropdownValue, inputValue },
-  }: {
-    [key: string]: InputWithDropDown;
-  }) => void;
-  error?: string;
+  onChange: (
+    {
+      [name]: { dropdownValue, inputValue },
+    }: {
+      [key: string]: InputWithDropDown;
+    },
+    hasError: boolean
+  ) => void;
   placeholderName?: string;
   inputType?: string;
   name: string;
+  validationType?: string;
+  validationRequired?: boolean;
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const menuRef = useRef<HTMLInputElement>(null);
 
   const [focus, setFocus] = useState(false);
+  const [error, setError] = useState("");
+  const [fieldHasError, setFieldHasError] = useState(false);
 
   const [inputdata, setInputData] = useState({
     dropdownValue: defaultDropdownValue || "",
@@ -69,10 +77,9 @@ const InputWithDropdown = ({
 
   useEffect(() => {
     const data = { [name]: inputdata };
-
-    onChange(data);
+    onChange(data, fieldHasError);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inputdata]);
+  }, [inputdata, fieldHasError]);
 
   useClickOutside([inputRef, menuRef], () => handleBlur());
 
@@ -92,6 +99,22 @@ const InputWithDropdown = ({
   };
 
   const handleInputChange = (event: any) => {
+    if (validationRequired) {
+      const errorMessage = validateInput(
+        name,
+        event.target.value,
+        validationType
+      );
+
+      if (errorMessage) {
+        setFieldHasError(true);
+      } else {
+        setFieldHasError(false);
+      }
+
+      setError(errorMessage);
+    }
+
     setInputData((prevState) => ({
       ...prevState,
       inputValue: event?.target.value,

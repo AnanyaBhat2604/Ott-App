@@ -63,7 +63,6 @@ const SignUp = () => {
             dropdownArray={countryCodes}
             defaultDropdownValue={countryCodes[0].value}
             onChange={onInputChange}
-            error={""}
             placeholderName={strings.phoneNumber}
             inputType={"number"}
             name={"phone"}
