@@ -12,6 +12,7 @@ import { InputWithDropDown } from "@/interfaces/componentTypes";
 import InputWithDropdown from "@/components/InputWithDropdown/InputWithDropdown";
 import DownArrowIcon from "../../../../public/assets/icons/down-arrow.svg";
 import Image from "next/image";
+import { frontendRoutes } from "@/assets/constants/frontend-routes";
 
 const SignUp = () => {
   const [showMoreOptions, setShowMoreOptions] = useState(false);
@@ -33,7 +34,7 @@ const SignUp = () => {
       <>
         <div className="flex justify-between gap-3 pt-[40px] opacity-70 items-center w-full">
           <div className="text-sm font-semibold">{strings.email}</div>
-          <Link href={"/auth/sign-up"} className="text-xs font-normal">
+          <Link href={frontendRoutes.SIGN_UP} className="text-xs font-normal">
             {strings.signUpWithPhoneNumber}
           </Link>
         </div>
@@ -54,7 +55,7 @@ const SignUp = () => {
         <div className="flex justify-between gap-3 pt-[40px] opacity-70 items-center w-full">
           <div className="text-sm font-semibold">{strings.phone}</div>
           <Link
-            href={"/auth/sign-up?email=true"}
+            href={`${frontendRoutes.SIGN_UP}?email=true`}
             className="text-xs font-normal"
           >
             {strings.signUpWithEmail}
@@ -148,7 +149,7 @@ const SignUp = () => {
       {showMoreOptions ? renderMoreOptions() : renderShowMoreOptions()}
       <div className="mt-[100px] text-sm ">
         <span className="opacity-70">{strings.alreadyHaveAnAccount}</span>{" "}
-        <Link href={"/auth/login"} className="font-thick">
+        <Link href={frontendRoutes.LOGIN} className="font-thick">
           {strings.signIn}
         </Link>
       </div>

@@ -55,6 +55,7 @@ const InputComponent = ({
             padding: "15px 20px",
             color: "white",
           },
+          autoComplete: "off",
         }}
         InputProps={
           type === constants.PASSWORD
@@ -82,7 +83,7 @@ const InputComponent = ({
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
         sx={{ ...inputStyles }}
-        autoComplete="off"
+        autoComplete="new-password"
       />
       {error && <div className="error-text">{error}</div>}
     </div>

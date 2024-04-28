@@ -10,6 +10,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { constants } from "@/assets/constants/constants";
 import InputComponent from "@/components/InputComponent/InputComponent";
+import { frontendRoutes } from "@/assets/constants/frontend-routes";
 
 const Login = () => {
   const searchParams = useSearchParams();
@@ -29,7 +30,7 @@ const Login = () => {
       <>
         <div className="flex justify-between gap-3 pt-[40px] opacity-70 items-center w-full">
           <div className="text-sm font-semibold">{strings.email}</div>
-          <Link href={"/auth/login"} className="text-xs font-normal">
+          <Link href={frontendRoutes.LOGIN} className="text-xs font-normal">
             {strings.signInWithPhoneNumber}
           </Link>
         </div>
@@ -53,7 +54,10 @@ const Login = () => {
       <>
         <div className="flex justify-between gap-3 pt-[40px] opacity-70 items-center w-full">
           <div className="text-sm font-semibold">{strings.phone}</div>
-          <Link href={"/auth/login?email=true"} className="text-xs font-normal">
+          <Link
+            href={`${frontendRoutes.LOGIN}?email=true`}
+            className="text-xs font-normal"
+          >
             {strings.signInWithEmail}
           </Link>
         </div>
@@ -83,7 +87,7 @@ const Login = () => {
       </div>
       <div className="mt-[100px] text-sm ">
         <span className="opacity-70">{strings.dontHaveAccount}</span>{" "}
-        <Link href={"/auth/sign-up"} className="font-thick">
+        <Link href={frontendRoutes.SIGN_UP} className="font-thick">
           {strings.signUp}
         </Link>
       </div>

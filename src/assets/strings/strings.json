@@ -17,5 +17,9 @@
   "continueWithFacebook": "Continue with Facebook",
   "continueWithGoogle": "Continue with Google",
   "continueWithApple": "Continue with Apple",
-  "continueWithEmail": "Continue with Email"
+  "continueWithEmail": "Continue with Email",
+  "yourDetails": "Your details",
+  "firstName": "First name",
+  "lastName": "Last name",
+  "state": "State"
 }
