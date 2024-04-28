@@ -1,13 +1,22 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import strings from "@/assets/strings/strings.json";
 import InputComponent from "@/components/InputComponent/InputComponent";
 import ButtonComponent from "@/components/ButtonComponent/ButtonComponent";
 
 const UserDetails = () => {
+  const [formData, setFormData] = useState({});
+
+  useEffect(() => {
+    console.log(formData);
+  }, [formData]);
+
   const onInputChange = (data: { [key: string]: string }) => {
-    console.log("object:", data);
+    setFormData((prevState) => ({
+      ...prevState,
+      ...data,
+    }));
   };
 
   const onSubmit = (event: any) => {

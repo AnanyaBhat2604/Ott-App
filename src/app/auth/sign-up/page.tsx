@@ -2,7 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import countryCodes from "@/assets/data/country-codes.json";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { constants, loginOptions } from "@/assets/constants/constants";
 import strings from "@/assets/strings/strings.json";
 import ButtonComponent from "@/components/ButtonComponent/ButtonComponent";
@@ -16,6 +16,7 @@ import { frontendRoutes } from "@/assets/constants/frontend-routes";
 
 const SignUp = () => {
   const [showMoreOptions, setShowMoreOptions] = useState(false);
+  const [formData, setFormData] = useState({});
 
   const searchParams = useSearchParams();
   const signUpWithEmail = searchParams.get("email");
@@ -26,10 +27,6 @@ const SignUp = () => {
   };
 
   const renderSignUpWithEmail = () => {
-    const onInputChange = (data: any) => {
-      console.log("Inputdata", data);
-    };
-
     return (
       <>
         <div className="flex justify-between gap-3 pt-[40px] opacity-70 items-center w-full">
@@ -126,8 +123,27 @@ const SignUp = () => {
   };
 
   const onInputChange = (data: { [key: string]: InputWithDropDown }) => {
-    console.log("object:", data);
+    setFormData((prevState) => {
+      const nextState = { ...prevState };
+      if (signUpWithEmail) {
+        if ("phone" in nextState) {
+          delete nextState["phone"];
+        }
+      } else {
+        if ("email" in nextState) {
+          delete nextState["email"];
+        }
+      }
+      return {
+        ...nextState,
+        ...data,
+      };
+    });
   };
+
+  useEffect(() => {
+    console.log(formData);
+  }, [formData]);
 
   return (
     <form className="flex flex-col text-white items-center" onSubmit={onSubmit}>

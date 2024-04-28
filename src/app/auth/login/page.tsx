@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import strings from "@/assets/strings/strings.json";
 import InputWithDropdown from "@/components/InputWithDropdown/InputWithDropdown";
 import countryCodes from "@/assets/data/country-codes.json";
@@ -13,6 +13,12 @@ import InputComponent from "@/components/InputComponent/InputComponent";
 import { frontendRoutes } from "@/assets/constants/frontend-routes";
 
 const Login = () => {
+  const [formData, setFormData] = useState({});
+
+  useEffect(() => {
+    console.log(formData);
+  }, [formData]);
+
   const searchParams = useSearchParams();
   const loginWithEmail = searchParams.get("email");
 
@@ -21,11 +27,26 @@ const Login = () => {
     alert("Button clicked");
   };
 
-  const renderLoginWithEmail = () => {
-    const onInputChange = (data: any) => {
-      console.log("Inputdata", data);
-    };
+  const onInputChange = (data: any) => {
+    setFormData((prevState) => {
+      const nextState = { ...prevState };
+      if (loginWithEmail) {
+        if ("phone" in nextState) {
+          delete nextState["phone"];
+        }
+      } else {
+        if ("email" in nextState) {
+          delete nextState["email"];
+        }
+      }
+      return {
+        ...nextState,
+        ...data,
+      };
+    });
+  };
 
+  const renderLoginWithEmail = () => {
     return (
       <>
         <div className="flex justify-between gap-3 pt-[40px] opacity-70 items-center w-full">
@@ -46,10 +67,6 @@ const Login = () => {
   };
 
   const renderLoginWithPhone = () => {
-    const onInputChange = (data: { [key: string]: InputWithDropDown }) => {
-      console.log("object:", data);
-    };
-
     return (
       <>
         <div className="flex justify-between gap-3 pt-[40px] opacity-70 items-center w-full">
