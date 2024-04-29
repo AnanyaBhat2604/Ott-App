@@ -1,0 +1,57 @@
+[
+  {
+    "name": "Home",
+    "link": "/home",
+    "options": [
+      {
+        "name": "All",
+        "link": "/home/all"
+      },
+      {
+        "name": "Movies",
+        "link": "/home/movies"
+      },
+      {
+        "name": "TV Shows",
+        "link": "/home/tv-shows"
+      }
+    ]
+  },
+  {
+    "name": "Store",
+    "link": "/store",
+    "options": [
+      {
+        "name": "All",
+        "link": "/store/all"
+      },
+      {
+        "name": "Rent",
+        "link": "/store/rent"
+      },
+      {
+        "name": "Channels",
+        "link": "/store/channels"
+      }
+    ]
+  },
+  {
+    "name": "Live TV",
+    "link": "/live-tv",
+    "options": []
+  },
+  {
+    "name": "Categories",
+    "link": "/categories",
+    "options": [
+      {
+        "name": "Category A",
+        "link": "/categories/categories-a"
+      },
+      {
+        "name": "Category B",
+        "link": "/categories/categories-b"
+      }
+    ]
+  }
+]
