@@ -46,6 +46,7 @@ const InputWithDropdown = ({
   name,
   validationRequired,
   validationType,
+  error = "",
 }: {
   dropdownArray: { label: string; value: string }[];
   defaultDropdownValue?: string;
@@ -55,20 +56,20 @@ const InputWithDropdown = ({
     }: {
       [key: string]: InputWithDropDown;
     },
-    hasError: boolean
+    hasError: string
   ) => void;
   placeholderName?: string;
   inputType?: string;
   name: string;
   validationType?: string;
   validationRequired?: boolean;
+  error?: string;
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const menuRef = useRef<HTMLInputElement>(null);
 
   const [focus, setFocus] = useState(false);
-  const [error, setError] = useState("");
-  const [fieldHasError, setFieldHasError] = useState(false);
+  const [fieldHasError, setFieldHasError] = useState("");
 
   const [inputdata, setInputData] = useState({
     dropdownValue: defaultDropdownValue || "",
@@ -107,12 +108,10 @@ const InputWithDropdown = ({
       );
 
       if (errorMessage) {
-        setFieldHasError(true);
+        setFieldHasError(errorMessage);
       } else {
-        setFieldHasError(false);
+        setFieldHasError("");
       }
-
-      setError(errorMessage);
     }
 
     setInputData((prevState) => ({

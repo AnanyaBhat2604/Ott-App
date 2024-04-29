@@ -30,20 +30,21 @@ const InputComponent = ({
   placeholder,
   name,
   onChange,
+  error = "",
 }: {
   validationRequired?: boolean;
   type?: string;
   placeholder: string;
   name: string;
   validationType?: string;
-  onChange: (data: any, hasError: boolean) => void;
+  onChange: (data: any, hasError: string) => void;
+  error?: string;
 }) => {
   const [focus, setFocus] = useState(false);
   const [inputType, setInputType] = useState(type);
-  const [error, setError] = useState("");
 
   const handleChange = (event: any) => {
-    let hasError = false;
+    let hasError = "";
     if (validationRequired) {
       const errorMessage = validateInput(
         event.target.name,
@@ -51,11 +52,10 @@ const InputComponent = ({
         validationType
       );
       if (errorMessage) {
-        hasError = true;
+        hasError = errorMessage;
       } else {
-        hasError = false;
+        hasError = "";
       }
-      setError(errorMessage);
     }
     onChange({ [event.target.name]: event.target.value }, hasError);
   };

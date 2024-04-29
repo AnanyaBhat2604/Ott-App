@@ -23,6 +23,6 @@
   "lastName": "Last name",
   "state": "State",
   "pleaseEnter": "Please enter",
-  "phoneNumValidation": "*Phone number must contain only digits",
+  "phoneNumValidation": "*Phone number must contain ten digits",
   "emailValidation": "*Invalid email format"
 }

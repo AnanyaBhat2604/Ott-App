@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import strings from "@/assets/strings/strings.json";
 import InputWithDropdown from "@/components/InputWithDropdown/InputWithDropdown";
 import countryCodes from "@/assets/data/country-codes.json";
@@ -12,19 +12,21 @@ import InputComponent from "@/components/InputComponent/InputComponent";
 import { frontendRoutes } from "@/assets/constants/frontend-routes";
 
 const Login = () => {
+  const formRef = useRef(null);
   const [formData, setFormData] = useState({});
-  const [errorFields, setErrorFields] = useState({});
+  const [errorFields, setErrorFields] = useState({
+    email: "",
+    phone: "",
+  });
 
   const searchParams = useSearchParams();
   const loginWithEmail = searchParams.get("email");
 
   const onSubmit = (event: any) => {
     event.preventDefault();
-
-    alert("Button clicked");
   };
 
-  const onInputChange = (data: any, hasError: boolean) => {
+  const onInputChange = (data: any, hasError: string) => {
     const removeField = (fields: any) => {
       const nextState = { ...fields };
       if (loginWithEmail && "phone" in nextState) {
@@ -48,6 +50,8 @@ const Login = () => {
     }));
   };
 
+  console.log(errorFields);
+
   const renderLoginWithEmail = () => {
     return (
       <>
@@ -64,6 +68,7 @@ const Login = () => {
             onChange={onInputChange}
             validationRequired
             validationType="email"
+            error={errorFields.email}
           />
         </div>
       </>
@@ -92,6 +97,7 @@ const Login = () => {
             placeholderName={strings.phoneNumber}
             inputType={"number"}
             name={"phone"}
+            error={errorFields.phone}
           />
         </div>
       </>
@@ -99,7 +105,11 @@ const Login = () => {
   };
 
   return (
-    <form className="flex flex-col text-white items-center" onSubmit={onSubmit}>
+    <form
+      className="flex flex-col text-white items-center"
+      onSubmit={onSubmit}
+      ref={formRef}
+    >
       <div className="text-lg font-bold">{strings.login}</div>
       {loginWithEmail === constants.TRUE
         ? renderLoginWithEmail()
