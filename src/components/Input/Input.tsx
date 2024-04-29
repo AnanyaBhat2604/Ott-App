@@ -1,6 +1,6 @@
 import { constants } from "@/assets/constants/constants";
 import { InputAdornment, TextField } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import EyeIcon from "../../../public/assets/icons/eye.svg";
 import EyeSlashIcon from "../../../public/assets/icons/eye-slash.svg";
 import Image from "next/image";
@@ -39,7 +39,7 @@ const InputComponent = ({
   validationType?: string;
   onChange: (data: any, hasError: string) => void;
   error?: string;
-}) => {
+}): ReactElement => {
   const [focus, setFocus] = useState(false);
   const [inputType, setInputType] = useState(type);
 

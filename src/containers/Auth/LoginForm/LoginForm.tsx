@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { FC, useRef, useState } from "react";
 import Link from "next/link";
 import strings from "@/assets/strings/strings.json";
 import InputWithDropdown from "@/components/DropdownInput/DropdownInput";
@@ -10,7 +10,7 @@ import InputComponent from "@/components/Input/Input";
 import { validateInput } from "@/utils/validation";
 import { frontendRoutes } from "@/assets/constants/frontend-routes";
 
-const LoginForm = () => {
+const LoginForm: FC = () => {
   const formRef = useRef(null);
 
   const searchParams = useSearchParams();
@@ -74,7 +74,7 @@ const LoginForm = () => {
     }));
   };
 
-  const renderLoginWithEmail = () => {
+  const renderLoginWithEmail = (): JSX.Element => {
     return (
       <>
         <div className="flex justify-between gap-3 pt-[40px] opacity-70 items-center w-full">
@@ -97,7 +97,7 @@ const LoginForm = () => {
     );
   };
 
-  const renderLoginWithPhone = () => {
+  const renderLoginWithPhone = (): JSX.Element => {
     return (
       <>
         <div className="flex justify-between gap-3 pt-[40px] opacity-70 items-center w-full">

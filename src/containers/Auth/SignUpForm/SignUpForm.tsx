@@ -1,6 +1,6 @@
 import { useSearchParams } from "next/navigation";
 import countryCodes from "@/assets/data/country-codes.json";
-import React, { useEffect, useState } from "react";
+import React, { FC, ReactElement, useEffect, useState } from "react";
 import { constants, loginOptions } from "@/assets/constants/constants";
 import strings from "@/assets/strings/strings.json";
 import Button from "@/components/Button/Button";
@@ -12,7 +12,7 @@ import DownArrowIcon from "../../../../public/assets/icons/down-arrow.svg";
 import Image from "next/image";
 import { frontendRoutes } from "@/assets/constants/frontend-routes";
 
-const SignUpForm = () => {
+const SignUpForm: FC = () => {
   const [showMoreOptions, setShowMoreOptions] = useState(false);
   const [formData, setFormData] = useState({});
 
@@ -24,7 +24,7 @@ const SignUpForm = () => {
     alert("Button clicked");
   };
 
-  const renderSignUpWithEmail = () => {
+  const renderSignUpWithEmail = (): ReactElement => {
     return (
       <>
         <div className="flex justify-between gap-3 pt-[40px] opacity-70 items-center w-full">
@@ -44,7 +44,7 @@ const SignUpForm = () => {
     );
   };
 
-  const renderSignUpWithPhone = () => {
+  const renderSignUpWithPhone = (): ReactElement => {
     return (
       <>
         <div className="flex justify-between gap-3 pt-[40px] opacity-70 items-center w-full">
@@ -70,7 +70,7 @@ const SignUpForm = () => {
     );
   };
 
-  const renderShowMoreOptions = () => {
+  const renderShowMoreOptions = (): ReactElement => {
     return (
       <div
         className="flex items-center mt-[30px] gap-[4px]"
@@ -86,7 +86,7 @@ const SignUpForm = () => {
     );
   };
 
-  const renderMoreOptions = () => {
+  const renderMoreOptions = (): ReactElement => {
     return (
       <div className="mt-[30px] flex flex-col gap-[40px] w-full">
         <div className="flex items-center">

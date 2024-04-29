@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import strings from "@/assets/strings/strings.json";
 import InputComponent from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 
-const UserDetailsForm = () => {
+const UserDetailsForm: FC = () => {
   const [formData, setFormData] = useState({});
 
   useEffect(() => {

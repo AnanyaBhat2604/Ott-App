@@ -1,8 +1,12 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { Button as MUIButton } from "@mui/material";
 import { ButtonComponentType } from "@/interfaces/componentTypes";
 
-const Button = ({ name, onClick, type = "button" }: ButtonComponentType) => {
+const Button = ({
+  name,
+  onClick,
+  type = "button",
+}: ButtonComponentType): ReactElement => {
   return (
     <MUIButton
       type={type}

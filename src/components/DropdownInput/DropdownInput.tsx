@@ -2,7 +2,7 @@
 import { useClickOutside } from "@/hooks/useClickOutside";
 import { InputWithDropDown } from "@/interfaces/componentTypes";
 import { MenuItem, Select, TextField } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import React, { ReactElement, useEffect, useRef, useState } from "react";
 import tailwindConfig from "../../../tailwind.config";
 import { validateInput } from "@/utils/validation";
 
@@ -64,7 +64,7 @@ const InputWithDropdown = ({
   validationType?: string;
   validationRequired?: boolean;
   error?: string;
-}) => {
+}): ReactElement => {
   const inputRef = useRef<HTMLInputElement>(null);
   const menuRef = useRef<HTMLInputElement>(null);
 

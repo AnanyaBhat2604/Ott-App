@@ -1,12 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { FC } from "react";
 import Link from "next/link";
 import strings from "@/assets/strings/strings.json";
 import { frontendRoutes } from "@/assets/constants/frontend-routes";
 import LoginForm from "@/containers/Auth/LoginForm/LoginForm";
 
-const Login = () => {
+const Login: FC = () => {
   return (
     <div className="flex flex-col text-white items-center">
       <div className="text-lg font-bold">{strings.login}</div>
