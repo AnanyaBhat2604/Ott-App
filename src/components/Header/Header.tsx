@@ -84,7 +84,7 @@ const Header = () => {
           {(["Home", "Store", "Categories"] as DropdownKey[]).map((key) => (
             <div
               key={key}
-              className={`flex gap-[10px] relative min-w-[100px] justify-center items-center px-[10px] py-[1rem] ${
+              className={`flex gap-[10px] relative min-w-[100px] justify-center items-center px-[10px] h-[64px]  ${
                 dropdownState[key].isHovered ? "bg-gray-800 text-white" : ""
               }`}
               onMouseEnter={() => handleDropdown(key, true)}
@@ -111,21 +111,18 @@ const Header = () => {
         </div>
         <div className="relative font-sans font-semibold text-20px leading-26.4px text-light-grey flex gap-[20px] items-center">
           <div
-            className={`py-[1rem] px-[10px] ${
+            className={` px-[10px] h-[64px] flex items-center ${
               dropdownState["search"].isHovered ? "bg-gray-800 text-white" : ""
             }`}
+            onMouseEnter={() => handleHover("search", true)}
+            onMouseLeave={() => handleHover("search", false)}
           >
-            <Image
-              src={search}
-              alt="search"
-              onMouseEnter={() => handleHover("search", true)}
-              onMouseLeave={() => handleHover("search", false)}
-            />
+            <Image src={search} alt="search" />
           </div>
           <div
             onMouseEnter={() => handleHover("tryForFree", true)}
             onMouseLeave={() => handleHover("tryForFree", false)}
-            className={`min-w-[100px]  px-[10px] py-[1rem] ${
+            className={`min-w-[100px]  px-[10px] h-[64px] flex items-center justify-center ${
               dropdownState["tryForFree"].isHovered
                 ? "bg-gray-800 text-white"
                 : ""
@@ -136,7 +133,7 @@ const Header = () => {
           {(["en"] as DropdownKey[]).map((key) => (
             <div
               key={key}
-              className={`flex gap-[10px] relative min-w-[80px] justify-center items-center px-[10px] py-[1rem] ${
+              className={`flex gap-[10px] relative min-w-[80px] justify-center items-center px-[10px] h-[64px]  ${
                 dropdownState[key].isHovered ? "bg-gray-800 text-white" : ""
               }`}
               onMouseEnter={() => handleDropdown(key, true)}
@@ -151,17 +148,13 @@ const Header = () => {
             </div>
           ))}
           <div
-            className={`px-[10px] py-[1rem] ${
+            className={`px-[10px] h-[64px] flex items-center ${
               dropdownState["profile"].isHovered ? "bg-gray-800 text-white" : ""
             }`}
+            onMouseEnter={() => handleHover("profile", true)}
+            onMouseLeave={() => handleHover("profile", false)}
           >
-            <Image
-              src={profile}
-              alt="profile"
-              onMouseEnter={() => handleHover("profile", true)}
-              onMouseLeave={() => handleHover("profile", false)}
-              className="h-[32px] w-[32px]"
-            />
+            <Image src={profile} alt="profile" className="h-[32px] w-[32px]" />
           </div>
         </div>
       </div>
