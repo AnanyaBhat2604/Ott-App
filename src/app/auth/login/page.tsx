@@ -10,6 +10,7 @@ import { useSearchParams } from "next/navigation";
 import { constants } from "@/assets/constants/constants";
 import InputComponent from "@/components/InputComponent/InputComponent";
 import { frontendRoutes } from "@/assets/constants/frontend-routes";
+import { validateInput } from "@/utils/validation";
 
 const Login = () => {
   const formRef = useRef(null);
@@ -27,6 +28,28 @@ const Login = () => {
 
   const onSubmit = (event: any) => {
     event.preventDefault();
+
+    Object.keys(formData).map((key) => {
+      if (key === "phone") {
+        const errorMessage = validateInput(
+          key,
+          formData[key]["inputValue"],
+          "phone"
+        );
+
+        setErrorFields((prev: any) => ({
+          ...prev,
+          [key]: errorMessage,
+        }));
+      } else {
+        const errorMessage = validateInput(key, formData[key], "email");
+
+        setErrorFields((prev: any) => ({
+          ...prev,
+          [key]: errorMessage,
+        }));
+      }
+    });
   };
 
   const onInputChange = (data: any, hasError: string) => {
