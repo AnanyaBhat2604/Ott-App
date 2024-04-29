@@ -13,14 +13,17 @@ import { frontendRoutes } from "@/assets/constants/frontend-routes";
 
 const Login = () => {
   const formRef = useRef(null);
-  const [formData, setFormData] = useState({});
-  const [errorFields, setErrorFields] = useState({
-    email: "",
-    phone: "",
-  });
 
   const searchParams = useSearchParams();
   const loginWithEmail = searchParams.get("email");
+
+  const [formData, setFormData] = useState<any>({
+    ...(loginWithEmail ? { email: "" } : { phone: "" }),
+  });
+
+  const [errorFields, setErrorFields] = useState<any>({
+    ...(loginWithEmail ? { email: "" } : { phone: "" }),
+  });
 
   const onSubmit = (event: any) => {
     event.preventDefault();
@@ -37,20 +40,18 @@ const Login = () => {
       return nextState;
     };
 
-    setFormData((prevState) => ({
+    setFormData((prevState: any) => ({
       ...removeField(prevState),
       ...data,
     }));
 
     const key = Object.keys(data)[0];
 
-    setErrorFields((prev) => ({
+    setErrorFields((prev: any) => ({
       ...removeField(prev),
       [key]: hasError,
     }));
   };
-
-  console.log(errorFields);
 
   const renderLoginWithEmail = () => {
     return (
@@ -97,7 +98,7 @@ const Login = () => {
             placeholderName={strings.phoneNumber}
             inputType={"number"}
             name={"phone"}
-            error={errorFields.phone}
+            error={errorFields?.phone}
           />
         </div>
       </>
