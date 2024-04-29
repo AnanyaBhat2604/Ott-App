@@ -1,14 +1,10 @@
 import React from "react";
-import Button from "@mui/material/Button";
+import { Button as MUIButton } from "@mui/material";
 import { ButtonComponentType } from "@/interfaces/componentTypes";
 
-const ButtonComponent = ({
-  name,
-  onClick,
-  type = "button",
-}: ButtonComponentType) => {
+const Button = ({ name, onClick, type = "button" }: ButtonComponentType) => {
   return (
-    <Button
+    <MUIButton
       type={type}
       variant="contained"
       className="w-full !bg-dodger-blue !text-sm !p-small rounded-sm !normal-case"
@@ -16,8 +12,8 @@ const ButtonComponent = ({
       onClick={onClick}
     >
       {name}
-    </Button>
+    </MUIButton>
   );
 };
 
-export default ButtonComponent;
+export default Button;
