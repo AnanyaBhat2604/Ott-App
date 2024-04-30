@@ -7,8 +7,6 @@ export const validateInput = (name: string, value: string, type?: string) => {
     validation = validationData[type];
   }
 
-  console.log(validation?.regex.test(value));
-
   let error = "";
   if (!value?.trim()) {
     error = `*${strings.pleaseEnter} ${
