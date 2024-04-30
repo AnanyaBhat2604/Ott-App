@@ -29,3 +29,10 @@ export interface ValidationRules {
     message: string;
   };
 }
+export interface LoginInfo {
+  phone?: {
+    dropdownValue?: string;
+    inputValue?: string;
+  };
+  email?: string;
+}

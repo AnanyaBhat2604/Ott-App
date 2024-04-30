@@ -1,4 +1,4 @@
-import React, { FC, useRef, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import strings from "@/assets/strings/strings.json";
 import InputWithDropdown from "@/components/DropdownInput/DropdownInput";
@@ -16,20 +16,20 @@ const LoginForm: FC = () => {
   const searchParams = useSearchParams();
   const loginWithEmail = searchParams.get("email");
 
-  const [formData, setFormData] = useState<any>({
-    ...(loginWithEmail ? { email: "" } : { phone: "" }),
-  });
+  const [formData, setFormData] = useState<any>({});
+  const [errorFields, setErrorFields] = useState<any>({});
 
-  const [errorFields, setErrorFields] = useState<any>({
-    ...(loginWithEmail ? { email: "" } : { phone: "" }),
-  });
+  useEffect(() => {
+    setFormData(loginWithEmail ? { email: "" } : { phone: "" });
+    setErrorFields(loginWithEmail ? { email: "" } : { phone: "" });
+  }, [loginWithEmail]);
 
-  const onSubmit = (event: any) => {
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-
-    Object.keys(formData).map((key) => {
+    console.log(formData);
+    Object.keys(formData).forEach((key: string) => {
       if (key === "phone") {
-        const errorMessage = validateInput(
+        const errorMessage: string = validateInput(
           key,
           formData[key]["inputValue"],
           "phone"
@@ -40,7 +40,8 @@ const LoginForm: FC = () => {
           [key]: errorMessage,
         }));
       } else {
-        const errorMessage = validateInput(key, formData[key], "email");
+        console.log("object");
+        const errorMessage: string = validateInput(key, formData[key], "email");
 
         setErrorFields((prev: any) => ({
           ...prev,
