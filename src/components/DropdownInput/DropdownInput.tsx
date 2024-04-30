@@ -125,7 +125,7 @@ const InputWithDropdown = ({
       <div
         className={`border-gray-light border-normal rounded-sm ${
           focus && "!border-dodger-blue"
-        }`}
+        } ${error && "!border-cinnabar"}`}
         ref={inputRef}
       >
         <Select

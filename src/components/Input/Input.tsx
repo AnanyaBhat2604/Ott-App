@@ -69,7 +69,7 @@ const InputComponent = ({
         onChange={handleChange}
         className={`text-white text-sm !border-normal !border-solid !rounded-sm ${
           focus ? "!border-dodger-blue" : "!border-gray-light"
-        }`}
+        } ${error && "!border-cinnabar"}`}
         inputProps={{
           style: {
             padding: "15px 20px",

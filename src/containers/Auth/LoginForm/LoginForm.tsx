@@ -26,7 +26,9 @@ const LoginForm: FC = () => {
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
+
     console.log(formData);
+
     Object.keys(formData).forEach((key: string) => {
       if (key === "phone") {
         const errorMessage: string = validateInput(
@@ -40,9 +42,7 @@ const LoginForm: FC = () => {
           [key]: errorMessage,
         }));
       } else {
-        console.log("object");
         const errorMessage: string = validateInput(key, formData[key], "email");
-
         setErrorFields((prev: any) => ({
           ...prev,
           [key]: errorMessage,
