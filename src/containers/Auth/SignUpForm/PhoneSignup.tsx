@@ -8,7 +8,7 @@ import Button from "@/components/Button/Button";
 import { validateInput } from "@/utils/validation";
 import { PhoneInput, PhoneValidation } from "@/interfaces/interfaces";
 
-const PhoneLogin: FC = () => {
+const PhoneSignup: FC = () => {
   const [errorFields, setErrorFields] = useState<PhoneValidation>({
     phone: "",
   });
@@ -57,10 +57,10 @@ const PhoneLogin: FC = () => {
       <div className="flex justify-between gap-3 pt-[40px] opacity-70 items-center w-full">
         <div className="text-sm font-semibold">{strings.phone}</div>
         <Link
-          href={`${frontendRoutes.LOGIN}?email=true`}
+          href={`${frontendRoutes.SIGN_UP}?email=true`}
           className="text-xs font-normal"
         >
-          {strings.signInWithEmail}
+          {strings.signUpWithEmail}
         </Link>
       </div>
       <div className="pt-[8px]">
@@ -83,4 +83,4 @@ const PhoneLogin: FC = () => {
   );
 };
 
-export default PhoneLogin;
+export default PhoneSignup;

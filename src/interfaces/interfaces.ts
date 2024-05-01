@@ -35,13 +35,21 @@ export interface LoginWithEmail {
   password: string;
 }
 
-export interface LoginWithPhone {
+export interface PhoneInput {
   phone: {
     dropdownValue: string;
     inputValue: string;
   };
 }
 
-export interface LoginWithPhoneValidation {
+export interface PhoneValidation {
+  phone: "";
+}
+
+export interface SignupEmail {
+  email: "";
+}
+
+export interface SignupPhone {
   phone: "";
 }

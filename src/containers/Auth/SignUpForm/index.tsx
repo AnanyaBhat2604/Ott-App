@@ -1,20 +1,20 @@
 import React, { FC } from "react";
 import { useSearchParams } from "next/navigation";
 import { constants } from "@/assets/constants/constants";
-import EmailLogin from "./EmailLogin";
-import PhoneLogin from "./PhoneLogin";
+import EmailSignup from "./EmailSignup";
+import PhoneSignup from "./PhoneSignup";
 import MoreOptions from "../MoreOptions/MoreOptions";
 
-const LoginForm: FC = () => {
+const SignUpForm: FC = () => {
   const searchParams = useSearchParams();
-  const loginWithEmail = searchParams.get("email");
+  const signUpWithEmail = searchParams.get("email");
 
   return (
     <div className="flex flex-col items-center">
-      {loginWithEmail === constants.TRUE ? <EmailLogin /> : <PhoneLogin />}
+      {signUpWithEmail === constants.TRUE ? <EmailSignup /> : <PhoneSignup />}
       <MoreOptions />
     </div>
   );
 };
 
-export default LoginForm;
+export default SignUpForm;

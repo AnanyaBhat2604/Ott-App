@@ -4,7 +4,7 @@ import React, { FC } from "react";
 import strings from "@/assets/strings/strings.json";
 import Link from "next/link";
 import { frontendRoutes } from "@/assets/constants/frontend-routes";
-import SignUpForm from "@/containers/Auth/SignUpForm/SignUpForm";
+import SignUpForm from "@/containers/Auth/SignUpForm";
 
 const SignUp: FC = () => {
   return (
