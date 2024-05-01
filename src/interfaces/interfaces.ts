@@ -27,6 +27,7 @@ export interface ValidationRules {
   [key: string]: {
     regex: RegExp;
     message: string;
+    valid?: boolean;
   };
 }
 
@@ -59,4 +60,9 @@ export interface UserDetails {
   lastName: string;
   email: string;
   state: string;
+}
+
+export interface NewPassword {
+  password: string;
+  confirmPassword: string;
 }

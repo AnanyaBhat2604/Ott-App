@@ -23,7 +23,7 @@ const EmailLogin: FC = () => {
     console.log(formData);
 
     Object.keys(formData).forEach((key: string) => {
-      const errorMessage: string = validateInput(
+      const errorMessage = validateInput(
         key,
         formData[key as keyof LoginWithEmail],
         key as keyof LoginWithEmail

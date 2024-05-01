@@ -21,7 +21,7 @@ const EmailSignup: FC = () => {
     console.log(formData);
 
     Object.keys(formData).forEach((key: string) => {
-      const errorMessage: string = validateInput(
+      const errorMessage = validateInput(
         key as keyof SignupEmail,
         formData[key as keyof SignupEmail],
         key as keyof SignupEmail

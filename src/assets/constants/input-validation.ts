@@ -11,3 +11,26 @@ export const validationData: ValidationRules = {
     message: strings.emailValidation,
   },
 };
+
+export const newPasswordValidations = {
+  length: {
+    regex: /^.{8,}$/,
+    message: strings.atleast8Characters,
+  },
+  lowercase: {
+    regex: /[a-z]/,
+    message: strings.atleast1Lowercase,
+  },
+  uppercase: {
+    regex: /[A-Z]/,
+    message: strings.atleast1Uppercase,
+  },
+  number: {
+    regex: /\d/,
+    message: strings.atleast1Number,
+  },
+  specialChar: {
+    regex: /[!@#$%^&*]/,
+    message: strings.atleast1SpecialCharacter,
+  },
+};

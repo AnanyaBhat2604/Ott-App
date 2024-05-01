@@ -25,7 +25,7 @@ const PhoneSignup: FC = () => {
     console.log(formData);
 
     Object.keys(formData).forEach((key: string) => {
-      const errorMessage: string = validateInput(
+      const errorMessage = validateInput(
         key,
         formData[key as keyof PhoneInput]["inputValue"],
         "phone"
