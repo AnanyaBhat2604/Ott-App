@@ -3,34 +3,52 @@ import strings from "@/assets/strings/strings.json";
 import InputComponent from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 import { validateInput } from "@/utils/validation";
+import { UserDetails } from "@/interfaces/interfaces";
 
 const UserDetailsForm: FC = () => {
-  const [formData, setFormData] = useState<any>({});
-  const [errorFields, setErrorFields] = useState<any>({});
+  const [formData, setFormData] = useState<UserDetails>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    state: "",
+  });
+  const [errorFields, setErrorFields] = useState<UserDetails>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    state: "",
+  });
 
   useEffect(() => {
     console.log(formData);
   }, [formData]);
 
-  const onInputChange = (data: { [key: string]: string }, hasError: string) => {
-    setFormData((prevState: any) => ({
+  const onInputChange = (
+    data: Partial<UserDetails>,
+    hasError: string
+  ): void => {
+    setFormData((prevState: UserDetails) => ({
       ...prevState,
       ...data,
     }));
 
-    const key = Object.keys(data)[0];
+    const key = Object.keys(data)[0] as keyof UserDetails;
 
-    setErrorFields((prev: any) => ({
+    setErrorFields((prev: UserDetails) => ({
       ...prev,
       [key]: hasError,
     }));
   };
 
-  const onSubmit = (event: any) => {
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     Object.keys(formData).forEach((key: string) => {
-      const errorMessage: string = validateInput(key, formData[key], "");
-      setErrorFields((prev: any) => ({
+      const errorMessage: string = validateInput(
+        key as keyof UserDetails,
+        formData[key as keyof UserDetails],
+        ""
+      );
+      setErrorFields((prev: UserDetails) => ({
         ...prev,
         [key]: errorMessage,
       }));

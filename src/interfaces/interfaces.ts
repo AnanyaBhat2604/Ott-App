@@ -53,3 +53,10 @@ export interface SignupEmail {
 export interface SignupPhone {
   phone: "";
 }
+
+export interface UserDetails {
+  firstName: string;
+  lastName: string;
+  email: string;
+  state: string;
+}
