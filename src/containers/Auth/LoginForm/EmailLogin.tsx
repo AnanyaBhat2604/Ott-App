@@ -20,7 +20,7 @@ const EmailLogin: FC = () => {
 
   const onSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    console.log(formData);
+    let hasError = false;
 
     Object.keys(formData).forEach((key: string) => {
       const errorMessage = validateInput(
@@ -28,11 +28,22 @@ const EmailLogin: FC = () => {
         formData[key as keyof LoginWithEmail],
         key as keyof LoginWithEmail
       );
+
+      if (!formData[key as keyof LoginWithEmail] || errorMessage) {
+        if (!hasError) {
+          hasError = true;
+        }
+      }
+
       setErrorFields((prev: LoginWithEmail) => ({
         ...prev,
         [key]: errorMessage,
       }));
     });
+
+    if (!hasError) {
+      alert("Can be submitted");
+    }
   };
 
   const onInputChange = (

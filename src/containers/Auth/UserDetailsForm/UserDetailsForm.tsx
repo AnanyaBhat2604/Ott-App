@@ -41,18 +41,30 @@ const UserDetailsForm: FC = () => {
   };
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+    let hasError = false;
     event.preventDefault();
     Object.keys(formData).forEach((key: string) => {
       const errorMessage: string = validateInput(
         key as keyof UserDetails,
         formData[key as keyof UserDetails],
-        ""
+        key
       );
+
+      if (!formData[key as keyof UserDetails] || errorMessage) {
+        if (!hasError) {
+          hasError = true;
+        }
+      }
+
       setErrorFields((prev: UserDetails) => ({
         ...prev,
         [key]: errorMessage,
       }));
     });
+
+    if (!hasError) {
+      alert("Can be submitted");
+    }
   };
 
   return (
