@@ -36,6 +36,7 @@
 
 .scrollbar-custom {
   scrollbar-gutter: stable;
+  scroll-behavior: smooth;
 }
 
 .scrollbar-custom::-webkit-scrollbar {

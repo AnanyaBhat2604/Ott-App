@@ -25,7 +25,7 @@ const MoreOptions: FC = () => {
 
   const renderMoreOptions = (): ReactElement => {
     return (
-      <div className="mt-[30px] flex flex-col gap-[40px] w-full">
+      <div className="mt-[30px] flex flex-col gap-[40px] w-full transition-all">
         <div className="flex items-center">
           <div className="bg-tundora w-full h-[1px]"></div>
           <div className="px-[20%] text-wild-sand text-xxs">or</div>
