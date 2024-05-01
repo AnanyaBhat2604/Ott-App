@@ -6,24 +6,57 @@ import strings from "@/assets/strings/strings.json";
 import Button from "@/components/Button/Button";
 import Link from "next/link";
 import InputComponent from "@/components/Input/Input";
-import { InputWithDropDown } from "@/interfaces/componentTypes";
 import InputWithDropdown from "@/components/DropdownInput/DropdownInput";
 import DownArrowIcon from "../../../../public/assets/icons/down-arrow.svg";
 import Image from "next/image";
 import { frontendRoutes } from "@/assets/constants/frontend-routes";
+import { validateInput } from "@/utils/validation";
 
 const SignUpForm: FC = () => {
   const [showMoreOptions, setShowMoreOptions] = useState(false);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState<any>({});
+  const [errorFields, setErrorFields] = useState<any>({});
 
   const searchParams = useSearchParams();
   const signUpWithEmail = searchParams.get("email");
 
-  const onSubmit = (event: any) => {
-    event.preventDefault();
-    alert("Button clicked");
-  };
+  useEffect(() => {
+    setFormData({
+      ...(signUpWithEmail ? { email: "" } : { phone: "" }),
+      password: "",
+    });
+    setErrorFields({
+      ...(signUpWithEmail ? { email: "" } : { phone: "" }),
+      password: "",
+    });
+  }, [signUpWithEmail]);
 
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
+
+    console.log(formData);
+
+    Object.keys(formData).forEach((key: string) => {
+      if (key === "phone") {
+        const errorMessage: string = validateInput(
+          key,
+          formData[key]["inputValue"],
+          "phone"
+        );
+
+        setErrorFields((prev: any) => ({
+          ...prev,
+          [key]: errorMessage,
+        }));
+      } else {
+        const errorMessage: string = validateInput(key, formData[key], "email");
+        setErrorFields((prev: any) => ({
+          ...prev,
+          [key]: errorMessage,
+        }));
+      }
+    });
+  };
   const renderSignUpWithEmail = (): ReactElement => {
     return (
       <>
@@ -38,6 +71,9 @@ const SignUpForm: FC = () => {
             placeholder={strings.email}
             name={"email"}
             onChange={onInputChange}
+            validationRequired
+            validationType="email"
+            error={errorFields.email}
           />
         </div>
       </>
@@ -64,6 +100,9 @@ const SignUpForm: FC = () => {
             placeholderName={strings.phoneNumber}
             inputType={"number"}
             name={"phone"}
+            validationRequired
+            validationType="phone"
+            error={errorFields.phone}
           />
         </div>
       </>
@@ -119,23 +158,28 @@ const SignUpForm: FC = () => {
     );
   };
 
-  const onInputChange = (data: { [key: string]: InputWithDropDown }) => {
-    setFormData((prevState) => {
-      const nextState = { ...prevState };
-      if (signUpWithEmail) {
-        if ("phone" in nextState) {
-          delete nextState["phone"];
-        }
-      } else {
-        if ("email" in nextState) {
-          delete nextState["email"];
-        }
+  const onInputChange = (data: any, hasError: string) => {
+    const removeField = (fields: any) => {
+      const nextState = { ...fields };
+      if (signUpWithEmail && "phone" in nextState) {
+        delete nextState["phone"];
+      } else if (!signUpWithEmail && "email" in nextState) {
+        delete nextState["email"];
       }
-      return {
-        ...nextState,
-        ...data,
-      };
-    });
+      return nextState;
+    };
+
+    setFormData((prevState: any) => ({
+      ...removeField(prevState),
+      ...data,
+    }));
+
+    const key = Object.keys(data)[0];
+
+    setErrorFields((prev: any) => ({
+      ...removeField(prev),
+      [key]: hasError,
+    }));
   };
 
   useEffect(() => {
@@ -147,12 +191,15 @@ const SignUpForm: FC = () => {
       {signUpWithEmail === constants.TRUE
         ? renderSignUpWithEmail()
         : renderSignUpWithPhone()}
-      <div className="pt-[16px]">
+      <div className="pt-medium">
         <InputComponent
           placeholder={strings.password}
           name={"password"}
           onChange={onInputChange}
           type="password"
+          validationRequired
+          validationType="password"
+          error={errorFields.password}
         />
       </div>
       <div className="w-full mt-[24px]">

@@ -1,4 +1,4 @@
-import { ValidationRules } from "@/interfaces/componentTypes";
+import { ValidationRules } from "@/interfaces/interfaces";
 import strings from "@/assets/strings/strings.json";
 
 export const validationData: ValidationRules = {

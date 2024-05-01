@@ -29,10 +29,19 @@ export interface ValidationRules {
     message: string;
   };
 }
-export interface LoginInfo {
-  phone?: {
-    dropdownValue?: string;
-    inputValue?: string;
+
+export interface LoginWithEmail {
+  email: string;
+  password: string;
+}
+
+export interface LoginWithPhone {
+  phone: {
+    dropdownValue: string;
+    inputValue: string;
   };
-  email?: string;
+}
+
+export interface LoginWithPhoneValidation {
+  phone: "";
 }

@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { Button as MUIButton } from "@mui/material";
-import { ButtonComponentType } from "@/interfaces/componentTypes";
+import { ButtonComponentType } from "@/interfaces/interfaces";
 
 const Button = ({
   name,

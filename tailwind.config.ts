@@ -37,6 +37,7 @@ const config: Config = {
       padding: {
         small: "14px 20px",
         normal: "60px 40px",
+        medium: "16px",
       },
       borderRadius: {
         sm: "4px",

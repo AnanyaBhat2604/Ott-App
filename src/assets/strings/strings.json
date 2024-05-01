@@ -22,7 +22,7 @@
   "firstName": "First name",
   "lastName": "Last name",
   "state": "State",
-  "pleaseEnter": "Please enter",
+  "pleaseEnter": "Please enter valid",
   "phoneNumValidation": "*Phone number must contain ten digits",
   "emailValidation": "*Invalid email format"
 }

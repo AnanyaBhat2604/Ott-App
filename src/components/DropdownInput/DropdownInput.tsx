@@ -1,6 +1,6 @@
 "use client";
 import { useClickOutside } from "@/hooks/useClickOutside";
-import { InputWithDropDown } from "@/interfaces/componentTypes";
+import { InputWithDropDown } from "@/interfaces/interfaces";
 import { MenuItem, Select, TextField } from "@mui/material";
 import React, { ReactElement, useEffect, useRef, useState } from "react";
 import tailwindConfig from "../../../tailwind.config";

@@ -3,7 +3,7 @@ import FacebookIcon from "../../../public/assets/icons/facebook.svg";
 import AppleIcon from "../../../public/assets/icons/apple.svg";
 import GoogleIcon from "../../../public/assets/icons/google.svg";
 import EmailIcon from "../../../public/assets/icons/email.svg";
-import { LoginOption } from "@/interfaces/componentTypes";
+import { LoginOption } from "@/interfaces/interfaces";
 
 export const constants = {
   TRUE: "true",
