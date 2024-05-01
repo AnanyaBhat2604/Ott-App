@@ -81,6 +81,7 @@ const UserDetailsForm: FC = () => {
           name={"email"}
           onChange={onInputChange}
           validationRequired
+          validationType="email"
           error={errorFields.email}
         />
       </div>
