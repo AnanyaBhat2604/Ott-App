@@ -1,9 +1,10 @@
+import Movies from "@/containers/movies/movies";
 import Image from "next/image";
 
 export default function Home() {
   return (
     <main>
-      <h1>Hello World</h1>
+      <Movies />
     </main>
   );
 }

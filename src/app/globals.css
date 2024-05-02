@@ -18,8 +18,23 @@
 
 body {}
 
+
+
+
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+
+
+  .carousel-custom>div>.react-multi-carousel-track {
+    @apply !gap-[20px] !absolute !top-0;
+  }
+
+  .carousel-custom>.react-multi-carousel-list {
+    @apply !h-[283px] !relative !overflow-y-visible !overflow-x-clip
+  }
+
+
 }
