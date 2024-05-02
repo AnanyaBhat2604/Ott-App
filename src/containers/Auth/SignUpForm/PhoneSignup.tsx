@@ -22,7 +22,7 @@ const PhoneSignup: FC = () => {
 
   const onSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    console.log(formData);
+    let hasError = false;
 
     Object.keys(formData).forEach((key: string) => {
       const errorMessage = validateInput(
@@ -31,11 +31,21 @@ const PhoneSignup: FC = () => {
         "phone"
       );
 
+      if (!formData[key as keyof PhoneInput] || errorMessage) {
+        if (!hasError) {
+          hasError = true;
+        }
+      }
+
       setErrorFields((prev: PhoneValidation) => ({
         ...prev,
         [key]: errorMessage,
       }));
     });
+
+    if (!hasError) {
+      alert("Can be submitted");
+    }
   };
 
   const onInputChange = (data: Partial<PhoneInput>, hasError: string): void => {

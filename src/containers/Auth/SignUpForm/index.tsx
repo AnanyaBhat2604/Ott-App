@@ -3,7 +3,7 @@ import { useSearchParams } from "next/navigation";
 import { constants } from "@/assets/constants/constants";
 import EmailSignup from "./EmailSignup";
 import PhoneSignup from "./PhoneSignup";
-import MoreOptions from "../MoreOptions/MoreOptions";
+import MoreOptions from "../MoreOptions";
 
 const SignUpForm: FC = () => {
   const searchParams = useSearchParams();

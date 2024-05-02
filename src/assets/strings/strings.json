@@ -35,5 +35,6 @@
   "atleast1Uppercase": "At least 1 Upper case letter (A-Z)",
   "atleast1Number": "At least 1 Number (0-9)",
   "atleast1SpecialCharacter": "At least 1 special characters (e.g. !@#$%&*)",
-  "passwordsMustBeSame": "*Passwords must be same"
+  "passwordsMustBeSame": "*Passwords must be same",
+  "pleaseEnterValidPassword": "*Please enter valid password"
 }

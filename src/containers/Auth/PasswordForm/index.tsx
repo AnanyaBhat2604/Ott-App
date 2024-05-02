@@ -5,7 +5,7 @@ import Button from "@/components/Button/Button";
 import { ValidatePassword, validateInput } from "@/utils/validation";
 import PasswordValidation from "./PasswordValidation";
 import { newPasswordValidations } from "@/assets/constants/input-validation";
-import { NewPassword } from "@/interfaces/interfaces";
+import { NewPassword, ValidationRules } from "@/interfaces/interfaces";
 
 const PasswordForm: FC = () => {
   const [formData, setFormData] = useState<NewPassword>({
@@ -20,7 +20,8 @@ const PasswordForm: FC = () => {
 
   const onSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    console.log(formData);
+
+    let hasError = false;
 
     Object.keys(formData).forEach((key: string) => {
       const errorMessage = validateInput(
@@ -28,6 +29,7 @@ const PasswordForm: FC = () => {
         formData[key as keyof NewPassword],
         key as keyof NewPassword
       );
+
       setErrorFields((prev: NewPassword) => ({
         ...prev,
         [key]: errorMessage,
@@ -39,9 +41,43 @@ const PasswordForm: FC = () => {
             ...prev,
             [key]: strings.passwordsMustBeSame,
           }));
+
+          if (!hasError) {
+            hasError = true;
+          }
+        }
+      } else if (key === "password") {
+        const passwordCriteria: ValidationRules = ValidatePassword(
+          formData[key as keyof NewPassword]
+        );
+        const message =
+          Object.values(passwordCriteria).find((criterion) => !criterion.valid)
+            ?.message || "";
+
+        if (formData[key as keyof NewPassword]) {
+          setErrorFields((prev: NewPassword) => ({
+            ...prev,
+            [key]: `${message}`,
+          }));
+        }
+
+        if (message) {
+          if (!hasError) {
+            hasError = true;
+          }
+        }
+      }
+
+      if (!formData[key as keyof NewPassword] || errorMessage) {
+        if (!hasError) {
+          hasError = true;
         }
       }
     });
+
+    if (!hasError) {
+      alert("Can be submitted");
+    }
   };
 
   const onInputChange = (data: any, hasError: string): void => {
@@ -58,12 +94,25 @@ const PasswordForm: FC = () => {
     }));
 
     if (key === "password") {
-      ValidatePassword(data[key]);
+      const passwordCriteria: ValidationRules = ValidatePassword(data[key]);
+      const message =
+        Object.values(passwordCriteria).find((criterion) => !criterion.valid)
+          ?.message || "";
+
+      setErrorFields((prev: NewPassword) => ({
+        ...prev,
+        [key]: `${message}`,
+      }));
     } else if (key === "confirmPassword") {
       if (formData.password !== data[key]) {
         setErrorFields((prev) => ({
           ...prev,
           [key]: strings.passwordsMustBeSame,
+        }));
+      } else {
+        setErrorFields((prev) => ({
+          ...prev,
+          [key]: "",
         }));
       }
     }

@@ -2,7 +2,7 @@
 
 import React, { FC } from "react";
 import strings from "@/assets/strings/strings.json";
-import PasswordForm from "@/containers/Auth/PasswordForm/PasswordForm";
+import PasswordForm from "@/containers/Auth/PasswordForm/index";
 
 const page: FC = () => {
   return (
