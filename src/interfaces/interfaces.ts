@@ -68,3 +68,7 @@ export interface NewPassword {
   password: string;
   confirmPassword: string;
 }
+
+export interface StorageData {
+  [key: string]: any;
+}
