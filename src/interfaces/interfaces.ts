@@ -8,6 +8,8 @@ export interface ButtonComponentType {
   name: string;
   onClick?: () => void;
   type?: "button" | "reset" | "submit";
+  disabled?: boolean;
+  loading?: boolean;
 }
 
 export interface LoginOption {
@@ -65,4 +67,8 @@ export interface UserDetails {
 export interface NewPassword {
   password: string;
   confirmPassword: string;
+}
+
+export interface StorageData {
+  [key: string]: any;
 }
