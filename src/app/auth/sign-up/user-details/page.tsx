@@ -2,7 +2,7 @@
 
 import React, { FC } from "react";
 import strings from "@/assets/strings/strings.json";
-import UserDetailsForm from "@/containers/Auth/UserDetailsForm/UserDetailsForm";
+import UserDetailsForm from "@/containers/Auth/UserDetailsForm";
 
 const UserDetails: FC = () => {
   return (
