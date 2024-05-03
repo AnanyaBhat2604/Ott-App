@@ -12,7 +12,6 @@ export default function Home() {
     try {
       const data = await request(URL?.GET_MOVIE, "GET", headers);
       setMovieData(data?.titles);
-      console.log(typeof data?.titles);
     } catch (error) {
       console.log("Error fetching the value");
     }

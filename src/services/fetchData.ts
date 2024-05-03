@@ -7,7 +7,7 @@ export const request = async (
   body: any = null
 ) => {
   try {
-    const response = await fetch(`${baseUrl + url}`, {
+    const response = await fetch(`${url}`, {
       method,
       headers: {
         "Content-Type": "application/json",
