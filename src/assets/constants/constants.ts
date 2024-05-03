@@ -32,3 +32,10 @@ export const loginOptions: LoginOption[] = [
     text: strings.continueWithEmail,
   },
 ];
+
+export const apiMethods = {
+  GET: "GET",
+  POST: "POST",
+  PUT: "PUT",
+  DELETE: "DELETE",
+};

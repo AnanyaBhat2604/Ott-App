@@ -6,6 +6,8 @@ import InputComponent from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 import { SignupEmail } from "@/interfaces/interfaces";
 import { validateInput } from "@/utils/validation";
+import { post } from "@/services/api/requests";
+import { apiEndpoints } from "@/assets/constants/api-endpoints";
 
 const EmailSignup: FC = () => {
   const [errorFields, setErrorFields] = useState<SignupEmail>({
@@ -15,6 +17,8 @@ const EmailSignup: FC = () => {
   const [formData, setFormData] = useState<SignupEmail>({
     email: "",
   });
+
+  const [loading, setLoading] = useState<boolean>(false);
 
   const onSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -40,7 +44,15 @@ const EmailSignup: FC = () => {
     });
 
     if (!hasError) {
-      alert("Can be submitted");
+      const data = { destination: formData.email, channel: "EMAIL" };
+      setLoading(true);
+      post(apiEndpoints.sendOTP, data)
+        .then((data: any) => {
+          console.log("Login Data", data);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     }
   };
 
@@ -80,7 +92,7 @@ const EmailSignup: FC = () => {
         />
       </div>
       <div className="w-full mt-[24px]">
-        <Button name={strings.continue} type="submit" />
+        <Button name={strings.continue} type="submit" loading={loading} />
       </div>
     </form>
   );
