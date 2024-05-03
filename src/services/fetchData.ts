@@ -1,26 +1,28 @@
-import { ValueResponse } from "@/interfaces/interfaces";
+const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-const API_ENDPOINT =
-  "https://netflix54.p.rapidapi.com/search/?query=stranger&offset=0&limit_titles=50&limit_suggestions=20&lang=en";
-
-export const getMovieData = async (): Promise<ValueResponse> => {
-  const options = {
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Key": "7f7d8fff60msh4da5e9a19d90978p11128fjsn5230c7177874",
-      "X-RapidAPI-Host": "netflix54.p.rapidapi.com",
-    },
-  };
-
+export const request = async (
+  url: string,
+  method: string,
+  headers: Record<string, string> = {},
+  body: any = null
+) => {
   try {
-    const response = await fetch(`${API_ENDPOINT}`, options);
+    const response = await fetch(`${baseUrl + url}`, {
+      method,
+      headers: {
+        "Content-Type": "application/json",
+        ...headers,
+      },
+      body: body ? JSON.stringify(body) : null,
+    });
+
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      throw new Error("Network response was not ok");
     }
-    const data: ValueResponse = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error fetching the value:", error);
+
+    return await response.json();
+  } catch (error: any) {
+    console.error("API Error:", error?.message);
     throw error;
   }
 };
