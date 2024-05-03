@@ -7,6 +7,9 @@ import InputWithDropdown from "@/components/DropdownInput/DropdownInput";
 import Button from "@/components/Button/Button";
 import { validateInput } from "@/utils/validation";
 import { PhoneInput, PhoneValidation } from "@/interfaces/interfaces";
+import { apiConstants } from "@/assets/constants/constants";
+import { post } from "@/services/api/requests";
+import { apiEndpoints } from "@/assets/constants/api-endpoints";
 
 const PhoneSignup: FC = () => {
   const [errorFields, setErrorFields] = useState<PhoneValidation>({
@@ -19,6 +22,8 @@ const PhoneSignup: FC = () => {
       inputValue: "",
     },
   });
+
+  const [loading, setLoading] = useState<boolean>(false);
 
   const onSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -44,7 +49,19 @@ const PhoneSignup: FC = () => {
     });
 
     if (!hasError) {
-      alert("Can be submitted");
+      const data = {
+        destination: formData.phone.inputValue,
+        channel: apiConstants.SMS,
+      };
+      setLoading(true);
+      post(apiEndpoints.sendOTP, data)
+        .then((data: any) => {
+          console.log("Login Data", data);
+        })
+        .catch(() => {})
+        .finally(() => {
+          setLoading(false);
+        });
     }
   };
 
@@ -87,7 +104,7 @@ const PhoneSignup: FC = () => {
         />
       </div>
       <div className="w-full mt-[24px]">
-        <Button name={strings.continue} type="submit" />
+        <Button name={strings.continue} type="submit" loading={loading} />
       </div>
     </form>
   );

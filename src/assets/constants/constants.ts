@@ -39,3 +39,8 @@ export const apiMethods = {
   PUT: "PUT",
   DELETE: "DELETE",
 };
+
+export const apiConstants = {
+  EMAIL: "EMAIL",
+  SMS: "SMS",
+};

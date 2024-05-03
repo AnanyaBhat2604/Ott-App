@@ -8,6 +8,7 @@ import { SignupEmail } from "@/interfaces/interfaces";
 import { validateInput } from "@/utils/validation";
 import { post } from "@/services/api/requests";
 import { apiEndpoints } from "@/assets/constants/api-endpoints";
+import { apiConstants } from "@/assets/constants/constants";
 
 const EmailSignup: FC = () => {
   const [errorFields, setErrorFields] = useState<SignupEmail>({
@@ -44,7 +45,7 @@ const EmailSignup: FC = () => {
     });
 
     if (!hasError) {
-      const data = { destination: formData.email, channel: "EMAIL" };
+      const data = { destination: formData.email, channel: apiConstants.EMAIL };
       setLoading(true);
       post(apiEndpoints.sendOTP, data)
         .then((data: any) => {
