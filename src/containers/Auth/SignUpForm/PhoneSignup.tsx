@@ -10,6 +10,7 @@ import { PhoneInput, PhoneValidation } from "@/interfaces/interfaces";
 import { apiConstants } from "@/assets/constants/constants";
 import { post } from "@/services/api/requests";
 import { apiEndpoints } from "@/assets/constants/api-endpoints";
+import { error } from "console";
 
 const PhoneSignup: FC = () => {
   const [errorFields, setErrorFields] = useState<PhoneValidation>({
@@ -58,7 +59,9 @@ const PhoneSignup: FC = () => {
         .then((data: any) => {
           console.log("Login Data", data);
         })
-        .catch(() => {})
+        .catch((error) => {
+          console.log("error", error.message);
+        })
         .finally(() => {
           setLoading(false);
         });

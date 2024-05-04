@@ -25,5 +25,6 @@ export const request = async (
     return await response.json();
   } catch (error: any) {
     logError(error);
+    throw error;
   }
 };

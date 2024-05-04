@@ -5,7 +5,11 @@ export const get = async (
   url: string,
   headers: Record<string, string> = {}
 ) => {
-  return request(url, apiMethods.GET, headers);
+  try {
+    return await request(url, apiMethods.GET, headers);
+  } catch (error) {
+    throw error;
+  }
 };
 
 export const post = async (
@@ -13,7 +17,12 @@ export const post = async (
   data: any,
   headers: Record<string, string> = {}
 ) => {
-  return request(url, apiMethods.POST, headers, data);
+  try {
+    return await request(url, apiMethods.POST, headers, data);
+  } catch (error) {
+    console.log("Error in request function:", error);
+    throw error;
+  }
 };
 
 export const put = async (
@@ -21,12 +30,20 @@ export const put = async (
   data: any,
   headers: Record<string, string> = {}
 ) => {
-  return request(url, apiMethods.PUT, headers, data);
+  try {
+    return await request(url, apiMethods.PUT, headers, data);
+  } catch (error) {
+    throw error;
+  }
 };
 
 export const del = async (
   url: string,
   headers: Record<string, string> = {}
 ) => {
-  return request(url, apiMethods.DELETE, headers);
+  try {
+    return await request(url, apiMethods.DELETE, headers);
+  } catch (error) {
+    throw error;
+  }
 };
