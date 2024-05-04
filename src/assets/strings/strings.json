@@ -41,5 +41,9 @@
   "codeSentMessage": "We have sent a verification code to ",
   "back": "Back",
   "passwordAssistance": "Password assistance",
-  "passwordAssistanceInfo": "Enter the email address or mobile phone number associated with your account."
+  "passwordAssistanceInfo": "Enter the email address or mobile phone number associated with your account.",
+  "checkYourEmail": "Check Your Email",
+  "pleaseCheckTheEmail": "Please check the email address",
+  "infoToSetPassword": "for instructions to reset your password.",
+  "resendEmail": "Resend email"
 }

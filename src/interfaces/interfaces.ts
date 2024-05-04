@@ -10,6 +10,7 @@ export interface ButtonComponentType {
   type?: "button" | "reset" | "submit";
   disabled?: boolean;
   loading?: boolean;
+  ghost?: boolean;
 }
 
 export interface LoginOption {
