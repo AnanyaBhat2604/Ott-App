@@ -2,7 +2,7 @@ import React, { FC, ReactElement, useState } from "react";
 import strings from "@/assets/strings/strings.json";
 import Image from "next/image";
 import { loginOptions } from "@/assets/constants/constants";
-import DownArrowIcon from "../../../../public/assets/icons/down-arrow.svg";
+import DownArrowIcon from "@/assets/icons/down-arrow.svg";
 
 const MoreOptions: FC = () => {
   const [showMoreOptions, setShowMoreOptions] = useState<boolean>(false);

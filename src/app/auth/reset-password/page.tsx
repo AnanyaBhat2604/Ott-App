@@ -2,7 +2,7 @@
 
 import React, { FC } from "react";
 import strings from "@/assets/strings/strings.json";
-import BackArrow from "../../../../public/assets/icons/arrow-left.svg";
+import BackArrow from "@/assets/icons/arrow-left.svg";
 import Image from "next/image";
 import Link from "next/link";
 import { frontendRoutes } from "@/assets/constants/frontend-routes";

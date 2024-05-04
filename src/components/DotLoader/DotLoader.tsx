@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import dotLoadingAnimation from "../../../public/assets/animations/dotLoadingAnimation.json";
+import dotLoadingAnimation from "@/assets/animations/dotLoadingAnimation.json";
 import Lottie from "lottie-react";
 
 const DotLoader: FC = () => {

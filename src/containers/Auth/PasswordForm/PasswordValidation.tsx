@@ -1,7 +1,7 @@
 import { ValidationRules } from "@/interfaces/interfaces";
 import React, { FC } from "react";
 import strings from "@/assets/strings/strings.json";
-import TickMark from "../../../../public/assets/icons/tick-mark.svg";
+import TickMark from "@/assets/icons/tick-mark.svg";
 import Image from "next/image";
 
 const PasswordValidation: FC<{ passwordValidation: ValidationRules }> = ({

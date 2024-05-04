@@ -1,8 +1,8 @@
 import { constants } from "@/assets/constants/constants";
 import { InputAdornment, TextField } from "@mui/material";
 import React, { ReactElement, useEffect, useState } from "react";
-import EyeIcon from "../../../public/assets/icons/eye.svg";
-import EyeSlashIcon from "../../../public/assets/icons/eye-slash.svg";
+import EyeIcon from "@/assets/icons/eye.svg";
+import EyeSlashIcon from "@/assets/icons/eye-slash.svg";
 import Image from "next/image";
 import { validateInput } from "@/utils/validation";
 

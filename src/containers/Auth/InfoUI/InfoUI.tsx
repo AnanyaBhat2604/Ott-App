@@ -1,5 +1,5 @@
 import strings from "@/assets/strings/strings.json";
-import MailIcon from "../../../../public/assets/icons/mail.svg";
+import MailIcon from "@/assets/icons/mail.svg";
 import Image from "next/image";
 import Button from "@/components/Button/Button";
 import { FC } from "react";
