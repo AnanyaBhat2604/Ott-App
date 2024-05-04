@@ -20,7 +20,6 @@ export const post = async (
   try {
     return await request(url, apiMethods.POST, headers, data);
   } catch (error) {
-    console.log("Error in request function:", error);
     throw error;
   }
 };

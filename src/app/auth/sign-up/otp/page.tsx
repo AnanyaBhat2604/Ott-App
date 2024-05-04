@@ -2,7 +2,6 @@
 
 import React, { FC } from "react";
 import strings from "@/assets/strings/strings.json";
-import OtpRead from "@/components/OtpRead/OtpRead";
 import OtpForm from "@/containers/Auth/OtpForm/OtpForm";
 
 const OtpPage: FC = () => {

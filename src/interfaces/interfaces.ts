@@ -72,3 +72,14 @@ export interface NewPassword {
 export interface StorageData {
   [key: string]: any;
 }
+
+export interface SnackbarContextType {
+  open: boolean;
+  message: string;
+  severity?: "success" | "error" | "info" | "warning";
+  openSnackbar: (
+    newMessage: string,
+    severity: "success" | "error" | "info" | "warning"
+  ) => void;
+  closeSnackbar: () => void;
+}

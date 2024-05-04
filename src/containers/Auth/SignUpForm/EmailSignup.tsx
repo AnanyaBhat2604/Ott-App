@@ -9,6 +9,7 @@ import { validateInput } from "@/utils/validation";
 import { post } from "@/services/api/requests";
 import { apiEndpoints } from "@/assets/constants/api-endpoints";
 import { apiConstants } from "@/assets/constants/constants";
+import { useSnackbar } from "@/contexts/snackbar-context/snackbar-context";
 
 const EmailSignup: FC = () => {
   const [errorFields, setErrorFields] = useState<SignupEmail>({
@@ -20,6 +21,8 @@ const EmailSignup: FC = () => {
   });
 
   const [loading, setLoading] = useState<boolean>(false);
+
+  const { openSnackbar } = useSnackbar();
 
   const onSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -50,6 +53,9 @@ const EmailSignup: FC = () => {
       post(apiEndpoints.sendOTP, data)
         .then((data: any) => {
           console.log("Login Data", data);
+        })
+        .catch((error) => {
+          openSnackbar(error.message, "error");
         })
         .finally(() => {
           setLoading(false);

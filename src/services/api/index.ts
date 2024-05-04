@@ -1,5 +1,3 @@
-import { logError } from "./logError";
-
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export const request = async (
@@ -24,7 +22,6 @@ export const request = async (
 
     return await response.json();
   } catch (error: any) {
-    logError(error);
     throw error;
   }
 };

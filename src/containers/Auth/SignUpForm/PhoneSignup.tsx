@@ -11,6 +11,7 @@ import { apiConstants } from "@/assets/constants/constants";
 import { post } from "@/services/api/requests";
 import { apiEndpoints } from "@/assets/constants/api-endpoints";
 import { error } from "console";
+import { useSnackbar } from "@/contexts/snackbar-context/snackbar-context";
 
 const PhoneSignup: FC = () => {
   const [errorFields, setErrorFields] = useState<PhoneValidation>({
@@ -25,6 +26,7 @@ const PhoneSignup: FC = () => {
   });
 
   const [loading, setLoading] = useState<boolean>(false);
+  const { openSnackbar } = useSnackbar();
 
   const onSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -60,7 +62,7 @@ const PhoneSignup: FC = () => {
           console.log("Login Data", data);
         })
         .catch((error) => {
-          console.log("error", error.message);
+          openSnackbar(error.message, "error");
         })
         .finally(() => {
           setLoading(false);
