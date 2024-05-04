@@ -19,6 +19,7 @@ const config: Config = {
         "dodger-blue": "#1D78FF",
         cinnabar: "#E13740",
         christi: "#45BB0E",
+        gray: "#808080",
         "gray-light": "#808080B2",
         tundora: "#4D4D4D",
         "bay-of-many": "#264C85",

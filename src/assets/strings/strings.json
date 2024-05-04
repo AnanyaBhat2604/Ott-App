@@ -38,5 +38,8 @@
   "passwordsMustBeSame": "*Passwords must be same",
   "pleaseEnterValidPassword": "*Please enter valid password",
   "verification": "Verification required",
-  "codeSentMessage": "We have sent a verification code to "
+  "codeSentMessage": "We have sent a verification code to ",
+  "back": "Back",
+  "passwordAssistance": "Password assistance",
+  "passwordAssistanceInfo": "Enter the email address or mobile phone number associated with your account."
 }

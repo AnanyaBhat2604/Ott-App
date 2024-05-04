@@ -83,3 +83,7 @@ export interface SnackbarContextType {
   ) => void;
   closeSnackbar: () => void;
 }
+
+export interface PasswordAssistanceInterface {
+  email: "";
+}
