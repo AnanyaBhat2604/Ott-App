@@ -1,6 +1,9 @@
+"use client";
+
 import React, { FC } from "react";
 import strings from "@/assets/strings/strings.json";
 import OtpRead from "@/components/OtpRead/OtpRead";
+import OtpForm from "@/containers/Auth/OtpForm/OtpForm";
 
 const OtpPage: FC = () => {
   return (
@@ -10,7 +13,7 @@ const OtpPage: FC = () => {
         {strings.verification}
       </div>
       <div className="text-sm pt-[10px]">{strings.codeSentMessage}</div>
-      <OtpRead />
+      <OtpForm />
     </div>
   );
 };

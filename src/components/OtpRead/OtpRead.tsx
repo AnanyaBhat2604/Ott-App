@@ -1,14 +1,19 @@
 "use client";
-import { useState } from "react";
+import { FC, useState } from "react";
 import OtpInput from "react-otp-input";
 
-const OtpRead = () => {
+const OtpRead: FC<{ onChange: (data: { [key: string]: string }) => void }> = ({
+  onChange,
+}) => {
   const [otp, setOtp] = useState("");
   return (
     <div className="pt-[20px]">
       <OtpInput
         value={otp}
-        onChange={setOtp}
+        onChange={(data) => {
+          setOtp(data);
+          onChange({ otp: data });
+        }}
         numInputs={4}
         renderSeparator={<span> </span>}
         renderInput={(props) => <input {...props} />}
