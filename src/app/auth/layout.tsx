@@ -14,12 +14,13 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (frontendProtectedRoutes.includes(pathname)) {
-      if (!getRoutePermissions(pathname)) {
-        router.push(frontendRoutes.LOGIN);
-      }
+    if (
+      frontendProtectedRoutes.includes(pathname) &&
+      !getRoutePermissions(pathname)
+    ) {
+      router.push(frontendRoutes.LOGIN);
     }
-  }, []);
+  }, [pathname, router]);
 
   return (
     <div className="auth-bg center-div">
