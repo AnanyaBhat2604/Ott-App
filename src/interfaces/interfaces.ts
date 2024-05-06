@@ -70,10 +70,6 @@ export interface NewPassword {
   confirmPassword: string;
 }
 
-export interface StorageData {
-  [key: string]: any;
-}
-
 export interface SnackbarContextType {
   open: boolean;
   message: string;
