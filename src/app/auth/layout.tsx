@@ -1,9 +1,26 @@
 "use client";
+import {
+  frontendProtectedRoutes,
+  frontendRoutes,
+} from "@/assets/constants/frontend-routes";
 import Snackbar from "@/components/Snackbar/Snackbar";
 import { SnackbarProvider } from "@/contexts/snackbar-context/snackbar-context";
-import React from "react";
+import { getRoutePermissions } from "@/utils/route-permissions";
+import { usePathname, useRouter } from "next/navigation";
+import React, { useEffect } from "react";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
+  const pathname = usePathname();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (frontendProtectedRoutes.includes(pathname)) {
+      if (!getRoutePermissions(pathname)) {
+        router.push(frontendRoutes.LOGIN);
+      }
+    }
+  }, []);
+
   return (
     <div className="auth-bg center-div">
       <SnackbarProvider>

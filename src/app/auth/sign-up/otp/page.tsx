@@ -7,7 +7,7 @@ import Timer from "@/components/Timer/Timer";
 
 const OtpPage: FC = () => {
   return (
-    <div className="flex flex-col text-white items-center px-[50px]">
+    <div className="flex flex-col text-white items-center">
       <div className="text-lg font-bold">{strings.signUp}</div>
       <div className="font-medium text-[20px] leading-tight mt-[40px]">
         {strings.verification}
@@ -16,7 +16,7 @@ const OtpPage: FC = () => {
         {strings.codeSentMessage}9099999999
       </div>
       <OtpForm />
-      <div className="mt-[100px] flex gap-[4px] text-light-grey">
+      <div className="mt-[100px] flex gap-[4px] text-gray ">
         {strings.resendOtp}
         <Timer targetDate={new Date("2024-05-06T14:59:00+05:30")} />
       </div>
