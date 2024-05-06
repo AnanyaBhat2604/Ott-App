@@ -8,8 +8,10 @@ import { SignupEmail } from "@/interfaces/interfaces";
 import { validateInput } from "@/utils/validation";
 import { post } from "@/services/api/requests";
 import { apiEndpoints } from "@/assets/constants/api-endpoints";
-import { apiConstants } from "@/assets/constants/constants";
+import { apiConstants, constants } from "@/assets/constants/constants";
 import { useSnackbar } from "@/contexts/snackbar-context/snackbar-context";
+import { setRoutePermissions } from "@/utils/route-permissions";
+import { useRouter } from "next/navigation";
 
 const EmailSignup: FC = () => {
   const [errorFields, setErrorFields] = useState<SignupEmail>({
@@ -21,6 +23,8 @@ const EmailSignup: FC = () => {
   });
 
   const [loading, setLoading] = useState<boolean>(false);
+
+  const router = useRouter();
 
   const { openSnackbar } = useSnackbar();
 
@@ -52,7 +56,10 @@ const EmailSignup: FC = () => {
       setLoading(true);
       post(apiEndpoints.sendOTP, data)
         .then((data: any) => {
-          console.log("Login Data", data);
+          if (data.resultInfo.code === constants.SUCCCESS) {
+            setRoutePermissions(frontendRoutes.SIGN_UP_OTP);
+            router.push(frontendRoutes.SIGN_UP_OTP);
+          }
         })
         .catch((error) => {
           openSnackbar(error.message, "error");

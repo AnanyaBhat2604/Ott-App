@@ -8,6 +8,8 @@ import { LoginOption } from "@/interfaces/interfaces";
 export const constants = {
   TRUE: "true",
   PASSWORD: "password",
+  SUCCCESS: "SUCCESS",
+  ROUTE_PERMISSIONS: "routePermissions",
 };
 
 export const loginOptions: LoginOption[] = [
