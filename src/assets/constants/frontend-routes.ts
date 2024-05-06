@@ -6,3 +6,8 @@ export const frontendRoutes = {
   RESET_PASSWORD: "/auth/reset-password",
   PASSWORD_EMAIL_SENT: "/auth/reset-password/check-your-email",
 };
+
+export const frontendProtectedRoutes = [
+  frontendRoutes.SIGN_UP_OTP,
+  frontendRoutes.SIGN_UP_USER_DETAILS,
+];
