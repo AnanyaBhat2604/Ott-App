@@ -24,6 +24,7 @@ const config: Config = {
         tundora: "#4D4D4D",
         "bay-of-many": "#264C85",
         "wild-sand": "#F4F4F4",
+        "light-grey": "#B3B3B3",
       },
       backgroundImage: {
         "auth-pattern": "url('/assets/images/background-poster.png')",

@@ -45,5 +45,6 @@
   "checkYourEmail": "Check Your Email",
   "pleaseCheckTheEmail": "Please check the email address",
   "infoToSetPassword": "for instructions to reset your password.",
-  "resendEmail": "Resend email"
+  "resendEmail": "Resend email",
+  "resendOtp": "Resend OTP in "
 }
