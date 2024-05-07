@@ -6,7 +6,6 @@ import {
 import Snackbar from "@/components/Snackbar/Snackbar";
 import { SnackbarProvider } from "@/contexts/snackbar-context/snackbar-context";
 import { getRoutePermissions } from "@/utils/route-permissions";
-import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
