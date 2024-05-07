@@ -7,6 +7,13 @@ import InputWithDropdown from "@/components/DropdownInput/DropdownInput";
 import Button from "@/components/Button/Button";
 import { validateInput } from "@/utils/validation";
 import { PhoneInput, PhoneValidation } from "@/interfaces/interfaces";
+import { apiConstants, constants } from "@/assets/constants/constants";
+import { post } from "@/services/api/requests";
+import { apiEndpoints } from "@/assets/constants/api-endpoints";
+import { setData } from "@/services/storage/storage";
+import { setRoutePermissions } from "@/utils/route-permissions";
+import { useSnackbar } from "@/contexts/snackbar-context/snackbar-context";
+import { useRouter } from "next/navigation";
 
 const PhoneLogin: FC = () => {
   const [errorFields, setErrorFields] = useState<PhoneValidation>({
@@ -19,6 +26,11 @@ const PhoneLogin: FC = () => {
       inputValue: "",
     },
   });
+
+  const [loading, setLoading] = useState(false);
+
+  const { openSnackbar } = useSnackbar();
+  const router = useRouter();
 
   const onSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -44,7 +56,34 @@ const PhoneLogin: FC = () => {
     });
 
     if (!hasError) {
-      alert("Can be submitted");
+      setLoading(true);
+      const data = {
+        destination: formData.phone.inputValue,
+        channel: apiConstants.SMS,
+      };
+      post(apiEndpoints.sendOTP, data)
+        .then((data: any) => {
+          if (data.resultInfo.code === constants.SUCCCESS) {
+            let currentTime = new Date();
+
+            const otpData = {
+              type: apiConstants.SMS,
+              destination: formData.phone.inputValue,
+              targetTimeStamp: new Date(
+                new Date(currentTime.getTime() + 30 * 1000)
+              ), //after 30 seconds
+            };
+            setData("otpData", otpData);
+            setRoutePermissions(frontendRoutes.SIGN_UP_OTP);
+            router.push(frontendRoutes.SIGN_UP_OTP);
+          }
+        })
+        .catch((error) => {
+          openSnackbar(error.message, "error");
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     }
   };
 
@@ -87,7 +126,7 @@ const PhoneLogin: FC = () => {
         />
       </div>
       <div className="w-full mt-[24px]">
-        <Button name={strings.continue} type="submit" />
+        <Button name={strings.continue} type="submit" loading={loading} />
       </div>
     </form>
   );

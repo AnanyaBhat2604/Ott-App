@@ -1,7 +1,7 @@
 "use client";
+import { constants } from "@/assets/constants/constants";
 import { FC, useState } from "react";
 import OtpInput from "react-otp-input";
-import Timer from "../Timer/Timer";
 
 const OtpRead: FC<{ onChange: (data: { [key: string]: string }) => void }> = ({
   onChange,
@@ -16,7 +16,7 @@ const OtpRead: FC<{ onChange: (data: { [key: string]: string }) => void }> = ({
           setOtp(data);
           onChange({ otp: data });
         }}
-        numInputs={4}
+        numInputs={constants.OTP_LENGTH}
         renderSeparator={<span> </span>}
         renderInput={(props) => <input {...props} />}
         inputStyle={

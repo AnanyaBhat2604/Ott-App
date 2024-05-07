@@ -10,6 +10,7 @@ export const constants = {
   PASSWORD: "password",
   SUCCCESS: "SUCCESS",
   ROUTE_PERMISSIONS: "routePermissions",
+  OTP_LENGTH: 6,
 };
 
 export const loginOptions: LoginOption[] = [
@@ -45,4 +46,6 @@ export const apiMethods = {
 export const apiConstants = {
   EMAIL: "EMAIL",
   SMS: "SMS",
+  PASSWORD: "PASSWORD",
+  OTP: "OTP",
 };

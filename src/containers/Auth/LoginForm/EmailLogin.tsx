@@ -6,6 +6,11 @@ import InputComponent from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 import { validateInput } from "@/utils/validation";
 import { LoginWithEmail } from "@/interfaces/interfaces";
+import { post } from "@/services/api/requests";
+import { apiEndpoints } from "@/assets/constants/api-endpoints";
+import { constants } from "@/assets/constants/constants";
+import { useRouter } from "next/navigation";
+import { useSnackbar } from "@/contexts/snackbar-context/snackbar-context";
 
 const EmailLogin: FC = () => {
   const [errorFields, setErrorFields] = useState<LoginWithEmail>({
@@ -17,6 +22,12 @@ const EmailLogin: FC = () => {
     email: "",
     password: "",
   });
+
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const router = useRouter();
+
+  const { openSnackbar } = useSnackbar();
 
   const onSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -42,7 +53,21 @@ const EmailLogin: FC = () => {
     });
 
     if (!hasError) {
-      alert("Can be submitted");
+      const data = { userName: formData.email, password: formData.password };
+      setLoading(true);
+      post(apiEndpoints.emailLogin, data)
+        .then((data: any) => {
+          if (data.resultInfo.code === constants.SUCCCESS) {
+            router.push(frontendRoutes.DASHBOARD);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          openSnackbar(error.message, "error");
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     }
   };
 
@@ -92,7 +117,7 @@ const EmailLogin: FC = () => {
         />
       </div>
       <div className="w-full mt-[24px]">
-        <Button name={strings.continue} type="submit" />
+        <Button name={strings.continue} type="submit" loading={loading} />
       </div>
     </form>
   );

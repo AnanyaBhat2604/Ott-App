@@ -1,3 +1,5 @@
+import strings from "@/assets/strings/strings.json";
+
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export const request = async (
@@ -17,7 +19,11 @@ export const request = async (
     });
 
     if (!response.ok) {
-      throw new Error("Network response was not ok");
+      const errorData = await response.json();
+
+      throw new Error(
+        errorData?.resultInfo?.message || strings.somethingWentWrong
+      );
     }
 
     return await response.json();
