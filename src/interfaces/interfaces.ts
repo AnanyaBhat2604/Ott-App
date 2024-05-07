@@ -44,10 +44,12 @@ export interface PhoneInput {
     dropdownValue: string;
     inputValue: string;
   };
+  password: string;
 }
 
 export interface PhoneValidation {
   phone: "";
+  password: "";
 }
 
 export interface SignupEmail {

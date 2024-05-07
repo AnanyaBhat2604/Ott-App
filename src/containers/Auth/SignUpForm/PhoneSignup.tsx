@@ -7,15 +7,19 @@ import InputWithDropdown from "@/components/DropdownInput/DropdownInput";
 import Button from "@/components/Button/Button";
 import { validateInput } from "@/utils/validation";
 import { PhoneInput, PhoneValidation } from "@/interfaces/interfaces";
-import { apiConstants } from "@/assets/constants/constants";
+import { apiConstants, constants } from "@/assets/constants/constants";
 import { post } from "@/services/api/requests";
 import { apiEndpoints } from "@/assets/constants/api-endpoints";
-import { error } from "console";
 import { useSnackbar } from "@/contexts/snackbar-context/snackbar-context";
+import InputComponent from "@/components/Input/Input";
+import { setData } from "@/services/storage/storage";
+import { setRoutePermissions } from "@/utils/route-permissions";
+import { useRouter } from "next/navigation";
 
 const PhoneSignup: FC = () => {
   const [errorFields, setErrorFields] = useState<PhoneValidation>({
     phone: "",
+    password: "",
   });
 
   const [formData, setFormData] = useState<PhoneInput>({
@@ -23,9 +27,11 @@ const PhoneSignup: FC = () => {
       dropdownValue: "",
       inputValue: "",
     },
+    password: "",
   });
 
   const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
   const { openSnackbar } = useSnackbar();
 
   const onSubmit = (event: FormEvent<HTMLFormElement>): void => {
@@ -33,11 +39,15 @@ const PhoneSignup: FC = () => {
     let hasError = false;
 
     Object.keys(formData).forEach((key: string) => {
-      const errorMessage = validateInput(
-        key,
-        formData[key as keyof PhoneInput]["inputValue"],
-        "phone"
-      );
+      let value: string;
+      if (key === "phone") {
+        value = (formData[key as keyof PhoneInput] as PhoneInput["phone"])
+          .inputValue;
+      } else {
+        value = formData[key as keyof PhoneInput] as string;
+      }
+
+      const errorMessage = validateInput(key, value, key as keyof PhoneInput);
 
       if (!formData[key as keyof PhoneInput] || errorMessage) {
         if (!hasError) {
@@ -59,7 +69,21 @@ const PhoneSignup: FC = () => {
       setLoading(true);
       post(apiEndpoints.sendOTP, data)
         .then((data: any) => {
-          console.log("Login Data", data);
+          if (data.resultInfo.code === constants.SUCCCESS) {
+            let currentTime = new Date();
+
+            const otpData = {
+              type: apiConstants.EMAIL,
+              destination: formData.phone.inputValue,
+              targetTimeStamp: new Date(
+                new Date(currentTime.getTime() + 30 * 1000)
+              ), //after 30 seconds
+              password: formData.password,
+            };
+            setData("otpData", otpData);
+            setRoutePermissions(frontendRoutes.SIGN_UP_OTP);
+            router.push(frontendRoutes.SIGN_UP_OTP);
+          }
         })
         .catch((error) => {
           openSnackbar(error.message, "error");
@@ -106,6 +130,17 @@ const PhoneSignup: FC = () => {
           inputType={"number"}
           name={"phone"}
           error={errorFields?.phone}
+        />
+      </div>
+      <div className="pt-[16px]">
+        <InputComponent
+          placeholder={strings.password}
+          name={"password"}
+          onChange={onInputChange}
+          validationRequired
+          validationType="password"
+          error={errorFields.password}
+          type="password"
         />
       </div>
       <div className="w-full mt-[24px]">
