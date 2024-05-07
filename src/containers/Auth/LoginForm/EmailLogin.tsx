@@ -11,6 +11,7 @@ import { apiEndpoints } from "@/assets/constants/api-endpoints";
 import { constants } from "@/assets/constants/constants";
 import { useRouter } from "next/navigation";
 import { useSnackbar } from "@/contexts/snackbar-context/snackbar-context";
+import { setData } from "@/services/storage/storage";
 
 const EmailLogin: FC = () => {
   const [errorFields, setErrorFields] = useState<LoginWithEmail>({
@@ -58,6 +59,8 @@ const EmailLogin: FC = () => {
       post(apiEndpoints.emailLogin, data)
         .then((data: any) => {
           if (data.resultInfo.code === constants.SUCCCESS) {
+            setData("token", data.token);
+            setData("refreshToken", data.refreshToken);
             router.push(frontendRoutes.DASHBOARD);
           }
         })

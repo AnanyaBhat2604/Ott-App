@@ -17,10 +17,12 @@ import { setData } from "@/services/storage/storage";
 const EmailSignup: FC = () => {
   const [errorFields, setErrorFields] = useState<SignupEmail>({
     email: "",
+    password: "",
   });
 
   const [formData, setFormData] = useState<SignupEmail>({
     email: "",
+    password: "",
   });
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -66,6 +68,7 @@ const EmailSignup: FC = () => {
               targetTimeStamp: new Date(
                 new Date(currentTime.getTime() + 30 * 1000)
               ), //after 30 seconds
+              password: formData.password,
             };
             setData("otpData", otpData);
             setRoutePermissions(frontendRoutes.SIGN_UP_OTP);
@@ -114,6 +117,17 @@ const EmailSignup: FC = () => {
           validationRequired
           validationType="email"
           error={errorFields.email}
+        />
+      </div>
+      <div className="pt-[16px]">
+        <InputComponent
+          placeholder={strings.password}
+          name={"password"}
+          onChange={onInputChange}
+          validationRequired
+          validationType="password"
+          error={errorFields.password}
+          type="password"
         />
       </div>
       <div className="w-full mt-[24px]">

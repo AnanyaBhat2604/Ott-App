@@ -17,6 +17,7 @@ const OtpPage: FC = () => {
     type: "",
     destination: "",
     targetTimeStamp: new Date(),
+    password: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -34,10 +35,11 @@ const OtpPage: FC = () => {
 
   const onOtpSubmit = (otp: string): void => {
     const submitData = {
-      mode: apiConstants.OTP,
+      mode: apiConstants.PASSWORD,
       [otpData.type === apiConstants.EMAIL ? "email" : "mobileNumber"]:
         otpData.destination,
       otp: otp,
+      password: otpData.password,
     };
 
     setLoading(true);

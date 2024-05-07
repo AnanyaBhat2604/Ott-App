@@ -52,6 +52,7 @@ export interface PhoneValidation {
 
 export interface SignupEmail {
   email: "";
+  password: "";
 }
 
 export interface SignupPhone {
@@ -88,5 +89,6 @@ export interface PasswordAssistanceInterface {
 export interface OtpObject {
   type: string;
   destination: string;
+  password: string;
   targetTimeStamp: Date;
 }
