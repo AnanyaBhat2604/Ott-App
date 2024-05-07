@@ -84,3 +84,9 @@ export interface SnackbarContextType {
 export interface PasswordAssistanceInterface {
   email: "";
 }
+
+export interface OtpObject {
+  type: string;
+  destination: string;
+  targetTimeStamp: Date;
+}

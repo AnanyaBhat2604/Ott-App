@@ -12,6 +12,7 @@ import { apiConstants, constants } from "@/assets/constants/constants";
 import { useSnackbar } from "@/contexts/snackbar-context/snackbar-context";
 import { setRoutePermissions } from "@/utils/route-permissions";
 import { useRouter } from "next/navigation";
+import { setData } from "@/services/storage/storage";
 
 const EmailSignup: FC = () => {
   const [errorFields, setErrorFields] = useState<SignupEmail>({
@@ -57,6 +58,16 @@ const EmailSignup: FC = () => {
       post(apiEndpoints.sendOTP, data)
         .then((data: any) => {
           if (data.resultInfo.code === constants.SUCCCESS) {
+            let currentTime = new Date();
+
+            const otpData = {
+              type: apiConstants.EMAIL,
+              destination: formData.email,
+              targetTimeStamp: new Date(
+                new Date(currentTime.getTime() + 30 * 1000)
+              ), //after 30 seconds
+            };
+            setData("otpData", otpData);
             setRoutePermissions(frontendRoutes.SIGN_UP_OTP);
             router.push(frontendRoutes.SIGN_UP_OTP);
           }
