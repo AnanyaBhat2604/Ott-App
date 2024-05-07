@@ -131,14 +131,14 @@ const InputWithDropdown = ({
         <Select
           value={inputdata.dropdownValue}
           renderValue={(p) => p}
-          className={`w-[130px] border-gray-light border-r !rounded-none text-white text-sm`}
+          className={`w-[130px] border-gray-light border-r !rounded-none !text-white text-sm`}
           onOpen={handleFocus}
           sx={selectStyles}
           onChange={handleSelect}
           MenuProps={{
             PaperProps: {
               ref: menuRef,
-              className: "bg-tundora text-white scrollbar-custom",
+              className: "!bg-tundora !text-white scrollbar-custom",
               sx: {
                 width: `${inputRef.current?.clientWidth}px`,
                 maxHeight: "250px",
