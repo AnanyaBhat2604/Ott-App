@@ -10,8 +10,10 @@ import MenuItems from "../MenuItems/MenuItems";
 import List from "../List/List";
 import { request } from "@/services/fetchData";
 import { URL } from "@/assets/constants/ApiRquest";
+import { ErrorLogger } from "@/services/ErrorLogger";
 
 const Header = () => {
+  const logger = new ErrorLogger();
   const [dropdown, setDropdown] = useState("");
   const [menuData, setMenuData] = useState({});
 
@@ -20,7 +22,7 @@ const Header = () => {
       const data = await request(URL.GET_MENU, "GET");
       setMenuData(data);
     } catch (error) {
-      console.log("Error fetching the value");
+      logger.logError("Menu", error, new Date().toISOString());
     }
   };
 
@@ -32,7 +34,7 @@ const Header = () => {
     <div className="bg-black">
       <div className="container mx-auto flex gap-[50px] justify-between items-center relative">
         <Logo />
-        <MenuItems menuData={menuData} />
+        {menuData && <MenuItems menuData={menuData} />}
 
         <div className=" font-sans font-semibold text-20px leading-26.4px text-light-grey flex gap-[20px] items-center">
           <div

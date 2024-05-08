@@ -13,3 +13,7 @@ export interface ValueResponse {
   titles: [];
   value: string;
 }
+
+export interface TitleProps {
+  title: string;
+}
