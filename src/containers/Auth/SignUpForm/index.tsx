@@ -10,7 +10,7 @@ const SignUpForm: FC = () => {
   const signUpWithEmail = searchParams.get("email");
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center w-card-container">
       {signUpWithEmail === constants.TRUE ? <EmailSignup /> : <PhoneSignup />}
       <MoreOptions />
     </div>

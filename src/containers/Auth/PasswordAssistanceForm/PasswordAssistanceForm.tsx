@@ -66,7 +66,7 @@ const PasswordAssistanceForm: FC = () => {
   };
 
   return (
-    <form onSubmit={onSubmit} className="mt-[40px]">
+    <form onSubmit={onSubmit} className="mt-[40px] w-full">
       <div className="pt-[8px]">
         <InputComponent
           placeholder={strings.email}

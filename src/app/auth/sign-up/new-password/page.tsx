@@ -9,7 +9,9 @@ const page: FC = () => {
     <div className="flex flex-col text-white items-center ">
       <div className="text-lg font-bold">{strings.createNewPassword}</div>
       <div className="text-sm pt-[10px]">{strings.askForthisPassword}</div>
-      <PasswordForm />
+      <div className="w-card-container">
+        <PasswordForm />
+      </div>
     </div>
   );
 };

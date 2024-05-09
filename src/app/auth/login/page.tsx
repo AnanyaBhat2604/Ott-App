@@ -8,7 +8,7 @@ import LoginForm from "@/containers/Auth/LoginForm";
 
 const Login: FC = () => {
   return (
-    <div className="flex flex-col text-white items-center">
+    <div className="flex flex-col text-white items-center w-card-container">
       <div className="text-lg font-bold">{strings.login}</div>
       <LoginForm />
       <div className="mt-[100px] text-sm ">

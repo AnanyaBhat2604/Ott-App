@@ -92,7 +92,7 @@ const EmailLogin: FC = () => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className="w-full">
       <div className="flex justify-between gap-3 pt-[40px] opacity-70 items-center w-full">
         <div className="text-sm font-semibold">{strings.email}</div>
         <Link href={frontendRoutes.LOGIN} className="text-xs font-normal">

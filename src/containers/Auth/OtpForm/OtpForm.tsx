@@ -12,7 +12,7 @@ const OtpForm: FC<{ onOtpSubmit: (otp: string) => void }> = ({
   };
 
   return (
-    <form>
+    <form className="w-card-container">
       <OtpRead onChange={onChange} />
     </form>
   );

@@ -64,6 +64,10 @@ const config: Config = {
       lineHeight: {
         normal: "24px",
       },
+
+      width: {
+        "card-container": "528px",
+      },
     },
   },
   plugins: [],

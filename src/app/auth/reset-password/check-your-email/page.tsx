@@ -4,7 +4,7 @@ import React from "react";
 const page = () => {
   const email = "abcd@gmail.com";
   return (
-    <div className="max-w-[520px]">
+    <div className="w-card-container">
       <InfoUI param={email} />
     </div>
   );

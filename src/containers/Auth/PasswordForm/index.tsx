@@ -120,7 +120,7 @@ const PasswordForm: FC = () => {
 
   return (
     <>
-      <form className="pt-[32px]" onSubmit={onSubmit}>
+      <form className="pt-[32px] w-full" onSubmit={onSubmit}>
         <div className="pt-medium">
           <InputComponent
             placeholder={strings.newPassword}

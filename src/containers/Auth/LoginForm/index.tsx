@@ -10,7 +10,7 @@ const LoginForm: FC = () => {
   const loginWithEmail = searchParams.get("email");
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center w-full">
       {loginWithEmail === constants.TRUE ? <EmailLogin /> : <PhoneLogin />}
       <MoreOptions />
     </div>

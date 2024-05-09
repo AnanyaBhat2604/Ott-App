@@ -19,7 +19,7 @@ const ResetPassword: FC = () => {
         <span className="text-gray text-sm">{strings.back}</span>
       </Link>
       <div className="text-lg font-bold">{strings.passwordAssistance}</div>
-      <div className="text-sm pt-[10px] max-w-[520px] text-center">
+      <div className="text-sm pt-[10px] w-card-container text-center">
         {strings.passwordAssistanceInfo}
       </div>
       <PasswordAssistanceForm />

@@ -75,7 +75,6 @@ const OtpPage: FC = () => {
         {strings.resendOtp}
         <Timer targetDate={otpData.targetTimeStamp} />
       </div>
-      {loading && "Loading..."}
     </div>
   );
 };

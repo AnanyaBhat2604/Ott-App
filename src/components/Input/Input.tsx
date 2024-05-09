@@ -61,7 +61,7 @@ const InputComponent = ({
   };
 
   return (
-    <div className="flex flex-col w-[528px]">
+    <div className="flex flex-col ">
       <TextField
         name={name}
         placeholder={placeholder}
