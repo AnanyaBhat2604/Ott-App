@@ -6,12 +6,12 @@ import InputComponent from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 import { validateInput } from "@/utils/validation";
 import { LoginWithEmail } from "@/interfaces/interfaces";
-import { post } from "@/services/api/requests";
 import { apiEndpoints } from "@/assets/constants/api-endpoints";
-import { constants } from "@/assets/constants/constants";
+import { apiMethods, constants } from "@/assets/constants/constants";
 import { useRouter } from "next/navigation";
 import { useSnackbar } from "@/contexts/snackbar-context/snackbar-context";
 import { setData } from "@/services/storage/storage";
+import { request } from "@/services/api";
 
 const EmailLogin: FC = () => {
   const [errorFields, setErrorFields] = useState<LoginWithEmail>({
@@ -56,7 +56,7 @@ const EmailLogin: FC = () => {
     if (!hasError) {
       const data = { userName: formData.email, password: formData.password };
       setLoading(true);
-      post(apiEndpoints.emailLogin, data)
+      request(apiEndpoints.emailLogin, apiMethods.POST, {}, data)
         .then((data: any) => {
           if (data.resultInfo.code === constants.SUCCCESS) {
             setData("token", data.token);

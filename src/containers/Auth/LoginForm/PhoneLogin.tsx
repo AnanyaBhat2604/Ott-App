@@ -6,21 +6,30 @@ import countryCodes from "@/assets/data/country-codes.json";
 import InputWithDropdown from "@/components/DropdownInput/DropdownInput";
 import Button from "@/components/Button/Button";
 import { validateInput } from "@/utils/validation";
-import { PhoneInput, PhoneValidation } from "@/interfaces/interfaces";
-import { apiConstants, constants } from "@/assets/constants/constants";
-import { post } from "@/services/api/requests";
+import {
+  PhoneInput,
+  PhoneInputLogin,
+  PhoneLoginType,
+  PhoneValidation,
+} from "@/interfaces/interfaces";
+import {
+  apiConstants,
+  apiMethods,
+  constants,
+} from "@/assets/constants/constants";
 import { apiEndpoints } from "@/assets/constants/api-endpoints";
 import { setData } from "@/services/storage/storage";
 import { setRoutePermissions } from "@/utils/route-permissions";
 import { useSnackbar } from "@/contexts/snackbar-context/snackbar-context";
 import { useRouter } from "next/navigation";
+import { request } from "@/services/api";
 
 const PhoneLogin: FC = () => {
-  const [errorFields, setErrorFields] = useState<PhoneValidation>({
+  const [errorFields, setErrorFields] = useState<PhoneLoginType>({
     phone: "",
   });
 
-  const [formData, setFormData] = useState<PhoneInput>({
+  const [formData, setFormData] = useState<PhoneInputLogin>({
     phone: {
       dropdownValue: "",
       inputValue: "",
@@ -39,17 +48,17 @@ const PhoneLogin: FC = () => {
     Object.keys(formData).forEach((key: string) => {
       const errorMessage = validateInput(
         key,
-        formData[key as keyof PhoneInput]["inputValue"],
+        formData[key as keyof PhoneInputLogin]["inputValue"],
         "phone"
       );
 
-      if (!formData[key as keyof PhoneInput] || errorMessage) {
+      if (!formData[key as keyof PhoneInputLogin] || errorMessage) {
         if (!hasError) {
           hasError = true;
         }
       }
 
-      setErrorFields((prev: PhoneValidation) => ({
+      setErrorFields((prev) => ({
         ...prev,
         [key]: errorMessage,
       }));
@@ -61,7 +70,7 @@ const PhoneLogin: FC = () => {
         destination: formData.phone.inputValue,
         channel: apiConstants.SMS,
       };
-      post(apiEndpoints.sendOTP, data)
+      request(apiEndpoints.sendOTP, apiMethods.POST, {}, data)
         .then((data: any) => {
           if (data.resultInfo.code === constants.SUCCCESS) {
             let currentTime = new Date();
@@ -88,14 +97,14 @@ const PhoneLogin: FC = () => {
   };
 
   const onInputChange = (data: Partial<PhoneInput>, hasError: string): void => {
-    setFormData((prevState: PhoneInput) => ({
+    setFormData((prevState: PhoneInputLogin) => ({
       ...prevState,
       ...data,
     }));
 
     const key = Object.keys(data)[0];
 
-    setErrorFields((prev: PhoneValidation) => ({
+    setErrorFields((prev) => ({
       ...prev,
       [key]: hasError,
     }));

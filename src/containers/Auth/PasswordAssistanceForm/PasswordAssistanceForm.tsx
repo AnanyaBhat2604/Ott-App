@@ -4,7 +4,6 @@ import InputComponent from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 import { PasswordAssistanceInterface } from "@/interfaces/interfaces";
 import { validateInput } from "@/utils/validation";
-import { post } from "@/services/api/requests";
 import { apiEndpoints } from "@/assets/constants/api-endpoints";
 import { apiConstants } from "@/assets/constants/constants";
 import { useSnackbar } from "@/contexts/snackbar-context/snackbar-context";

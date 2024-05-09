@@ -7,14 +7,18 @@ import InputWithDropdown from "@/components/DropdownInput/DropdownInput";
 import Button from "@/components/Button/Button";
 import { validateInput } from "@/utils/validation";
 import { PhoneInput, PhoneValidation } from "@/interfaces/interfaces";
-import { apiConstants, constants } from "@/assets/constants/constants";
-import { post } from "@/services/api/requests";
+import {
+  apiConstants,
+  apiMethods,
+  constants,
+} from "@/assets/constants/constants";
 import { apiEndpoints } from "@/assets/constants/api-endpoints";
 import { useSnackbar } from "@/contexts/snackbar-context/snackbar-context";
 import InputComponent from "@/components/Input/Input";
 import { setData } from "@/services/storage/storage";
 import { setRoutePermissions } from "@/utils/route-permissions";
 import { useRouter } from "next/navigation";
+import { request } from "@/services/api";
 
 const PhoneSignup: FC = () => {
   const [errorFields, setErrorFields] = useState<PhoneValidation>({
@@ -67,7 +71,7 @@ const PhoneSignup: FC = () => {
         channel: apiConstants.SMS,
       };
       setLoading(true);
-      post(apiEndpoints.sendOTP, data)
+      request(apiEndpoints.sendOTP, apiMethods.POST, {}, data)
         .then((data: any) => {
           if (data.resultInfo.code === constants.SUCCCESS) {
             let currentTime = new Date();

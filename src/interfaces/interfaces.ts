@@ -47,18 +47,29 @@ export interface PhoneInput {
   password: string;
 }
 
+export interface PhoneInputLogin {
+  phone: {
+    dropdownValue: string;
+    inputValue: string;
+  };
+}
+
 export interface PhoneValidation {
-  phone: "";
-  password: "";
+  phone: string;
+  password: string;
+}
+
+export interface PhoneLoginType {
+  phone: string;
 }
 
 export interface SignupEmail {
-  email: "";
-  password: "";
+  email: string;
+  password: string;
 }
 
 export interface SignupPhone {
-  phone: "";
+  phone: string;
 }
 
 export interface UserDetails {
@@ -85,7 +96,7 @@ export interface SnackbarContextType {
 }
 
 export interface PasswordAssistanceInterface {
-  email: "";
+  email: string;
 }
 
 export interface OtpObject {

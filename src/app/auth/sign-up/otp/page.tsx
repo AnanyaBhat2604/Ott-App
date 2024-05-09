@@ -5,12 +5,16 @@ import OtpForm from "@/containers/Auth/OtpForm/OtpForm";
 import Timer from "@/components/Timer/Timer";
 import { getData } from "@/services/storage/storage";
 import { OtpObject } from "@/interfaces/interfaces";
-import { apiConstants, constants } from "@/assets/constants/constants";
-import { post } from "@/services/api/requests";
+import {
+  apiConstants,
+  apiMethods,
+  constants,
+} from "@/assets/constants/constants";
 import { apiEndpoints } from "@/assets/constants/api-endpoints";
 import { frontendRoutes } from "@/assets/constants/frontend-routes";
 import { useRouter } from "next/navigation";
 import { useSnackbar } from "@/contexts/snackbar-context/snackbar-context";
+import { request } from "@/services/api";
 
 const OtpPage: FC = () => {
   const [otpData, setOtpData] = useState<OtpObject>({
@@ -43,7 +47,7 @@ const OtpPage: FC = () => {
     };
 
     setLoading(true);
-    post(apiEndpoints.register, submitData)
+    request(apiEndpoints.register, apiMethods.POST, {}, submitData)
       .then((data: any) => {
         if (data.resultInfo.code === constants.SUCCCESS) {
           router.push(frontendRoutes.DASHBOARD);
