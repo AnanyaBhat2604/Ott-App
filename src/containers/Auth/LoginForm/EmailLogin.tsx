@@ -116,6 +116,7 @@ const EmailLogin: FC = () => {
           type="password"
           onChange={onInputChange}
           validationRequired
+          validationType=""
           error={errorFields.password}
         />
       </div>
