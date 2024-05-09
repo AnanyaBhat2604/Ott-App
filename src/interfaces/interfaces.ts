@@ -105,3 +105,10 @@ export interface OtpObject {
   password: string;
   targetTimeStamp: Date;
 }
+
+export interface SkeletonLoaderInterface {
+  width?: string;
+  height?: string;
+  variant?: "rectangular" | "rounded" | "circular";
+  className?: string;
+}
