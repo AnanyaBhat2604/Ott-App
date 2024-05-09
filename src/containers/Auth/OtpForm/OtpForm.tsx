@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSnackbar } from "@/contexts/snackbar-context/snackbar-context";
-import { getData } from "@/services/storage/storage";
+import { getData, removeData } from "@/services/storage/storage";
 import { request } from "@/services/api";
 import OtpRead from "@/components/OtpRead/OtpRead";
 import Timer from "@/components/Timer/Timer";
@@ -49,6 +49,7 @@ const OtpForm: FC = () => {
     request(apiEndpoints.register, apiMethods.POST, {}, submitData)
       .then((data: any) => {
         if (data.resultInfo.code === constants.SUCCCESS) {
+          removeData("otpData");
           router.push(frontendRoutes.DASHBOARD);
         }
       })
