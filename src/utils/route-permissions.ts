@@ -27,3 +27,7 @@ export const deleteRoutePermissions = (route: string): void => {
 
   setData(constants.ROUTE_PERMISSIONS, existingRoutes);
 };
+
+export const deleteAllRoutePermissions = (): void => {
+  setData(constants.ROUTE_PERMISSIONS, []);
+};

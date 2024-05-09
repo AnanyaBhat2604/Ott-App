@@ -1,18 +1,22 @@
 "use client";
+import { constants } from "@/assets/constants/constants";
 import {
   frontendProtectedRoutes,
   frontendRoutes,
 } from "@/assets/constants/frontend-routes";
-import SkeletonLoader from "@/components/SkeletonLoader/SkeletonLoader";
 import Snackbar from "@/components/Snackbar/Snackbar";
 import AuthSkeleton from "@/containers/SkeletonLoaders/AuthSkeleton";
 import { SnackbarProvider } from "@/contexts/snackbar-context/snackbar-context";
-import { getRoutePermissions } from "@/utils/route-permissions";
+import { getData } from "@/services/storage/storage";
+import {
+  deleteAllRoutePermissions,
+  getRoutePermissions,
+} from "@/utils/route-permissions";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
-  const pathname = usePathname();
+  const pathname: string = usePathname();
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
 
@@ -26,8 +30,19 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     }
 
     setMounted(true);
+    deleteRoutePermissions();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const deleteRoutePermissions = () => {
+    //Delete route permission on user exit from that page
+    const routePermissions: string[] =
+      getData(constants.ROUTE_PERMISSIONS) || [];
+
+    if (!routePermissions.includes(pathname)) {
+      deleteAllRoutePermissions();
+    }
+  };
 
   return (
     <div className="auth-bg center-div">
