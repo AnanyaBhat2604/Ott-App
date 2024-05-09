@@ -3,6 +3,7 @@ export const constants = {
   TRYFORFREE: "tryforfree",
   EN: "EN",
   PROFILE: "profile",
+  GET: "GET",
 };
 
 export const responsive = {

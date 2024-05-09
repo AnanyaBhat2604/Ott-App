@@ -19,7 +19,7 @@ const Header = () => {
 
   const fetchMenuData = async () => {
     try {
-      const data = await request(URL.GET_MENU, "GET");
+      const data = await request(URL.GET_MENU, constants.GET);
       setMenuData(data);
     } catch (error) {
       logger.logError("Menu", error, new Date().toISOString());
@@ -54,34 +54,34 @@ const Header = () => {
           </div>
 
           <div
-            className={` px-[10px] h-[64px] flex items-center relative  ${
-              constants.PROFILE === dropdown ? "bg-gray-800 text-white" : ""
-            }`}
-            onMouseEnter={() => {
-              if (constants.PROFILE !== dropdown) {
-                setDropdown(constants.PROFILE);
-              }
-            }}
-            onMouseLeave={() => {
-              setDropdown("");
-            }}
+            className={` px-[10px] h-[64px] flex items-center relative group hover:bg-gray-800 text-white`}
+            // onMouseEnter={() => {
+            //   if (constants.PROFILE !== dropdown) {
+            //     setDropdown(constants.PROFILE);
+            //   }
+            // }}
+            // onMouseLeave={() => {
+            //   setDropdown("");
+            // }}
           >
             <Image src={profile} alt="profile" className="h-[32px] w-[32px]" />
-            {dropdown === constants.PROFILE && (
-              <List
-                options={[
-                  {
-                    name: "Sign In",
-                  },
-                  {
-                    name: "Help",
-                  },
-                  {
-                    name: "Watch Anywhere",
-                  },
-                ]}
-              />
-            )}
+            <div className="bg-white hidden group-hover:block">
+              {
+                <List
+                  options={[
+                    {
+                      name: "Sign In",
+                    },
+                    {
+                      name: "Help",
+                    },
+                    {
+                      name: "Watch Anywhere",
+                    },
+                  ]}
+                />
+              }
+            </div>
           </div>
         </div>
       </div>
