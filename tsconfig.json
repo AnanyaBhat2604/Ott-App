@@ -32,7 +32,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "server/src/index.mjs", "server/src/index.mjs", "server/src/controllers/menuController.mjs", "server/src/routes/menuRoutes.mjs"  ],
   "exclude": [
     "node_modules"
   ]
