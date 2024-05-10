@@ -55,14 +55,6 @@ const Header = () => {
 
           <div
             className={` px-[10px] h-[64px] flex items-center relative group hover:bg-gray-800 text-white`}
-            // onMouseEnter={() => {
-            //   if (constants.PROFILE !== dropdown) {
-            //     setDropdown(constants.PROFILE);
-            //   }
-            // }}
-            // onMouseLeave={() => {
-            //   setDropdown("");
-            // }}
           >
             <Image src={profile} alt="profile" className="h-[32px] w-[32px]" />
             <div className="bg-white hidden group-hover:block">
