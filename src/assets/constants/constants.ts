@@ -6,6 +6,18 @@ export const constants = {
   GET: "GET",
 };
 
+export const profileOptions = [
+  {
+    title: "Sign In",
+  },
+  {
+    title: "Help",
+  },
+  {
+    title: "Watch Anywhere",
+  },
+];
+
 export const responsive = {
   superLargeDesktop: {
     breakpoint: { max: 4000, min: 3000 },

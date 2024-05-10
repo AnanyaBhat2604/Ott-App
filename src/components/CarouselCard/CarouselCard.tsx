@@ -10,8 +10,8 @@ const CarouselCard = ({ actualData }: any) => {
 
   return (
     <div
-      className={`bg-opacity-25 bg-blue-700 backdrop-filter backdrop-blur-md bg-cover bg-center border border-white border-opacity-25 rounded-lg p-6 shadow-lg flex flex-col items-center justify-center text-center transition-all ${
-        isHovered && "scale-110"
+      className={`bg-opacity-25 bg-blue-700 backdrop-filter backdrop-blur-md bg-cover bg-center border border-white border-opacity-25 rounded-lg p-6 shadow-lg flex flex-col items-center justify-center text-center  transition-all  ${
+        isHovered && "scale-110 max-h-[450px]"
       }`}
     >
       <div
@@ -30,7 +30,7 @@ const CarouselCard = ({ actualData }: any) => {
             width={500}
             height={300}
             onError={() => setError(true)}
-            className="h-[210px] w-[372px] object-cover"
+            className="h-[210px] object-cover"
           />
         </div>
         {isHovered && (

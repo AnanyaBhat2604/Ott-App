@@ -6,7 +6,6 @@ import Carousel from "react-multi-carousel";
 import CarouselCard from "../CarouselCard/CarouselCard";
 
 const MovieCarousel = ({ movieData }: any) => {
-  console.log(movieData);
   return (
     <Carousel responsive={responsive}>
       {movieData &&

@@ -5,7 +5,7 @@ import strings from "@/assets/strings/strings.json";
 
 const Footer = () => {
   return (
-    <div className="bg-black text-white py-8 flex items-center flex-col gap-[12px]">
+    <div className="bg-black text-white py-8 flex items-center flex-col gap-[12px] pt-[150px]">
       <div>
         <Image src={Logo} alt="Logo" width={100} height={50} />{" "}
       </div>

@@ -7,7 +7,7 @@ export default async function Home() {
   const data = await request(URL?.GET_MOVIE, constants.GET, headers);
 
   return (
-    <main>
+    <main className="bg-black h-full">
       <Movies movieData={data?.titles} />
     </main>
   );

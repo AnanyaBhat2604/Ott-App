@@ -21,8 +21,8 @@ const DropdownItem: FC<{ item: any }> = ({ item }) => {
           hovered && "bg-gray-800 text-white"
         }`}
       >
-        <span>{item.name}</span>
-        {item.options && item.options.length > 0 && (
+        <span>{item.title}</span>
+        {item.children && item.children.length > 0 && (
           <Image
             src={hovered ? noDetails : details}
             alt="details"
@@ -31,7 +31,9 @@ const DropdownItem: FC<{ item: any }> = ({ item }) => {
         )}
       </div>
       <div className="relative z-10">
-        {hovered && <List options={item.options} />}
+        {item.children && item.children.length > 0 && hovered && (
+          <List options={item?.children} />
+        )}
       </div>
     </div>
   );

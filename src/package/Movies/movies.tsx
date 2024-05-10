@@ -5,7 +5,7 @@ import strings from "@/assets/strings/strings.json";
 
 const Movies = ({ movieData }: any) => {
   return (
-    <div className="bg-black flex flex-col gap-[20px] p-[40px] carousel-custom ">
+    <div className=" flex flex-col gap-[20px] p-[40px] carousel-custom ">
       <Title title={strings.movies} />
       <MovieCarousel movieData={movieData} />
     </div>
