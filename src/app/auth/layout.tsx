@@ -30,9 +30,13 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     }
 
     setMounted(true);
-    deleteRoutePermissions();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    deleteRoutePermissions();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
 
   const deleteRoutePermissions = () => {
     //Delete route permission on user exit from that page

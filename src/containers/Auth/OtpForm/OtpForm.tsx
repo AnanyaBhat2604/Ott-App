@@ -37,16 +37,29 @@ const OtpForm: FC = () => {
   }, []);
 
   const onOtpSubmit = (otp: string): void => {
-    const submitData = {
-      mode: apiConstants.PASSWORD,
-      [otpData.type === apiConstants.EMAIL ? "email" : "mobileNumber"]:
-        otpData.destination,
-      otp: otp,
-      password: otpData.password,
-    };
+    const submitData =
+      otpData.type === apiConstants.EMAIL
+        ? {
+            mode: apiConstants.PASSWORD,
+            email: otpData.destination,
+            otp: otp,
+            password: otpData.password,
+          }
+        : {
+            mode: apiConstants.OTP,
+            mobileNumber: otpData.destination,
+            otp: otp,
+          };
 
     setLoading(true);
-    request(apiEndpoints.register, apiMethods.POST, {}, submitData)
+    request(
+      otpData.type === apiConstants.EMAIL
+        ? apiEndpoints.register
+        : apiEndpoints.otpLogin,
+      apiMethods.POST,
+      {},
+      submitData
+    )
       .then((data: any) => {
         if (data.resultInfo.code === constants.SUCCCESS) {
           removeData("otpData");
