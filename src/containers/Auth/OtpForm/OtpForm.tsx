@@ -73,6 +73,7 @@ const OtpForm: FC = () => {
           } else {
             removeData("otpData");
             router.push(frontendRoutes.LOGIN);
+            openSnackbar(strings.signUpSuccess, "success");
           }
         }
       })

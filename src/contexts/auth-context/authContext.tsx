@@ -40,16 +40,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const router = useRouter();
-  const { openSnackbar } = useSnackbar();
-
-  openSnackbar(strings.loggedInSuccessfully, "success");
 
   const login = (token: string, refreshToken: string) => {
     setIsLoggedIn(true);
     setData("token", { token: token, auth: true });
     setData("refreshToken", refreshToken);
     router.push(frontendRoutes.DASHBOARD);
-    openSnackbar(strings.loggedInSuccessfully, "success");
   };
 
   const logout = () => {
