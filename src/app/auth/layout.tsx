@@ -5,7 +5,6 @@ import {
   frontendRoutes,
 } from "@/assets/constants/frontend-routes";
 import Snackbar from "@/components/Snackbar/Snackbar";
-import AuthSkeleton from "@/containers/SkeletonLoaders/AuthSkeleton";
 import { SnackbarProvider } from "@/contexts/snackbar-context/snackbar-context";
 import { getData } from "@/services/storage/storage";
 import {

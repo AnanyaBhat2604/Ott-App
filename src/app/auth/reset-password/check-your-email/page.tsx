@@ -1,5 +1,10 @@
-import InfoUI from "@/containers/Auth/InfoUI/InfoUI";
+import AuthSkeleton from "@/containers/SkeletonLoaders/AuthSkeleton";
+import dynamic from "next/dynamic";
 import React from "react";
+
+const InfoUI = dynamic(() => import("@/containers/Auth/InfoUI/InfoUI"), {
+  loading: () => <AuthSkeleton />,
+});
 
 const page = () => {
   const email = "abcd@gmail.com";

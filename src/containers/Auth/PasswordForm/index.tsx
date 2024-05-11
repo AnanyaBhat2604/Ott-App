@@ -120,32 +120,36 @@ const PasswordForm: FC = () => {
 
   return (
     <>
-      <form className="pt-[32px] w-full" onSubmit={onSubmit}>
-        <div className="pt-medium">
-          <InputComponent
-            placeholder={strings.newPassword}
-            name={"password"}
-            type="password"
-            onChange={onInputChange}
-            validationRequired
-            error={errorFields.password}
-          />
-        </div>
-        <div className="pt-medium">
-          <InputComponent
-            placeholder={strings.reEnterPassword}
-            name={"confirmPassword"}
-            type="password"
-            onChange={onInputChange}
-            validationRequired
-            error={errorFields.confirmPassword}
-          />
-        </div>
-        <div className="w-full mt-[24px]">
-          <Button name={strings.continue} type="submit" />
-        </div>
-      </form>
-      <PasswordValidation passwordValidation={newPasswordValidations} />
+      <div className="text-lg font-bold">{strings.createNewPassword}</div>
+      <div className="text-sm pt-[10px]">{strings.askForthisPassword}</div>
+      <div className="w-card-container">
+        <form className="pt-[32px] w-full" onSubmit={onSubmit}>
+          <div className="pt-medium">
+            <InputComponent
+              placeholder={strings.newPassword}
+              name={"password"}
+              type="password"
+              onChange={onInputChange}
+              validationRequired
+              error={errorFields.password}
+            />
+          </div>
+          <div className="pt-medium">
+            <InputComponent
+              placeholder={strings.reEnterPassword}
+              name={"confirmPassword"}
+              type="password"
+              onChange={onInputChange}
+              validationRequired
+              error={errorFields.confirmPassword}
+            />
+          </div>
+          <div className="w-full mt-[24px]">
+            <Button name={strings.continue} type="submit" />
+          </div>
+        </form>
+        <PasswordValidation passwordValidation={newPasswordValidations} />
+      </div>
     </>
   );
 };

@@ -1,7 +1,5 @@
 "use client";
 import React, { FC } from "react";
-import strings from "@/assets/strings/strings.json";
-// import OtpForm from "@/containers/Auth/OtpForm/OtpForm";
 import dynamic from "next/dynamic";
 import AuthSkeleton from "@/containers/SkeletonLoaders/AuthSkeleton";
 

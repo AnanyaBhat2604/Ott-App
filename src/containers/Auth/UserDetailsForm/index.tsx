@@ -68,48 +68,51 @@ const UserDetailsForm: FC = () => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <div className="pt-medium">
-        <InputComponent
-          placeholder={strings.firstName}
-          name={"firstName"}
-          onChange={onInputChange}
-          validationRequired
-          error={errorFields.firstName}
-        />
-      </div>
-      <div className="pt-medium">
-        <InputComponent
-          placeholder={strings.lastName}
-          name={"lastName"}
-          onChange={onInputChange}
-          validationRequired
-          error={errorFields.lastName}
-        />
-      </div>
-      <div className="pt-medium">
-        <InputComponent
-          placeholder={strings.email}
-          name={"email"}
-          onChange={onInputChange}
-          validationRequired
-          validationType="email"
-          error={errorFields.email}
-        />
-      </div>
-      <div className="pt-medium">
-        <InputComponent
-          placeholder={strings.state}
-          name={"state"}
-          onChange={onInputChange}
-          validationRequired
-          error={errorFields.state}
-        />
-      </div>
-      <div className="w-full mt-[24px]">
-        <Button name={strings.continue} type="submit" />
-      </div>
-    </form>
+    <>
+      <div className="text-lg font-bold">{strings.yourDetails}</div>
+      <form onSubmit={onSubmit}>
+        <div className="pt-medium">
+          <InputComponent
+            placeholder={strings.firstName}
+            name={"firstName"}
+            onChange={onInputChange}
+            validationRequired
+            error={errorFields.firstName}
+          />
+        </div>
+        <div className="pt-medium">
+          <InputComponent
+            placeholder={strings.lastName}
+            name={"lastName"}
+            onChange={onInputChange}
+            validationRequired
+            error={errorFields.lastName}
+          />
+        </div>
+        <div className="pt-medium">
+          <InputComponent
+            placeholder={strings.email}
+            name={"email"}
+            onChange={onInputChange}
+            validationRequired
+            validationType="email"
+            error={errorFields.email}
+          />
+        </div>
+        <div className="pt-medium">
+          <InputComponent
+            placeholder={strings.state}
+            name={"state"}
+            onChange={onInputChange}
+            validationRequired
+            error={errorFields.state}
+          />
+        </div>
+        <div className="w-full mt-[24px]">
+          <Button name={strings.continue} type="submit" />
+        </div>
+      </form>
+    </>
   );
 };
 

@@ -1,14 +1,10 @@
 "use client";
 
 import React, { FC } from "react";
-import Link from "next/link";
-import { frontendRoutes } from "@/assets/constants/frontend-routes";
-// import LoginForm from "@/containers/Auth/LoginForm";
 import dynamic from "next/dynamic";
 import AuthSkeleton from "@/containers/SkeletonLoaders/AuthSkeleton";
 const LoginForm = dynamic(() => import("@/containers/Auth/LoginForm"), {
   loading: () => <AuthSkeleton />,
-  // ssr: false,
 });
 
 const Login: FC = () => {
