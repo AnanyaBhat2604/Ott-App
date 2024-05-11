@@ -89,6 +89,10 @@ const OtpForm: FC = () => {
 
   return (
     <>
+      <div className="text-lg font-bold">{strings.signUp}</div>
+      <div className="font-medium text-[20px] leading-tight mt-[40px]">
+        {strings.verification}
+      </div>
       <div className="text-sm pt-[10px]  text-light-grey">
         {strings.codeSentMessage} {otpData?.destination || ""}
       </div>

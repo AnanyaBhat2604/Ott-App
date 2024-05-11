@@ -18,7 +18,6 @@ import React, { useEffect, useState } from "react";
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const pathname: string = usePathname();
   const router = useRouter();
-  const [mounted, setMounted] = useState(false);
 
   const isBlocked =
     frontendProtectedRoutes.includes(pathname) &&
@@ -29,7 +28,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       router.push(frontendRoutes.LOGIN);
     }
 
-    setMounted(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -52,7 +50,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     <div className="auth-bg center-div">
       <SnackbarProvider>
         <div className="custom-card  z-[1] relative max-h-[90vh] overflow-y-auto scrollbar-custom">
-          {!isBlocked && mounted ? children : <AuthSkeleton />}
+          {children}
         </div>
         <Snackbar />
       </SnackbarProvider>

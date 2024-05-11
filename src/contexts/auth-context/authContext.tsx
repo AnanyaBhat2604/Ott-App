@@ -39,7 +39,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   const logout = () => {
-    const token = {};
+    const token = getData("token");
 
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -76,7 +76,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
   return (
     <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
-      {!mounted ? <h1>Loading</h1> : children}
+      {children}
     </AuthContext.Provider>
   );
 };

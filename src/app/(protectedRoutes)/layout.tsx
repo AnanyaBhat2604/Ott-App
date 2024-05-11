@@ -1,10 +1,15 @@
 "use client";
 
-import { AuthProvider } from "@/contexts/auth-context/authContext";
-import React from "react";
+import { AuthProvider, useAuth } from "@/contexts/auth-context/authContext";
+import React, { useEffect } from "react";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
-  return <AuthProvider>{children}</AuthProvider>;
+  return (
+    <div>
+      <h1>Hello</h1>
+      {children}
+    </div>
+  );
 };
 
 export default Layout;
