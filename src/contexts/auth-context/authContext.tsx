@@ -1,7 +1,7 @@
 "use client";
 import { apiEndpoints } from "@/assets/constants/api-endpoints";
 import { apiMethods, constants } from "@/assets/constants/constants";
-import { frontendRoutes, openRoutes } from "@/assets/constants/frontend-routes";
+import { frontendRoutes } from "@/assets/constants/frontend-routes";
 import { request } from "@/services/api";
 import { getData, removeData } from "@/services/storage/storage";
 import { usePathname, useRouter } from "next/navigation";

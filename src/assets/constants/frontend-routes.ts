@@ -21,5 +21,3 @@ export const authRoutes = [
   frontendRoutes.RESET_PASSWORD,
   frontendRoutes.PASSWORD_EMAIL_SENT,
 ];
-
-export const openRoutes = [...authRoutes];
