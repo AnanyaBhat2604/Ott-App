@@ -14,6 +14,7 @@ import {
 } from "@/assets/constants/constants";
 import { apiEndpoints } from "@/assets/constants/api-endpoints";
 import { frontendRoutes } from "@/assets/constants/frontend-routes";
+import { useAuth } from "@/contexts/auth-context/authContext";
 
 const OtpForm: FC = () => {
   const [otpData, setOtpData] = useState<OtpObject>({
@@ -26,6 +27,7 @@ const OtpForm: FC = () => {
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
+  const { login } = useAuth();
 
   const { openSnackbar } = useSnackbar();
 
@@ -64,9 +66,10 @@ const OtpForm: FC = () => {
         if (data.resultInfo.code === constants.SUCCCESS) {
           if (otpData.type === apiConstants.SMS) {
             removeData("otpData");
-            setData("token", data?.data?.tokenInfo?.token);
-            setData("refreshToken", data?.data?.tokenInfo?.refreshToken);
-            router.push(frontendRoutes.DASHBOARD);
+            login(
+              data?.data?.tokenInfo?.token,
+              data?.data?.tokenInfo?.refreshToken
+            );
           } else {
             removeData("otpData");
             router.push(frontendRoutes.LOGIN);

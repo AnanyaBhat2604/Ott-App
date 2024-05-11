@@ -1,3 +1,4 @@
+"use client";
 import { SnackbarContextType } from "@/interfaces/interfaces";
 import React, {
   FC,

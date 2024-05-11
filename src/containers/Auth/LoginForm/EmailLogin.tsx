@@ -10,8 +10,8 @@ import { apiEndpoints } from "@/assets/constants/api-endpoints";
 import { apiMethods, constants } from "@/assets/constants/constants";
 import { useRouter } from "next/navigation";
 import { useSnackbar } from "@/contexts/snackbar-context/snackbar-context";
-import { setData } from "@/services/storage/storage";
 import { request } from "@/services/api";
+import { useAuth } from "@/contexts/auth-context/authContext";
 
 const EmailLogin: FC = () => {
   const [errorFields, setErrorFields] = useState<LoginWithEmail>({
@@ -26,7 +26,7 @@ const EmailLogin: FC = () => {
 
   const [loading, setLoading] = useState<boolean>(false);
 
-  const router = useRouter();
+  const { login } = useAuth();
 
   const { openSnackbar } = useSnackbar();
 
@@ -38,7 +38,7 @@ const EmailLogin: FC = () => {
       const errorMessage = validateInput(
         key,
         formData[key as keyof LoginWithEmail],
-        key as keyof LoginWithEmail
+        key === "password" ? "" : (key as keyof LoginWithEmail)
       );
 
       if (!formData[key as keyof LoginWithEmail] || errorMessage) {
@@ -58,11 +58,8 @@ const EmailLogin: FC = () => {
       setLoading(true);
       request(apiEndpoints.emailLogin, apiMethods.POST, {}, data)
         .then((data: any) => {
-          console.log(data);
           if (data.resultInfo.code === constants.SUCCCESS) {
-            setData("token", data?.data?.token);
-            setData("refreshToken", data?.data?.refreshToken);
-            router.push(frontendRoutes.DASHBOARD);
+            login(data?.data?.token, data?.data?.refreshToken);
           }
         })
         .catch((error) => {

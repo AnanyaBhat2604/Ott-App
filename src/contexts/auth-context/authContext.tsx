@@ -7,7 +7,7 @@ import {
   openRoutes,
 } from "@/assets/constants/frontend-routes";
 import { request } from "@/services/api";
-import { getData, removeData } from "@/services/storage/storage";
+import { getData, removeData, setData } from "@/services/storage/storage";
 import { redirect, usePathname, useRouter } from "next/navigation";
 import React, {
   ReactNode,
@@ -16,10 +16,12 @@ import React, {
   useEffect,
   useState,
 } from "react";
+import strings from "@/assets/strings/strings.json";
+import { useSnackbar } from "../snackbar-context/snackbar-context";
 
 interface AuthContextType {
   isLoggedIn: boolean;
-  login: () => void;
+  login: (token: string, refreshToken: string) => void;
   logout: () => void;
 }
 
@@ -37,13 +39,25 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const router = useRouter();
+  const { openSnackbar } = useSnackbar();
 
-  const login = () => {
+  openSnackbar(strings.loggedInSuccessfully, "success");
+
+  const login = (token: string, refreshToken: string) => {
     setIsLoggedIn(true);
+    setData("token", { token: token, auth: true });
+    setData("refreshToken", refreshToken);
+    router.push(frontendRoutes.DASHBOARD);
+    openSnackbar(strings.loggedInSuccessfully, "success");
   };
 
   const logout = () => {
-    const token = getData("token");
+    const tokenData: { token: string; auth: boolean } = getData("token") || {
+      token: "",
+      auth: false,
+    };
+    const token = tokenData?.token;
 
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -65,9 +79,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const pathname = usePathname();
 
   useEffect(() => {
-    const token = getData("token");
-    console.log(token);
-    if (token) {
+    const tokenData: { token: string; auth: boolean } = getData("token") || {
+      token: "",
+      auth: false,
+    };
+
+    if (tokenData?.token && tokenData?.auth) {
       setIsLoggedIn(true);
       if (authRoutes.includes(pathname)) {
         return redirect(frontendRoutes.DASHBOARD);
