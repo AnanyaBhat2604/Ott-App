@@ -58,9 +58,10 @@ const EmailLogin: FC = () => {
       setLoading(true);
       request(apiEndpoints.emailLogin, apiMethods.POST, {}, data)
         .then((data: any) => {
+          console.log(data);
           if (data.resultInfo.code === constants.SUCCCESS) {
-            setData("token", data.token);
-            setData("refreshToken", data.refreshToken);
+            setData("token", data?.data?.token);
+            setData("refreshToken", data?.data?.refreshToken);
             router.push(frontendRoutes.DASHBOARD);
           }
         })
