@@ -1,10 +1,10 @@
 "use client";
 import { apiEndpoints } from "@/assets/constants/api-endpoints";
 import { apiMethods, constants } from "@/assets/constants/constants";
-import { frontendRoutes } from "@/assets/constants/frontend-routes";
+import { frontendRoutes, openRoutes } from "@/assets/constants/frontend-routes";
 import { request } from "@/services/api";
 import { getData, removeData } from "@/services/storage/storage";
-import { usePathname, useRouter } from "next/navigation";
+import { redirect, usePathname, useRouter } from "next/navigation";
 import React, {
   ReactNode,
   createContext,
@@ -58,18 +58,16 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       .finally(() => {});
   };
 
-  const router = useRouter();
   const pathname = usePathname();
 
-  const [mounted, setMounted] = useState(false);
-
   useEffect(() => {
-    setMounted(true);
     const token = getData("token");
     if (token) {
       setIsLoggedIn(true);
     } else {
-      router.push(frontendRoutes.LOGIN);
+      if (!openRoutes.includes(pathname)) {
+        redirect(frontendRoutes.LOGIN);
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
