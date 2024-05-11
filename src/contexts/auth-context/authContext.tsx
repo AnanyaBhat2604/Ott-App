@@ -1,7 +1,11 @@
 "use client";
 import { apiEndpoints } from "@/assets/constants/api-endpoints";
 import { apiMethods, constants } from "@/assets/constants/constants";
-import { frontendRoutes, openRoutes } from "@/assets/constants/frontend-routes";
+import {
+  authRoutes,
+  frontendRoutes,
+  openRoutes,
+} from "@/assets/constants/frontend-routes";
 import { request } from "@/services/api";
 import { getData, removeData } from "@/services/storage/storage";
 import { redirect, usePathname, useRouter } from "next/navigation";
@@ -62,15 +66,20 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
   useEffect(() => {
     const token = getData("token");
+    console.log(token);
     if (token) {
       setIsLoggedIn(true);
+      if (authRoutes.includes(pathname)) {
+        return redirect(frontendRoutes.DASHBOARD);
+      }
     } else {
+      setIsLoggedIn(false);
       if (!openRoutes.includes(pathname)) {
-        redirect(frontendRoutes.LOGIN);
+        return redirect(frontendRoutes.LOGIN);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname]);
+  }, []);
 
   return (
     <AuthContext.Provider value={{ isLoggedIn, login, logout }}>

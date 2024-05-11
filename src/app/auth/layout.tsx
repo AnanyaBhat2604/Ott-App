@@ -5,14 +5,21 @@ import {
   frontendRoutes,
 } from "@/assets/constants/frontend-routes";
 import Snackbar from "@/components/Snackbar/Snackbar";
+import AuthSkeleton from "@/containers/SkeletonLoaders/AuthSkeleton";
 import { SnackbarProvider } from "@/contexts/snackbar-context/snackbar-context";
 import { getData } from "@/services/storage/storage";
 import {
   deleteAllRoutePermissions,
   getRoutePermissions,
 } from "@/utils/route-permissions";
+import dynamic from "next/dynamic";
 import { usePathname, useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+
+const Children = dynamic(() => import("@/components/Children/Children"), {
+  loading: () => <AuthSkeleton />,
+  ssr: false,
+});
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const pathname: string = usePathname();
@@ -46,14 +53,14 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <div className="auth-bg center-div">
-      <SnackbarProvider>
+    <SnackbarProvider>
+      <div className="auth-bg center-div">
         <div className="custom-card  z-[1] relative max-h-[90vh] overflow-y-auto scrollbar-custom">
-          {children}
+          <Children childData={children} />
         </div>
-        <Snackbar />
-      </SnackbarProvider>
-    </div>
+      </div>{" "}
+      <Snackbar />
+    </SnackbarProvider>
   );
 };
 

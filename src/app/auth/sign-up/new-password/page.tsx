@@ -1,8 +1,16 @@
 "use client";
 
+import AuthSkeleton from "@/containers/SkeletonLoaders/AuthSkeleton";
+import dynamic from "next/dynamic";
 import React, { FC } from "react";
-import strings from "@/assets/strings/strings.json";
-import PasswordForm from "@/containers/Auth/PasswordForm/index";
+
+const PasswordForm = dynamic(
+  () => import("@/containers/Auth/PasswordForm/index"),
+  {
+    loading: () => <AuthSkeleton />,
+    ssr: false,
+  }
+);
 
 const page: FC = () => {
   return (

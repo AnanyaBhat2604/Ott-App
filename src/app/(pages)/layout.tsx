@@ -8,7 +8,11 @@ const Children = dynamic(() => import("../../components/Children/Children"), {
 });
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
-  return <Children childData={children} />;
+  return (
+    <div>
+      <Children childData={children} />
+    </div>
+  );
 };
 
 export default Layout;
