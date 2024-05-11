@@ -14,7 +14,6 @@ import {
 } from "@/assets/constants/constants";
 import { apiEndpoints } from "@/assets/constants/api-endpoints";
 import { useSnackbar } from "@/contexts/snackbar-context/snackbar-context";
-import InputComponent from "@/components/Input/Input";
 import { setData } from "@/services/storage/storage";
 import { setRoutePermissions } from "@/utils/route-permissions";
 import { useRouter } from "next/navigation";
