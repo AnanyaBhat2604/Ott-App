@@ -4,7 +4,6 @@ import { useSnackbar } from "@/contexts/snackbar-context/snackbar-context";
 import { getData, removeData, setData } from "@/services/storage/storage";
 import { request } from "@/services/api";
 import OtpRead from "@/components/OtpRead/OtpRead";
-import Timer from "@/components/Timer/Timer";
 import strings from "@/assets/strings/strings.json";
 import { OtpObject } from "@/interfaces/interfaces";
 import {
@@ -15,6 +14,13 @@ import {
 import { apiEndpoints } from "@/assets/constants/api-endpoints";
 import { frontendRoutes } from "@/assets/constants/frontend-routes";
 import { useAuth } from "@/contexts/auth-context/authContext";
+import dynamic from "next/dynamic";
+import SkeletonLoader from "@/components/SkeletonLoader/SkeletonLoader";
+
+const Timer = dynamic(() => import("@/components/Timer/Timer"), {
+  loading: () => <SkeletonLoader width="200px" height="20px" />,
+  ssr: false,
+});
 
 const OtpForm: FC = () => {
   const [otpData, setOtpData] = useState<OtpObject>({
@@ -24,7 +30,11 @@ const OtpForm: FC = () => {
     password: "",
   });
 
+  const [showTimer, setShowTimer] = useState(false);
+
   const [loading, setLoading] = useState(false);
+
+  const [timerEnded, setTimerEnded] = useState(false);
 
   const router = useRouter();
   const { login } = useAuth();
@@ -37,6 +47,10 @@ const OtpForm: FC = () => {
       setOtpData(data as OtpObject);
     }
   }, []);
+
+  const handleTimerEnd = () => {
+    setTimerEnded(true);
+  };
 
   const onOtpSubmit = (otp: string): void => {
     const submitData =
@@ -91,6 +105,42 @@ const OtpForm: FC = () => {
     }
   };
 
+  const resendOtp = () => {
+    const data = {
+      destination: otpData.destination,
+      channel:
+        otpData.type === apiConstants.EMAIL
+          ? apiConstants.EMAIL
+          : apiConstants.SMS,
+    };
+    request(apiEndpoints.sendOTP, apiMethods.POST, {}, data)
+      .then((data: any) => {
+        if (data.resultInfo.code === constants.SUCCCESS) {
+          let currentTime = new Date();
+
+          const newOtpData = {
+            type:
+              otpData.type === apiConstants.EMAIL
+                ? apiConstants.EMAIL
+                : apiConstants.SMS,
+            destination: otpData.destination,
+            targetTimeStamp: new Date(
+              new Date(currentTime.getTime() + 30 * 1000)
+            ), //after 30 seconds
+          };
+          setOtpData(newOtpData as OtpObject);
+          setTimerEnded(false);
+          setData("otpData", newOtpData);
+        }
+      })
+      .catch((error) => {
+        openSnackbar(error.message, "error");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
   return (
     <>
       <div className="text-lg font-bold">{strings.signUp}</div>
@@ -105,9 +155,23 @@ const OtpForm: FC = () => {
         <OtpRead onChange={onChange} />
       </form>
 
-      <div className="mt-[100px] flex gap-[4px] text-gray ">
-        {strings.resendOtp}
-        <Timer targetDate={otpData.targetTimeStamp} />
+      <div
+        className="mt-[100px] flex gap-[4px] text-gray "
+        key={String(otpData.targetTimeStamp)}
+      >
+        {timerEnded ? (
+          <div className="text-white cursor-pointer" onClick={resendOtp}>
+            {strings.resendOtpText}
+          </div>
+        ) : (
+          <>
+            {strings.resendOtp}{" "}
+            <Timer
+              targetDate={otpData.targetTimeStamp}
+              onTimerEnd={handleTimerEnd}
+            />
+          </>
+        )}
       </div>
     </>
   );

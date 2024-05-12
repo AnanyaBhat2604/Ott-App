@@ -11,7 +11,7 @@ export const calculateTimeDiff = (
   const seconds = totalSeconds < 0 ? 0 : totalSeconds % 60;
 
   return {
-    minutes: minutes < 10 ? `0${minutes}` : String(minutes),
-    seconds: seconds < 10 ? `0${seconds}` : String(seconds),
+    minutes: minutes.toString().padStart(2, "0"),
+    seconds: seconds.toString().padStart(2, "0"),
   };
 };

@@ -1,9 +1,10 @@
-"use client";
-
 import { calculateTimeDiff } from "@/utils/calculateTimeDiff";
 import React, { useState, useEffect, FC } from "react";
 
-const Timer: FC<{ targetDate: Date }> = ({ targetDate }) => {
+const Timer: FC<{ targetDate: Date; onTimerEnd?: () => void }> = ({
+  targetDate,
+  onTimerEnd,
+}) => {
   const [timeLeft, setTimeLeft] = useState<{
     minutes: string;
     seconds: string;
@@ -19,14 +20,23 @@ const Timer: FC<{ targetDate: Date }> = ({ targetDate }) => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setTimeLeft(calculateTimeDiff(targetDate));
+      const newTimeLeft = calculateTimeDiff(targetDate);
+      setTimeLeft(newTimeLeft);
+
+      if (
+        newTimeLeft.minutes === "00" &&
+        newTimeLeft.seconds === "00" &&
+        onTimerEnd
+      ) {
+        onTimerEnd();
+      }
     }, 1000);
 
     return () => clearTimeout(timer);
   });
 
   return (
-    <div>
+    <div className="w-[50px]">
       <div className="text-white">{`${timeLeft.minutes}:${timeLeft.seconds}`}</div>
     </div>
   );

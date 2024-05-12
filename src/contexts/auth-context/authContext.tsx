@@ -4,7 +4,7 @@ import { apiMethods, constants } from "@/assets/constants/constants";
 import {
   authRoutes,
   frontendRoutes,
-  openRoutes,
+  protectedRoutes,
 } from "@/assets/constants/frontend-routes";
 import { request } from "@/services/api";
 import { getData, removeData, setData } from "@/services/storage/storage";
@@ -16,8 +16,6 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import strings from "@/assets/strings/strings.json";
-import { useSnackbar } from "../snackbar-context/snackbar-context";
 
 interface AuthContextType {
   isLoggedIn: boolean;
@@ -87,7 +85,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       }
     } else {
       setIsLoggedIn(false);
-      if (!openRoutes.includes(pathname)) {
+      if (protectedRoutes.includes(pathname)) {
         return redirect(frontendRoutes.LOGIN);
       }
     }

@@ -11,6 +11,8 @@ export const frontendRoutes = {
 export const frontendProtectedRoutes = [
   frontendRoutes.SIGN_UP_OTP,
   frontendRoutes.SIGN_UP_USER_DETAILS,
+  frontendRoutes.RESET_PASSWORD,
+  frontendRoutes.PASSWORD_EMAIL_SENT,
 ];
 
 export const authRoutes = [
@@ -22,4 +24,4 @@ export const authRoutes = [
   frontendRoutes.PASSWORD_EMAIL_SENT,
 ];
 
-export const openRoutes = [...authRoutes];
+export const protectedRoutes = [frontendRoutes.DASHBOARD];
