@@ -25,19 +25,14 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const pathname: string = usePathname();
   const router = useRouter();
 
-  const isBlocked =
+  const isBlocked = () =>
     frontendProtectedRoutes.includes(pathname) &&
     !getRoutePermissions(pathname);
 
   useEffect(() => {
-    if (isBlocked) {
+    if (isBlocked()) {
       router.push(frontendRoutes.LOGIN);
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
     deleteRoutePermissions();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
@@ -49,6 +44,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
     if (!routePermissions.includes(pathname)) {
       deleteAllRoutePermissions();
+      isBlocked();
     }
   };
 
