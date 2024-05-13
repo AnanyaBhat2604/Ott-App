@@ -6,17 +6,19 @@ export const constants = {
   GET: "GET",
 };
 
-export const profileOptions = [
-  {
-    title: "Sign In",
-  },
-  {
-    title: "Help",
-  },
-  {
-    title: "Watch Anywhere",
-  },
-];
+export const profileOptions = {
+  children: [
+    {
+      title: "Sign In",
+    },
+    {
+      title: "Help",
+    },
+    {
+      title: "Watch Anywhere",
+    },
+  ],
+};
 
 export const responsive = {
   superLargeDesktop: {

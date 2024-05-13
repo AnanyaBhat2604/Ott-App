@@ -3,15 +3,17 @@ import React, { useState } from "react";
 import Image from "next/image";
 
 const CarouselCard = ({ actualData }: any) => {
-  const { jawSummary } = actualData;
+  const jawSummary = actualData;
   const [isHovered, setIsHovered] = useState(false);
 
   const [error, setError] = useState(false);
 
+  const src = jawSummary.backgroundImage.url;
+
   return (
     <div
-      className={`bg-opacity-25 bg-blue-700 backdrop-filter backdrop-blur-md bg-cover bg-center border border-white border-opacity-25 rounded-lg p-6 shadow-lg flex flex-col items-center justify-center text-center  transition-all  ${
-        isHovered && "scale-110 max-h-[450px]"
+      className={`bg-opacity-25 bg-blue-700 backdrop-filter backdrop-blur-md bg-cover bg-center border border-white border-opacity-25 rounded-lg p-6 shadow-lg flex flex-col items-center justify-center text-center  transition-all z-10 ${
+        isHovered && "scale-110 max-h-[450px] z-40"
       }`}
     >
       <div
@@ -24,9 +26,10 @@ const CarouselCard = ({ actualData }: any) => {
             src={
               error
                 ? "https://img.freepik.com/free-vector/illustration-gallery-icon_53876-27002.jpg?w=740&t=st=1714637808~exp=1714638408~hmac=565aff2bd3609247db95a239bf7f4b2530fe714e77b8c8854fb2ea1199facc20"
-                : jawSummary.backgroundImage.url
+                : src
             }
             alt={jawSummary.title}
+            loader={() => src}
             width={500}
             height={300}
             onError={() => setError(true)}

@@ -1,4 +1,4 @@
-import { URL, headers } from "@/assets/constants/ApiRquest";
+import { URL } from "@/assets/constants/ApiRquest";
 import { constants } from "@/assets/constants/constants";
 import Movies from "@/package/Movies/movies";
 import TvShows from "@/package/TvShows/TvShows";
@@ -12,20 +12,21 @@ export default async function Explore({
 }) {
   const { slug } = params;
 
-  const data = await request(URL?.GET_MOVIE, constants.GET, headers);
-  const moviesData =
-    data?.titles?.filter(
-      (item: { summary: { type: string } }) => item.summary?.type === "movie"
-    ) || [];
-  const tvShowsData =
-    data?.titles?.filter(
-      (item: { summary: { type: string } }) => item.summary?.type === "show"
-    ) || [];
+  const moviesData = await request(URL?.GET_ALL_MOVIES, constants.GET);
+  const tvShowsData = await request(URL?.GET_ALL_TV_SHOWS, constants.GET);
+
   return (
     <div>
       {{
-        ["tv-shows"]: <TvShows movieData={tvShowsData} />,
-        ["movies"]: <Movies movieData={moviesData} />,
+        ["tvShows"]: (
+          <TvShows
+            movieData={tvShowsData?.data}
+            title={tvShowsData?.data.name}
+          />
+        ),
+        ["Movies"]: (
+          <Movies movieData={moviesData?.data} title={moviesData?.data.name} />
+        ),
       }[slug] || <h1>Not Found</h1>}
     </div>
   );

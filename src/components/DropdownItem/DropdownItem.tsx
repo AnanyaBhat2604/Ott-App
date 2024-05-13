@@ -18,7 +18,7 @@ const DropdownItem: FC<{ item: any }> = ({ item }) => {
     >
       <div
         className={`flex h-[64px] px-[18px] items-center w-max ${
-          hovered && "bg-gray-800 text-white"
+          hovered && "bg-gray-800 text-white cursor-pointer"
         }`}
       >
         <span>{item.title}</span>
@@ -32,7 +32,7 @@ const DropdownItem: FC<{ item: any }> = ({ item }) => {
       </div>
       <div className="relative z-10">
         {item.children && item.children.length > 0 && hovered && (
-          <List options={item?.children} />
+          <List options={item} />
         )}
       </div>
     </div>

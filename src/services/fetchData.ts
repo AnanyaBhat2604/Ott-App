@@ -10,7 +10,7 @@ export const request = async (
 ) => {
   const logger = new ErrorLogger();
   try {
-    const response = await fetch(`${url}`, {
+    const response = await fetch(`${baseUrl + url}`, {
       method,
       headers: {
         "Content-Type": "application/json",
@@ -19,7 +19,7 @@ export const request = async (
       body: body ? JSON.stringify(body) : null,
     });
 
-    if (!response.ok) {
+    if (!response?.ok) {
       throw new Error("Network response was not ok");
     }
 
