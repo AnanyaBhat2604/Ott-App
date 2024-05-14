@@ -50,5 +50,8 @@
   "somethingWentWrong": "Something went wrong",
   "passwordValidationMessage": "*Password must be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, one number, and one special character (!@#$%^&*).",
   "signUpSuccess": "Signup successful",
-  "resendOtpText": "Resend OTP"
+  "resendOtpText": "Resend OTP",
+  "loginSuccess": "Login successful",
+  "logoutSuccess": "Logout successful",
+  "logoutFailed": "Failed to Logout"
 }

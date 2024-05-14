@@ -6,6 +6,7 @@ import {
   frontendRoutes,
   protectedRoutes,
 } from "@/assets/constants/frontend-routes";
+import strings from "@/assets/strings/strings.json";
 import { request } from "@/services/api";
 import { getData, removeData, setData } from "@/services/storage/storage";
 import { redirect, usePathname, useRouter } from "next/navigation";
@@ -16,6 +17,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
+import { useSnackbar } from "../snackbar-context/snackbar-context";
 
 interface AuthContextType {
   isLoggedIn: boolean;
@@ -38,6 +40,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const router = useRouter();
+  const { openSnackbar } = useSnackbar();
 
   const login = (token: string, refreshToken: string) => {
     setIsLoggedIn(true);
@@ -63,10 +66,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       .then((data: any) => {
         if (data.resultInfo.code === constants.SUCCCESS) {
           removeData("token");
-          window.location.reload;
+          redirect(frontendRoutes.LOGIN);
         }
       })
-      .catch((error) => {})
+      .catch((error) => {
+        openSnackbar(error.message || strings.logoutFailed, "error");
+      })
       .finally(() => {});
   };
 

@@ -49,14 +49,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <SnackbarProvider>
-      <div className="auth-bg center-div">
-        <div className="custom-card  z-[1] relative max-h-[90vh] overflow-y-auto scrollbar-custom">
-          <Children childData={children} />
-        </div>
-      </div>{" "}
-      <Snackbar />
-    </SnackbarProvider>
+    <div className="auth-bg center-div">
+      <div className="custom-card  z-[1] relative max-h-[90vh] overflow-y-auto scrollbar-custom">
+        <Children childData={children} />
+      </div>
+    </div>
   );
 };
 
