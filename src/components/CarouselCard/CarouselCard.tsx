@@ -8,7 +8,7 @@ const CarouselCard = ({ actualData }: any) => {
 
   const [error, setError] = useState(false);
 
-  const src = jawSummary.backgroundImage.url;
+  const src = jawSummary.image.url;
 
   return (
     <div
@@ -42,7 +42,7 @@ const CarouselCard = ({ actualData }: any) => {
               {jawSummary.title}
             </h1>
             <p className="text-white text-base mt-4 line-clamp-2">
-              {jawSummary.synopsis}
+              {jawSummary.description}
             </p>
           </div>
         )}

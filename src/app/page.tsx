@@ -1,37 +1,32 @@
-"use client";
 import { URL } from "@/assets/constants/ApiRquest";
 import { request } from "@/services/fetchData";
-import Movies from "../package/Movies/movies";
 import { constants } from "@/assets/constants/constants";
-import { useEffect, useState } from "react";
-import { ErrorLogger } from "@/services/ErrorLogger";
+import type { Metadata } from "next";
+import getComponent from "@/services/PackageSelector";
 
-export default function Home() {
-  const logger = new ErrorLogger();
-  const [movieData, setMovieData] = useState([]);
-  useEffect(() => {
-    fetchMovieData();
-  }, []);
+export const metadata: Metadata = {
+  title: "Home Page",
+  description: "...",
+};
 
-  const fetchMovieData = async () => {
-    try {
-      const data = await request(URL?.GET_DASHBOARD_LIST, constants.GET);
-
-      setMovieData(data?.data);
-    } catch (error) {
-      logger.logError("Menu", error, new Date().toISOString());
-    }
-  };
+const page = async () => {
+  const data = await request(URL?.GET_Home_Data, constants.GET);
 
   return (
     <main className="h-full">
-      {movieData.map((content: any, i) => {
-        return (
-          <div key={i}>
-            <Movies movieData={content.data} title={content.name} />
-          </div>
-        );
-      })}
+      {data?.curation?.packages &&
+        data?.curation?.packages?.length > 0 &&
+        data?.curation?.packages?.map((content: any, i: number) => {
+          const Component = getComponent(content.packageType);
+
+          return (
+            <div key={i}>
+              <Component data={content.items} title={content.title} />
+            </div>
+          );
+        })}
     </main>
   );
-}
+};
+
+export default page;

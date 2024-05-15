@@ -5,7 +5,7 @@ import strings from "@/assets/strings/strings.json";
 const Title: React.FC<TitleProps> = ({ title }) => {
   return (
     <div className="font-sans font-semibold text-24px leading-26.4px text-white">
-      <span>{strings.prime}</span> {title}
+      {title}
     </div>
   );
 };

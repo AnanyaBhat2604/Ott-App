@@ -1,7 +1,6 @@
 import { URL } from "@/assets/constants/ApiRquest";
 import { constants } from "@/assets/constants/constants";
-import Movies from "@/package/Movies/movies";
-import TvShows from "@/package/TvShows/TvShows";
+import Rails from "@/package/Rails/Rails";
 import { request } from "@/services/fetchData";
 import React from "react";
 
@@ -14,18 +13,20 @@ export default async function Explore({
 
   const moviesData = await request(URL?.GET_ALL_MOVIES, constants.GET);
   const tvShowsData = await request(URL?.GET_ALL_TV_SHOWS, constants.GET);
-
   return (
     <div>
       {{
         ["tvShows"]: (
-          <TvShows
-            movieData={tvShowsData?.data}
-            title={tvShowsData?.data.name}
+          <Rails
+            data={tvShowsData.curation.packages[0]}
+            title={tvShowsData?.title}
           />
         ),
         ["Movies"]: (
-          <Movies movieData={moviesData?.data} title={moviesData?.data.name} />
+          <Rails
+            data={moviesData.curation.packages[0]}
+            title={moviesData?.title}
+          />
         ),
       }[slug] || <h1>Not Found</h1>}
     </div>

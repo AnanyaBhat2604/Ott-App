@@ -5,18 +5,20 @@ import React from "react";
 import Carousel from "react-multi-carousel";
 import CarouselCard from "../CarouselCard/CarouselCard";
 
-const MovieCarousel = ({ movieData }: any) => {
+const CarouselItems = ({ movieData }: any) => {
   return (
     <Carousel responsive={responsive}>
       {movieData &&
         movieData.length > 0 &&
-        movieData.map((curElem: any) => {
+        movieData.map((curElem: any, i: number) => {
           return (
-            <CarouselCard key={curElem?.summary?.id} actualData={curElem} />
+            <div key={i}>
+              <CarouselCard key={curElem?.summary?.id} actualData={curElem} />
+            </div>
           );
         })}
     </Carousel>
   );
 };
 
-export default MovieCarousel;
+export default CarouselItems;
