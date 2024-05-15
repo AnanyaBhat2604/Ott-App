@@ -1,9 +1,7 @@
 import Rails from "@/package/Rails/Rails";
 import FAQ from "@/package/FAQ/FAQ";
 
-type ComponentKey = "Rails" | "FAQ";
-
-function getComponent(key: ComponentKey) {
+function getComponent(key: string) {
   switch (key) {
     case "Rails":
       return Rails;

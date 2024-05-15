@@ -13,6 +13,7 @@ export default async function Explore({
 
   const moviesData = await request(URL?.GET_ALL_MOVIES, constants.GET);
   const tvShowsData = await request(URL?.GET_ALL_TV_SHOWS, constants.GET);
+  console.log(moviesData.curation.packages[0].items.contents);
   return (
     <div>
       {{
@@ -23,10 +24,17 @@ export default async function Explore({
           />
         ),
         ["Movies"]: (
-          <Rails
-            data={moviesData.curation.packages[0]}
-            title={moviesData?.title}
-          />
+          <>
+            {moviesData?.curation?.packages[0]?.items?.contents?.map(
+              (content: any, i: number) => {
+                return (
+                  <div key={i}>
+                    <Rails data={content} title={moviesData?.title} />
+                  </div>
+                );
+              }
+            )}
+          </>
         ),
       }[slug] || <h1>Not Found</h1>}
     </div>
