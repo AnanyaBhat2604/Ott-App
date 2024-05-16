@@ -6,7 +6,6 @@ import Title from "../Title/Title";
 const HeroCard: FC<{ heroData: any }> = ({ heroData }) => {
   const [error, setError] = useState(false);
   const src = heroData.image.url;
-  const isReversed = heroData;
 
   return (
     <div
