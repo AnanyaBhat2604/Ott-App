@@ -10,7 +10,7 @@ import MenuItems from "../MenuItems/MenuItems";
 import List from "../List/List";
 import { request } from "@/services/fetchData";
 import { URL } from "@/assets/constants/ApiRquest";
-import { ErrorLogger } from "@/services/ErrorLogger";
+import { ErrorLogger } from "@/services/errorLogger";
 
 const Header = () => {
   const logger = new ErrorLogger();
