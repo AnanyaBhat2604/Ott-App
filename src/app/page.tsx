@@ -11,7 +11,6 @@ export const metadata: Metadata = {
 
 const page = async () => {
   const data = await request(URL?.GET_Home_Data, constants.GET);
-  console.log(data.curation.packages);
   return (
     <main className="h-full">
       {data?.curation?.packages &&
