@@ -1,6 +1,8 @@
-import Rails from "@/package/Rails/Rails";
-import FAQ from "@/package/FAQ/FAQ";
-import Hero from "@/package/Hero/Hero";
+import dynamic from "next/dynamic";
+
+const Rails = dynamic(() => import("@/package/Rails/Rails"));
+const Hero = dynamic(() => import("@/package/Hero/Hero"));
+const FAQ = dynamic(() => import("@/package/FAQ/FAQ"));
 
 function getComponent(key: string) {
   switch (key) {
