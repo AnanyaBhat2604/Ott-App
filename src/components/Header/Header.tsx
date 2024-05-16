@@ -9,7 +9,7 @@ import Logo from "../Logo/Logo";
 import MenuItems from "../MenuItems/MenuItems";
 import List from "../List/List";
 import { request } from "@/services/fetchData";
-import { URL } from "@/assets/constants/ApiRquest";
+import { URL } from "@/assets/constants/apiRequest";
 import { ErrorLogger } from "@/services/errorLogger";
 
 const Header = () => {

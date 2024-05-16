@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import Logo from "../../assets/icons/Logo.png";
+import Logo from "../../assets/icons/logo.png";
 import strings from "@/assets/strings/strings.json";
 
 const Footer = () => {

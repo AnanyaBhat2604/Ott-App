@@ -1,8 +1,13 @@
-import { URL } from "@/assets/constants/ApiRquest";
 import { request } from "@/services/fetchData";
 import { constants } from "@/assets/constants/constants";
 import type { Metadata } from "next";
-import Home from "@/package/Home/Home";
+
+import dynamic from "next/dynamic";
+import { URL } from "@/assets/constants/apiRequest";
+
+const Home = dynamic(() => import("@/package/Home/Home"), {
+  ssr: false,
+});
 
 export const metadata: Metadata = {
   title: "Home Page",

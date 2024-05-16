@@ -3,24 +3,23 @@ import Image from "next/image";
 import React, { FC, useState } from "react";
 import Title from "../Title/Title";
 
-const HeroCard: FC<{ heroData: any; index: number }> = ({
-  heroData,
-  index,
-}) => {
+const HeroCard: FC<{ heroData: any }> = ({ heroData }) => {
   const [error, setError] = useState(false);
-  const src = heroData.image;
-
-  const isReversed = index % 2 === 1;
-  const isFirst = index === 0;
+  const src = heroData.image.url;
+  const isReversed = heroData;
 
   return (
     <div
       className={`flex px-32 py-24 gap-5 justify-center items-center border-b-[2px] border-dark-grey ${
-        isReversed ? "flex-row-reverse" : ""
-      } ${isFirst ? "border-t-[2px]" : ""}
+        heroData.orientation === "right" ? "flex-row-reverse" : ""
+      } }
       `}
     >
-      <div className={`basis-1/2 ${isReversed ? "flex justify-end" : ""}`}>
+      <div
+        className={`basis-1/2 ${
+          heroData.orientation === "right" ? "flex justify-end" : ""
+        }`}
+      >
         <Image
           src={
             error

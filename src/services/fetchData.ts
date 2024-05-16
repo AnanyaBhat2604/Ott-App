@@ -25,7 +25,6 @@ export const request = async (
 
     return await response.json();
   } catch (error: any) {
-    // console.error("API Error:", error?.message);
     logger.logError(" Menu", error?.message, new Date().toISOString());
     throw error;
   }

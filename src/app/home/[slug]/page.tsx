@@ -1,4 +1,4 @@
-import { URL } from "@/assets/constants/ApiRquest";
+import { URL } from "@/assets/constants/apiRequest";
 import { constants } from "@/assets/constants/constants";
 import Rails from "@/package/Rails/Rails";
 import { request } from "@/services/fetchData";
