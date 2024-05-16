@@ -12,7 +12,7 @@ const AccordionComponent: FC<{ title: string; content: string }> = ({
   return (
     <div className="flex flex-col">
       <div
-        className="bg-dark-grey  z-10 relative text-white w-full hover:bg-light-grey transition-all flex justify-between p-[24px] cursor-pointer overflow-hidden"
+        className="bg-dark-grey  z-10 relative text-white w-full hover:bg-light-grey transition-all flex justify-between p-[24px] cursor-pointer overflow-hidden select-none"
         onClick={() => setIsActive(!isActive)}
       >
         <div className="text-[18px] z-[-1]">{title}</div>
@@ -27,11 +27,11 @@ const AccordionComponent: FC<{ title: string; content: string }> = ({
       </div>
       {
         <div
-          className={`text-white bg-dark-grey  text-[18px] px-[24px] mt-[1.5px] transition-all overflow-hidden relative z-0 ${
-            isActive ? "h-full py-[24px]  opacity-100" : "h-0 py-0  opacity-0"
+          className={`text-white bg-dark-grey  text-[18px] mt-[1.5px] transition-all overflow-hidden relative z-0 origin-top ${
+            isActive ? "opacity-100 max-h-[200px]" : "opacity-0  max-h-0"
           }`}
         >
-          {content}
+          <div className="p-[24px] ">{content}</div>
         </div>
       }
     </div>
