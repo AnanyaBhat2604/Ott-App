@@ -1,4 +1,4 @@
-import { ErrorLogger } from "./errorLogger";
+import { ErrorLogger } from "./ErrorLogger";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
