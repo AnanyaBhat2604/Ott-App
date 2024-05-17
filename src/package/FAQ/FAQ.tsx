@@ -1,15 +1,17 @@
 import Accordion from "@/components/Accordion";
 import Title from "@/components/Title/Title";
+import { FAQProps } from "@/interfaces/interfaces";
 import React, { FC } from "react";
 
-const FAQ: FC<{ data: any; title: string }> = ({ data, title }) => {
+const FAQ: React.FC<FAQProps> = ({ data, title }) => {
+  console.log(data);
   return (
     <div className=" flex flex-col gap-[20px] p-[40px] relative">
       <div className="text-center">
         <Title title={title} />
       </div>
 
-      <Accordion data={data.contents} />
+      <Accordion contents={data.contents} />
     </div>
   );
 };

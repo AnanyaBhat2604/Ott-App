@@ -6,7 +6,7 @@ export const request = async (
   url: string,
   method: string,
   headers: Record<string, string> = {},
-  body: any = null
+  body?: Object
 ) => {
   const logger = new ErrorLogger();
   try {
@@ -25,7 +25,7 @@ export const request = async (
 
     return await response.json();
   } catch (error: any) {
-    logger.logError(" Menu", error?.message, new Date().toISOString());
+    logger.logError(" Menu", error, new Date().toISOString());
     throw error;
   }
 };

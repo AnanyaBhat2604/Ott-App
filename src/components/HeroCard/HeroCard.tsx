@@ -2,8 +2,9 @@
 import Image from "next/image";
 import React, { FC, useState } from "react";
 import Title from "../Title/Title";
+import { HeroDataProps } from "@/interfaces/interfaces";
 
-const HeroCard: FC<{ heroData: any }> = ({ heroData }) => {
+const HeroCard: FC<{ heroData: HeroDataProps }> = ({ heroData }) => {
   const [error, setError] = useState(false);
   const src = heroData.image.url;
 

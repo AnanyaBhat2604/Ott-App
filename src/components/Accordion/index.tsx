@@ -1,11 +1,12 @@
 "use client";
 import React, { FC } from "react";
 import AccordionComponent from "./AccordionComponent";
+import { FAQDataProps } from "@/interfaces/interfaces";
 
-const Accordion: FC<{ data: any }> = ({ data }) => {
+const Accordion: FC<FAQDataProps> = ({ contents }) => {
   return (
     <>
-      {data.map((item: any, i: number) => {
+      {contents.map((item: any, i: number) => {
         return (
           <div key={i}>
             <AccordionComponent

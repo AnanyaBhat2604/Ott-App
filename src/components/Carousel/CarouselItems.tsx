@@ -4,16 +4,17 @@ import { responsive } from "@/assets/constants/constants";
 import React from "react";
 import Carousel from "react-multi-carousel";
 import CarouselCard from "../CarouselCard/CarouselCard";
+import { CarouselItemsProps, Content } from "@/interfaces/interfaces";
 
-const CarouselItems = ({ movieData }: any) => {
+const CarouselItems = ({ movieData }: CarouselItemsProps) => {
   return (
     <Carousel responsive={responsive}>
       {movieData &&
         movieData.length > 0 &&
-        movieData.map((curElem: any, i: number) => {
+        movieData.map((curElem: Content, i: number) => {
           return (
             <div key={i}>
-              <CarouselCard key={curElem?.summary?.id} actualData={curElem} />
+              <CarouselCard key={curElem?.id} actualData={curElem} />
             </div>
           );
         })}
