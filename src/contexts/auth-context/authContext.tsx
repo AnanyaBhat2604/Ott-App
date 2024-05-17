@@ -4,12 +4,17 @@ import { apiMethods, constants } from "@/assets/constants/constants";
 import {
   authRoutes,
   frontendRoutes,
-  protectedRoutes,
+  openRoutes,
 } from "@/assets/constants/frontend-routes";
 import strings from "@/assets/strings/strings.json";
 import { request } from "@/services/api";
 import { getData, removeData, setData } from "@/services/storage/storage";
-import { redirect, usePathname, useRouter } from "next/navigation";
+import {
+  redirect,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import React, {
   ReactNode,
   createContext,
@@ -41,6 +46,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const router = useRouter();
   const { openSnackbar } = useSnackbar();
+
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const login = (token: string, refreshToken: string) => {
     setIsLoggedIn(true);
@@ -75,27 +83,29 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       .finally(() => {});
   };
 
-  const pathname = usePathname();
-
   useEffect(() => {
     const tokenData: { token: string; auth: boolean } = getData("token") || {
       token: "",
       auth: false,
     };
 
+    const redirectPath = searchParams.get("redirect");
+
+    console.log("redirectPath", redirectPath);
+
     if (tokenData?.token && tokenData?.auth) {
       setIsLoggedIn(true);
       if (authRoutes.includes(pathname)) {
-        return redirect(frontendRoutes.DASHBOARD);
+        return redirect(redirectPath ? redirectPath : frontendRoutes.DASHBOARD);
       }
     } else {
       setIsLoggedIn(false);
-      if (protectedRoutes.includes(pathname)) {
-        return redirect(frontendRoutes.LOGIN);
+      if (!openRoutes.includes(pathname)) {
+        return redirect(`${frontendRoutes.LOGIN}?redirect=${pathname}`);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [pathname]);
 
   return (
     <AuthContext.Provider value={{ isLoggedIn, login, logout }}>

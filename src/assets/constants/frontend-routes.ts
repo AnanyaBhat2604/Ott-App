@@ -24,4 +24,4 @@ export const authRoutes = [
   frontendRoutes.PASSWORD_EMAIL_SENT,
 ];
 
-export const protectedRoutes = [frontendRoutes.DASHBOARD];
+export const openRoutes = [...authRoutes];
