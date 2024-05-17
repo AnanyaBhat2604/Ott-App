@@ -4,7 +4,6 @@ import { FAQProps } from "@/interfaces/interfaces";
 import React, { FC } from "react";
 
 const FAQ: React.FC<FAQProps> = ({ data, title }) => {
-  console.log(data);
   return (
     <div className=" flex flex-col gap-[20px] p-[40px] relative">
       <div className="text-center">
