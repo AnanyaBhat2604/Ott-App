@@ -110,12 +110,25 @@ const PhoneLogin: FC = () => {
     }));
   };
 
+  const getUpdatedParams = () => {
+    const url = new URL(document.location.href);
+    const searchParams: { [key: string]: string } = {};
+
+    url.searchParams.forEach((value, key) => {
+      searchParams[key] = value;
+    });
+
+    searchParams["email"] = "true";
+
+    return new URLSearchParams(searchParams).toString();
+  };
+
   return (
     <form onSubmit={onSubmit} className="w-full">
       <div className="flex justify-between gap-3 pt-[40px] opacity-70 items-center w-full">
         <div className="text-sm font-semibold">{strings.phone}</div>
         <Link
-          href={`${frontendRoutes.LOGIN}?email=true`}
+          href={`${frontendRoutes.LOGIN}?${getUpdatedParams()}`}
           className="text-xs font-normal"
         >
           {strings.signInWithEmail}
