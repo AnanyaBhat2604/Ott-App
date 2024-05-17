@@ -49,12 +49,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const redirectPath = searchParams.get("redirect");
 
   const login = (token: string, refreshToken: string) => {
     setIsLoggedIn(true);
     setData("token", { token: token, auth: true });
     setData("refreshToken", refreshToken);
-    router.push(frontendRoutes.DASHBOARD);
+    router.replace(redirectPath ? redirectPath : frontendRoutes.DASHBOARD);
   };
 
   const logout = () => {
@@ -89,10 +90,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       auth: false,
     };
 
-    const redirectPath = searchParams.get("redirect");
-
-    console.log("redirectPath", redirectPath);
-
     if (tokenData?.token && tokenData?.auth) {
       setIsLoggedIn(true);
       if (authRoutes.includes(pathname)) {
@@ -101,7 +98,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     } else {
       setIsLoggedIn(false);
       if (!openRoutes.includes(pathname)) {
-        return redirect(`${frontendRoutes.LOGIN}?redirect=${pathname}`);
+        return router.replace(
+          `${frontendRoutes.LOGIN}?redirect=${encodeURIComponent(pathname)}`
+        );
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
