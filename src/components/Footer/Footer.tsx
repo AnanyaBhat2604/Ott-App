@@ -5,7 +5,6 @@ import strings from "@/assets/strings/strings.json";
 import Link from "next/link";
 
 const Footer = ({ data }: any) => {
-  console.log(data);
   return (
     <div className="bg-black text-white py-8 flex items-center flex-col gap-[12px] pt-[150px]">
       <div>
