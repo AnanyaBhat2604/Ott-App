@@ -3,7 +3,7 @@
 import { frontendRoutes } from "@/assets/constants/frontend-routes";
 import { useAuth } from "@/contexts/auth-context/authContext";
 import dynamic from "next/dynamic";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
 const Children = dynamic(() => import("../../components/Children/Children"), {

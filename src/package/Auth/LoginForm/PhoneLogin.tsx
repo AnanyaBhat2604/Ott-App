@@ -23,6 +23,7 @@ import { setRoutePermissions } from "@/utils/route-permissions";
 import { useSnackbar } from "@/contexts/snackbar-context/snackbar-context";
 import { useRouter } from "next/navigation";
 import { request } from "@/services/api";
+import { getUpdatedParams } from "@/utils/getUpdatedParams";
 
 const PhoneLogin: FC = () => {
   const [errorFields, setErrorFields] = useState<PhoneLoginType>({
@@ -110,25 +111,12 @@ const PhoneLogin: FC = () => {
     }));
   };
 
-  const getUpdatedParams = () => {
-    const url = new URL(document.location.href);
-    const searchParams: { [key: string]: string } = {};
-
-    url.searchParams.forEach((value, key) => {
-      searchParams[key] = value;
-    });
-
-    searchParams["email"] = "true";
-
-    return new URLSearchParams(searchParams).toString();
-  };
-
   return (
     <form onSubmit={onSubmit} className="w-full">
       <div className="flex justify-between gap-3 pt-[40px] opacity-70 items-center w-full">
         <div className="text-sm font-semibold">{strings.phone}</div>
         <Link
-          href={`${frontendRoutes.LOGIN}?${getUpdatedParams()}`}
+          href={`${frontendRoutes.LOGIN}?${getUpdatedParams(true)}`}
           className="text-xs font-normal"
         >
           {strings.signInWithEmail}

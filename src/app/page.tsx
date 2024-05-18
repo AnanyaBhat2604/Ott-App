@@ -29,10 +29,4 @@ const Home = async () => {
   );
 };
 
-Home.getStaticProps = () => ({
-  props: {
-    hello: "world",
-  },
-});
-
 export default Home;
