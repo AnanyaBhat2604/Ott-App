@@ -31,6 +31,7 @@ const InputComponent = ({
   name,
   onChange,
   error = "",
+  value = "",
 }: {
   validationRequired?: boolean;
   type?: string;
@@ -39,9 +40,11 @@ const InputComponent = ({
   validationType?: string;
   onChange: (data: any, hasError: string) => void;
   error?: string;
+  value?: string;
 }): ReactElement => {
   const [focus, setFocus] = useState(false);
   const [inputType, setInputType] = useState(type);
+  const [inputValue, setInputValue] = useState(value || "");
 
   const handleChange = (event: any) => {
     let hasError = "";
@@ -58,6 +61,7 @@ const InputComponent = ({
       }
     }
     onChange({ [event.target.name]: event.target.value }, hasError);
+    setInputValue(event.target.value);
   };
 
   return (
@@ -65,6 +69,7 @@ const InputComponent = ({
       <TextField
         name={name}
         placeholder={placeholder}
+        value={inputValue}
         type={inputType}
         onChange={handleChange}
         className={`text-white text-sm !border-normal !border-solid !rounded-sm ${

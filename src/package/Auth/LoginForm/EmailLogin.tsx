@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { useSnackbar } from "@/contexts/snackbar-context/snackbar-context";
 import { request } from "@/services/api";
 import { useAuth } from "@/contexts/auth-context/authContext";
+import { getData, removeData } from "@/services/storage/storage";
 
 const EmailLogin: FC = () => {
   const [errorFields, setErrorFields] = useState<LoginWithEmail>({
@@ -20,7 +21,7 @@ const EmailLogin: FC = () => {
   });
 
   const [formData, setFormData] = useState<LoginWithEmail>({
-    email: "",
+    email: getData("email") || "",
     password: "",
   });
 
@@ -59,7 +60,8 @@ const EmailLogin: FC = () => {
       request(apiEndpoints.emailLogin, apiMethods.POST, {}, data)
         .then((data: any) => {
           if (data.resultInfo.code === constants.SUCCCESS) {
-            login(data?.data?.token, data?.data?.refreshToken);
+            removeData("email");
+            login(data?.data?.token, data?.data?.refreshToken, "email");
           }
         })
         .catch((error) => {
@@ -119,6 +121,7 @@ const EmailLogin: FC = () => {
           onChange={onInputChange}
           validationRequired
           validationType="email"
+          value={formData.email}
           error={errorFields.email}
         />
       </div>

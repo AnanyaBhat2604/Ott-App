@@ -1,11 +1,7 @@
 "use client";
 import { apiEndpoints } from "@/assets/constants/api-endpoints";
 import { apiMethods, constants } from "@/assets/constants/constants";
-import {
-  authRoutes,
-  frontendRoutes,
-  openRoutes,
-} from "@/assets/constants/frontend-routes";
+import { frontendRoutes } from "@/assets/constants/frontend-routes";
 import strings from "@/assets/strings/strings.json";
 import { request } from "@/services/api";
 import { getData, removeData, setData } from "@/services/storage/storage";
@@ -26,7 +22,7 @@ import { useSnackbar } from "../snackbar-context/snackbar-context";
 
 interface AuthContextType {
   isLoggedIn: boolean;
-  login: (token: string, refreshToken: string) => void;
+  login: (token: string, refreshToken: string, type: string) => void;
   logout: () => void;
 }
 
@@ -51,10 +47,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const searchParams = useSearchParams();
   const redirectPath = searchParams.get("redirect");
 
-  const login = (token: string, refreshToken: string) => {
+  const login = (token: string, refreshToken: string, type: string) => {
     setIsLoggedIn(true);
     setData("token", { token: token, auth: true });
     setData("refreshToken", refreshToken);
+
     router.replace(redirectPath ? redirectPath : frontendRoutes.DASHBOARD);
   };
 

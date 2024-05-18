@@ -82,11 +82,13 @@ const OtpForm: FC = () => {
             removeData("otpData");
             login(
               data?.data?.tokenInfo?.token,
-              data?.data?.tokenInfo?.refreshToken
+              data?.data?.tokenInfo?.refreshToken,
+              "phone"
             );
           } else {
+            setData("email", otpData.destination);
             removeData("otpData");
-            router.push(frontendRoutes.LOGIN);
+            router.push(`${frontendRoutes.LOGIN}?email=true`);
             openSnackbar(strings.signUpSuccess, "success");
           }
         }
