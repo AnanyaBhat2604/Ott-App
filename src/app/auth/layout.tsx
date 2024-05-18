@@ -5,6 +5,7 @@ import {
   frontendRoutes,
 } from "@/assets/constants/frontend-routes";
 import Snackbar from "@/components/Snackbar/Snackbar";
+import { useAuth } from "@/contexts/auth-context/authContext";
 import { SnackbarProvider } from "@/contexts/snackbar-context/snackbar-context";
 import AuthSkeleton from "@/package/SkeletonLoaders/AuthSkeleton";
 import { getData } from "@/services/storage/storage";
@@ -13,7 +14,12 @@ import {
   getRoutePermissions,
 } from "@/utils/route-permissions";
 import dynamic from "next/dynamic";
-import { usePathname, useRouter } from "next/navigation";
+import {
+  redirect,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import React, { useEffect } from "react";
 
 const Children = dynamic(() => import("@/components/Children/Children"), {
@@ -24,6 +30,11 @@ const Children = dynamic(() => import("@/components/Children/Children"), {
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const pathname: string = usePathname();
   const router = useRouter();
+
+  const { isLoggedIn } = useAuth();
+
+  const searchParams = useSearchParams();
+  const redirectPath = searchParams.get("redirect");
 
   const isBlocked = () =>
     frontendProtectedRoutes.includes(pathname) &&
@@ -47,6 +58,13 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       isBlocked();
     }
   };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      redirect(redirectPath ? redirectPath : frontendRoutes.DASHBOARD);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoggedIn]);
 
   return (
     <div className="auth-bg center-div">

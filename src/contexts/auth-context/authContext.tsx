@@ -92,16 +92,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
     if (tokenData?.token && tokenData?.auth) {
       setIsLoggedIn(true);
-      if (authRoutes.includes(pathname)) {
-        return redirect(redirectPath ? redirectPath : frontendRoutes.DASHBOARD);
-      }
     } else {
       setIsLoggedIn(false);
-      if (!openRoutes.includes(pathname)) {
-        return router.replace(
-          `${frontendRoutes.LOGIN}?redirect=${encodeURIComponent(pathname)}`
-        );
-      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
