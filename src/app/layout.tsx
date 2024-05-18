@@ -1,5 +1,7 @@
 import Providers from "@/package/Providers/Providers";
 import "./globals.css";
+import Header from "@/components/Header/Header";
+import FooterBlock from "@/package/FooterBlock/FooterBlock";
 
 // export const metadata: Metadata = {
 //   title: "OTT App",
@@ -14,7 +16,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`bg-black`}>
-        <Providers>{children}</Providers>
+        <Providers>
+          <Header />
+          {children}
+          <FooterBlock />
+        </Providers>
       </body>
     </html>
   );
