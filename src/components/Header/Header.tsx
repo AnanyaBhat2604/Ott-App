@@ -10,7 +10,7 @@ import MenuItems from "../MenuItems/MenuItems";
 import List from "../List/List";
 import { request } from "@/services/fetchData";
 import { URL } from "@/assets/constants/apiRequest";
-import { ErrorLogger } from "@/services/errorLogger";
+import { ErrorLogger } from "@/services/ErrorLogger";
 
 const Header = () => {
   const logger = new ErrorLogger();
@@ -34,7 +34,7 @@ const Header = () => {
         <Logo />
         {menuData && <MenuItems menuData={menuData} />}
 
-        <div className=" font-sans font-semibold text-20px leading-26.4px text-light-grey flex gap-[20px] items-center">
+        <div className=" font-sans font-semibold text-20px leading-26.4px text-light-grey-1 flex gap-[20px] items-center">
           <div
             className={` px-[10px] h-[64px] flex items-center hover:bg-gray-800 text-white cursor-pointer
             `}

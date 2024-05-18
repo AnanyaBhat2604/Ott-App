@@ -13,6 +13,7 @@ const Footer = ({ data }: any) => {
           alt={data.logo.alt}
           width={100}
           height={50}
+          className="h-auto"
         />{" "}
       </div>
       <div className="flex justify-center text-blue-500  gap-[20px]">

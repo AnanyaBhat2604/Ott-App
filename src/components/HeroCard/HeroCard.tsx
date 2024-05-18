@@ -31,7 +31,8 @@ const HeroCard: FC<{ heroData: HeroDataProps }> = ({ heroData }) => {
           width={400}
           height={300}
           onError={() => setError(true)}
-          className="h-[300px] w-[400px] object-cover"
+          unoptimized
+          className="h-full w-[400px] object-cover"
         />
       </div>
       <div className="text-white basis-1/2">

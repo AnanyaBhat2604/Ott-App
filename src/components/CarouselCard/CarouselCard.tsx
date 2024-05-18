@@ -34,6 +34,7 @@ const CarouselCard = ({ actualData }: any) => {
             height={300}
             onError={() => setError(true)}
             className="h-[210px] object-cover"
+            unoptimized
           />
         </div>
         {isHovered && (

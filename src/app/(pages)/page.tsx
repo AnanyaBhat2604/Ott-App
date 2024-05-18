@@ -2,14 +2,14 @@ import { request } from "@/services/fetchData";
 import { constants } from "@/assets/constants/constants";
 import type { Metadata } from "next";
 import { URL } from "@/assets/constants/apiRequest";
-import getComponent from "@/services/packageSelector";
+import getComponent from "@/services/PackageSelector";
 
 export const metadata: Metadata = {
   title: "Home Page",
   description: "...",
 };
 
-const page = async () => {
+const Home = async () => {
   const data = await request(URL?.GET_Home_Data, constants.GET);
 
   return (
@@ -29,4 +29,10 @@ const page = async () => {
   );
 };
 
-export default page;
+Home.getStaticProps = () => ({
+  props: {
+    hello: "world",
+  },
+});
+
+export default Home;

@@ -12,7 +12,7 @@ const AccordionComponent: FC<{ title: string; content: string }> = ({
   return (
     <div className="flex flex-col">
       <div
-        className="bg-dark-grey  z-10 relative text-white w-full hover:bg-light-grey transition-all flex justify-between p-[24px] cursor-pointer overflow-hidden select-none"
+        className="bg-dark-grey  z-10 relative text-white w-full hover:bg-light-grey-1 transition-all flex justify-between p-[24px] cursor-pointer overflow-hidden select-none"
         onClick={() => setIsActive(!isActive)}
       >
         <div className="text-[18px] z-[-1]">{title}</div>
