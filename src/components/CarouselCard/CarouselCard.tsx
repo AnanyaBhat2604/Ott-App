@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const CarouselCard = ({ actualData }: any) => {
   const jawSummary = actualData;
@@ -11,7 +12,8 @@ const CarouselCard = ({ actualData }: any) => {
   const src = jawSummary.image.url;
 
   return (
-    <div
+    <Link
+      href={jawSummary.target.path}
       className={`bg-opacity-25 bg-blue-700 backdrop-filter backdrop-blur-md bg-cover bg-center border border-white border-opacity-25 rounded-lg p-6 shadow-lg flex flex-col items-center justify-center text-center  transition-all z-10 ${
         isHovered && "scale-110 max-h-[450px] z-40"
       }`}
@@ -48,7 +50,7 @@ const CarouselCard = ({ actualData }: any) => {
           </div>
         )}
       </div>
-    </div>
+    </Link>
   );
 };
 

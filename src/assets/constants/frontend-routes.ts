@@ -6,6 +6,10 @@ export const frontendRoutes = {
   RESET_PASSWORD: "/auth/reset-password",
   PASSWORD_EMAIL_SENT: "/auth/reset-password/check-your-email",
   DASHBOARD: "/",
+  HOME: "/home",
+  MOVIES: "/home/movies",
+  TV_SHOWS: "/home/tv-shows",
+  GLOBAL_404: "/404",
 };
 
 export const frontendProtectedRoutes = [
@@ -24,4 +28,8 @@ export const authRoutes = [
   frontendRoutes.PASSWORD_EMAIL_SENT,
 ];
 
-export const openRoutes = [...authRoutes, frontendRoutes.DASHBOARD];
+export const openRoutes = [
+  ...authRoutes,
+  frontendRoutes.DASHBOARD,
+  frontendRoutes.GLOBAL_404,
+];
