@@ -11,9 +11,9 @@ const Footer = ({ data }: any) => {
         <Image
           src={data.logo.src}
           alt={data.logo.alt}
-          width={100}
-          height={50}
-          className="h-auto"
+          width={0}
+          height={0}
+          className="w-auto max-h-[50px]"
         />{" "}
       </div>
       <div className="flex justify-center text-blue-500  gap-[20px]">
