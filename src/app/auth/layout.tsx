@@ -4,9 +4,7 @@ import {
   frontendProtectedRoutes,
   frontendRoutes,
 } from "@/assets/constants/frontend-routes";
-import Snackbar from "@/components/Snackbar/Snackbar";
 import { useAuth } from "@/contexts/auth-context/authContext";
-import { SnackbarProvider } from "@/contexts/snackbar-context/snackbar-context";
 import AuthSkeleton from "@/package/SkeletonLoaders/AuthSkeleton";
 import { getData } from "@/services/storage/storage";
 import {
@@ -58,13 +56,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       isBlocked();
     }
   };
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      redirect(redirectPath ? redirectPath : frontendRoutes.DASHBOARD);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoggedIn]);
 
   return (
     <div className="auth-bg center-div">

@@ -19,6 +19,12 @@ import React, {
   useState,
 } from "react";
 import { useSnackbar } from "../snackbar-context/snackbar-context";
+import {
+  checkCookie,
+  deleteCookie,
+  getCookie,
+  setCookie,
+} from "@/services/cookieService/cookies";
 
 interface AuthContextType {
   isLoggedIn: boolean;
@@ -49,8 +55,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
   const login = (token: string, refreshToken: string, type: string) => {
     setIsLoggedIn(true);
-    setData("token", { token: token, auth: true });
-    setData("refreshToken", refreshToken);
+
+    setCookie("token", { token: token, auth: true });
+    setCookie("refreshToken", refreshToken);
 
     router.replace(redirectPath ? redirectPath : frontendRoutes.DASHBOARD);
   };
@@ -71,7 +78,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     request(apiEndpoints.logout, apiMethods.GET, headers)
       .then((data: any) => {
         if (data.resultInfo.code === constants.SUCCCESS) {
-          removeData("token");
+          deleteCookie("token");
           redirect(frontendRoutes.LOGIN);
         }
       })
@@ -82,7 +89,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   useEffect(() => {
-    const tokenData: { token: string; auth: boolean } = getData("token") || {
+    const tokenData: { token: string; auth: boolean } = getCookie("token") || {
       token: "",
       auth: false,
     };
