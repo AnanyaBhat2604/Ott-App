@@ -10,7 +10,7 @@ const HeroCard: FC<{ heroData: HeroDataProps }> = ({ heroData }) => {
 
   return (
     <div
-      className={`flex px-32 py-24 gap-5 justify-center items-center border-b-[2px] border-dark-grey ${
+      className={`flex px-32 py-24 gap-5 justify-center items-center border-b-[2px] border-dark-grey max-w-[1800px] mx-auto ${
         heroData.orientation === "right" ? "flex-row-reverse" : ""
       } }
       `}
@@ -31,6 +31,7 @@ const HeroCard: FC<{ heroData: HeroDataProps }> = ({ heroData }) => {
           width={400}
           height={300}
           onError={() => setError(true)}
+          unoptimized
           className="h-[300px] w-[400px] object-cover"
         />
       </div>

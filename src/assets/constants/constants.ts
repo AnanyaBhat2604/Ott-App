@@ -9,13 +9,12 @@ export const constants = {
 export const profileOptions = {
   children: [
     {
-      title: "Sign In",
-    },
-    {
       title: "Help",
+      url: "/help",
     },
     {
       title: "Watch Anywhere",
+      url: "/watch",
     },
   ],
 };
