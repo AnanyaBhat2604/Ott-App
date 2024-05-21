@@ -15,8 +15,6 @@ export default async function middleware(req: NextRequest) {
   );
   const isPublicRoute = authRoutes.includes(path);
 
-  console.log("redirect path", redirectPath);
-
   const cookie = cookies().get("token")?.value;
   const session: { token: string; auth: boolean } = cookie
     ? JSON.parse(decryptData(cookie as string))
