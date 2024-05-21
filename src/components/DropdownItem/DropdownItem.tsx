@@ -18,7 +18,7 @@ const DropdownItem: FC<{ item: any }> = ({ item }) => {
     >
       <div
         className={`flex h-[64px] px-[18px] items-center w-max ${
-          hovered && "bg-gray-800 text-white cursor-pointer"
+          hovered && "bg-dark-grey text-white cursor-pointer"
         }`}
       >
         <span>{item.title}</span>

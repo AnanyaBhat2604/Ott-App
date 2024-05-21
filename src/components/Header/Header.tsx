@@ -11,10 +11,16 @@ import List from "../List/List";
 import { request } from "@/services/fetchData";
 import { URL } from "@/assets/constants/apiRequest";
 import { ErrorLogger } from "@/services/ErrorLogger";
+import { useAuth } from "@/contexts/auth-context/authContext";
+import { frontendRoutes } from "@/assets/constants/frontend-routes";
+import strings from "@/assets/strings/strings.json";
 
 const Header = () => {
   const logger = new ErrorLogger();
   const [menuData, setMenuData] = useState({});
+
+  const { isLoggedIn } = useAuth();
+
   const fetchMenuData = async () => {
     try {
       const data = await request(URL.GET_MENU, constants.GET);
@@ -26,7 +32,27 @@ const Header = () => {
 
   useEffect(() => {
     fetchMenuData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    const option = isLoggedIn ? strings.signOut : strings.signIn;
+    const url = isLoggedIn ? "" : frontendRoutes.LOGIN;
+
+    addSignInOption(option, url);
+  }, [isLoggedIn]);
+
+  const addSignInOption = (option: string, url: string) => {
+    const signInOutIndex = profileOptions.children.findIndex(
+      (item) => item.title === strings.signIn || item.title === strings.signOut
+    );
+
+    if (signInOutIndex !== -1) {
+      profileOptions.children[signInOutIndex] = { title: option, url: url };
+    } else {
+      profileOptions.children.unshift({ title: option, url: url });
+    }
+  };
 
   return (
     <div className="bg-black">
@@ -36,14 +62,14 @@ const Header = () => {
 
         <div className=" font-sans font-semibold text-20px leading-26.4px text-light-grey-1 flex gap-[20px] items-center">
           <div
-            className={` px-[10px] h-[64px] flex items-center hover:bg-gray-800 text-white cursor-pointer
+            className={` px-[10px] h-[64px] flex items-center hover:bg-dark-grey text-white cursor-pointer
             `}
           >
             <Image src={search} alt={"Search"} />
           </div>
 
           <div
-            className={` px-[10px] h-[64px] flex items-center relative group hover:bg-gray-800 text-white cursor-pointer`}
+            className={` px-[10px] h-[64px] flex items-center relative group hover:bg-dark-grey text-white cursor-pointer`}
           >
             <Image src={profile} alt="profile" className="h-[32px] w-[32px]" />
             <div className="bg-white hidden group-hover:block z-10">
