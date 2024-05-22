@@ -60,7 +60,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     setCookie("token", { token: token, auth: true });
     setCookie("refreshToken", refreshToken);
 
-    router.replace(redirectPath ? redirectPath : frontendRoutes.DASHBOARD);
+    // router.replace(redirectPath ? redirectPath : frontendRoutes.DASHBOARD);
+    router.refresh();
   };
 
   const logout = () => {
@@ -80,8 +81,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       .then((data: any) => {
         if (data.resultInfo.code === constants.SUCCCESS) {
           deleteCookie("token");
-          openSnackbar(strings.logoutSuccess, "success");
-          router.replace(frontendRoutes.LOGIN);
+
+          // router.replace(frontendRoutes.LOGIN);
+          router.refresh();
         }
       })
       .catch((error) => {
