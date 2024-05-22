@@ -41,7 +41,7 @@ export default async function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  return NextResponse.next();
+  // return NextResponse.next();
 }
 
 // Routes Middleware should not run on
