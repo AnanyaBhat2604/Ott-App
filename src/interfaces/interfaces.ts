@@ -80,6 +80,7 @@ export interface MenuItem {
   id: string;
   title: string;
   url: string;
+  function?: () => void;
   // Could be a boolean based on its usage, but set as string to match your example
   children: MenuItem[]; // Recursive type reference for nested children
 }
@@ -212,4 +213,14 @@ export interface CookieOptions {
   domain?: string;
   secure?: boolean;
   sameSite?: "strict" | "lax" | "none";
+}
+
+export interface ProfileOption {
+  title: string;
+  url: string;
+  function?: () => void;
+}
+
+export interface ProfileOptions {
+  children: ProfileOption[];
 }

@@ -25,6 +25,7 @@ import {
   getCookie,
   setCookie,
 } from "@/services/cookieService/cookies";
+import { getUpdatedParams } from "@/utils/getUpdatedParams";
 
 interface AuthContextType {
   isLoggedIn: boolean;
@@ -63,7 +64,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   const logout = () => {
-    const tokenData: { token: string; auth: boolean } = getData("token") || {
+    const tokenData: { token: string; auth: boolean } = getCookie("token") || {
       token: "",
       auth: false,
     };
@@ -79,7 +80,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       .then((data: any) => {
         if (data.resultInfo.code === constants.SUCCCESS) {
           deleteCookie("token");
-          redirect(frontendRoutes.LOGIN);
+          openSnackbar(strings.logoutSuccess, "success");
+          router.replace(frontendRoutes.LOGIN);
         }
       })
       .catch((error) => {
