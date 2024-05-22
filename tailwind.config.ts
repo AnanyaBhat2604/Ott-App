@@ -27,6 +27,7 @@ const config: Config = {
         "light-grey-1": "#B3B3B3",
         "light-grey": "#FFFFFF99",
         "dark-grey": "#292A2A",
+        "dark-blue": "#010e2f",
       },
       backgroundImage: {
         "auth-pattern": "url('/assets/images/background-poster.png')",

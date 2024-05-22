@@ -11,7 +11,7 @@
 
 @layer components {
   .auth-bg {
-    @apply bg-auth-pattern relative before:bg-auth-gradient before:absolute before:inset-0 h-screen z-0;
+    @apply bg-auth-pattern relative before:bg-auth-gradient before:absolute before:inset-0 h-screen;
   }
 
   .custom-card {
@@ -32,12 +32,12 @@
     text-wrap: balance;
   }
 
-  .carousel-custom > div > .react-multi-carousel-track {
+  .carousel-custom>div>.react-multi-carousel-track {
     @apply !gap-[20px] !absolute !top-0;
   }
 
-  .carousel-custom > .react-multi-carousel-list {
-    @apply !h-[283px] !relative !overflow-y-visible !overflow-x-clip;
+  .carousel-custom>.react-multi-carousel-list {
+    @apply !h-[283px] !relative !overflow-y-visible !overflow-x-clip px-[40px];
   }
 }
 
