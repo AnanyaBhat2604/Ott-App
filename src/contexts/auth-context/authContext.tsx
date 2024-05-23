@@ -60,6 +60,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     setCookie("token", { token: token, auth: true });
     setCookie("refreshToken", refreshToken);
 
+    router.refresh();
     router.replace(redirectPath ? redirectPath : frontendRoutes.DASHBOARD);
   };
 
