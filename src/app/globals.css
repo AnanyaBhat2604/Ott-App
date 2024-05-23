@@ -37,7 +37,7 @@
   }
 
   .carousel-custom>.react-multi-carousel-list {
-    @apply !h-[283px] !relative !overflow-y-visible !overflow-x-clip px-[40px];
+    @apply !h-[283px] !relative !overflow-y-visible !overflow-x-clip;
   }
 }
 
