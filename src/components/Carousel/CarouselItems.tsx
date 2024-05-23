@@ -13,7 +13,10 @@ const CarouselItems = ({ movieData }: CarouselItemsProps) => {
         movieData.length > 0 &&
         movieData.map((curElem: Content, i: number) => {
           return (
-            <div key={i}>
+            <div
+              key={i}
+              className={`${i !== movieData.length - 1 && "mr-[20px]"}`}
+            >
               <CarouselCard key={curElem?.id} actualData={curElem} />
             </div>
           );
