@@ -4,4 +4,5 @@ export const apiEndpoints = {
   register: "api/v1/user/register",
   otpLogin: "api/v1/user/otpLogin",
   logout: "api/v1/user/logout",
+  refreshToken: "api/v1/user/refresh",
 };

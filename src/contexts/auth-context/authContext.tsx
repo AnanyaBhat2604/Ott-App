@@ -81,13 +81,14 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       .then((data: any) => {
         if (data.resultInfo.code === constants.SUCCCESS) {
           deleteCookie("token");
+          deleteCookie("refreshToken");
 
           // router.refresh();
           // router.push(frontendRoutes.LOGIN);
           window.location.reload();
         }
       })
-      .catch((error) => {
+      .catch((error: any) => {
         openSnackbar(error.message || strings.logoutFailed, "error");
       })
       .finally(() => {});

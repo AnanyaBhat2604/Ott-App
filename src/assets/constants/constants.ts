@@ -16,6 +16,7 @@ export const constants = {
   SUCCCESS: "SUCCESS",
   ROUTE_PERMISSIONS: "routePermissions",
   OTP_LENGTH: 6,
+  UNAUTHORIZED_ACCESS_IN_APPLICATIONS: "UNAUTHORIZED_ACCESS_IN_APPLICATIONS",
 };
 
 export const profileOptions: ProfileOptions = {
