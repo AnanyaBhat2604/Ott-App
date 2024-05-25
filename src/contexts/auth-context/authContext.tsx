@@ -4,7 +4,6 @@ import { apiMethods, constants } from "@/assets/constants/constants";
 import { frontendRoutes } from "@/assets/constants/frontend-routes";
 import strings from "@/assets/strings/strings.json";
 import { request } from "@/services/api";
-import { getData, removeData, setData } from "@/services/storage/storage";
 import {
   redirect,
   usePathname,

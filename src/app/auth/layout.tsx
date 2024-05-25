@@ -6,7 +6,7 @@ import {
 } from "@/assets/constants/frontend-routes";
 import { useAuth } from "@/contexts/auth-context/authContext";
 import AuthSkeleton from "@/package/SkeletonLoaders/AuthSkeleton";
-import { getData } from "@/services/storage/storage";
+import { getCookie } from "@/services/cookieService/cookies";
 import {
   deleteAllRoutePermissions,
   getRoutePermissions,
@@ -49,7 +49,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const deleteRoutePermissions = () => {
     //Delete route permission on user exit from that page
     const routePermissions: string[] =
-      getData(constants.ROUTE_PERMISSIONS) || [];
+      getCookie(constants.ROUTE_PERMISSIONS) || [];
 
     if (!routePermissions.includes(pathname)) {
       deleteAllRoutePermissions();

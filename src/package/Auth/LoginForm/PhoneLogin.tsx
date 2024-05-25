@@ -18,12 +18,12 @@ import {
   constants,
 } from "@/assets/constants/constants";
 import { apiEndpoints } from "@/assets/constants/api-endpoints";
-import { setData } from "@/services/storage/storage";
 import { setRoutePermissions } from "@/utils/route-permissions";
 import { useSnackbar } from "@/contexts/snackbar-context/snackbar-context";
 import { useRouter } from "next/navigation";
 import { request } from "@/services/api";
 import { getUpdatedParams } from "@/utils/getUpdatedParams";
+import { setCookie } from "@/services/cookieService/cookies";
 
 const PhoneLogin: FC = () => {
   const [errorFields, setErrorFields] = useState<PhoneLoginType>({
@@ -83,7 +83,7 @@ const PhoneLogin: FC = () => {
                 new Date(currentTime.getTime() + 30 * 1000)
               ), //after 30 seconds
             };
-            setData("otpData", otpData);
+            setCookie("otpData", otpData);
             setRoutePermissions(frontendRoutes.SIGN_UP_OTP);
             router.push(frontendRoutes.SIGN_UP_OTP);
           }

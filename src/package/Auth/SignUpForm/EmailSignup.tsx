@@ -15,8 +15,8 @@ import {
 import { useSnackbar } from "@/contexts/snackbar-context/snackbar-context";
 import { setRoutePermissions } from "@/utils/route-permissions";
 import { useRouter } from "next/navigation";
-import { setData } from "@/services/storage/storage";
 import { request } from "@/services/api";
+import { setCookie } from "@/services/cookieService/cookies";
 
 const EmailSignup: FC = () => {
   const [errorFields, setErrorFields] = useState<SignupEmail>({
@@ -74,7 +74,7 @@ const EmailSignup: FC = () => {
               ), //after 30 seconds
               password: formData.password,
             };
-            setData("otpData", otpData);
+            setCookie("otpData", otpData);
             setRoutePermissions(frontendRoutes.SIGN_UP_OTP);
             router.push(frontendRoutes.SIGN_UP_OTP);
           }

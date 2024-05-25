@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSnackbar } from "@/contexts/snackbar-context/snackbar-context";
-import { getData, removeData, setData } from "@/services/storage/storage";
 import { request } from "@/services/api";
 import OtpRead from "@/components/OtpRead/OtpRead";
 import strings from "@/assets/strings/strings.json";
@@ -16,6 +15,11 @@ import { frontendRoutes } from "@/assets/constants/frontend-routes";
 import { useAuth } from "@/contexts/auth-context/authContext";
 import dynamic from "next/dynamic";
 import SkeletonLoader from "@/components/SkeletonLoader/SkeletonLoader";
+import {
+  deleteCookie,
+  getCookie,
+  setCookie,
+} from "@/services/cookieService/cookies";
 
 const Timer = dynamic(() => import("@/components/Timer/Timer"), {
   loading: () => <SkeletonLoader width="200px" height="20px" />,
@@ -42,7 +46,7 @@ const OtpForm: FC = () => {
   const { openSnackbar } = useSnackbar();
 
   useEffect(() => {
-    const data = getData("otpData");
+    const data = getCookie("otpData");
     if (data as OtpObject) {
       setOtpData(data as OtpObject);
     }
@@ -79,15 +83,15 @@ const OtpForm: FC = () => {
       .then((data: any) => {
         if (data.resultInfo.code === constants.SUCCCESS) {
           if (otpData.type === apiConstants.SMS) {
-            removeData("otpData");
+            deleteCookie("otpData");
             login(
               data?.data?.tokenInfo?.token,
               data?.data?.tokenInfo?.refreshToken,
               "phone"
             );
           } else {
-            setData("email", otpData.destination);
-            removeData("otpData");
+            setCookie("email", otpData.destination);
+            deleteCookie("otpData");
             router.push(`${frontendRoutes.LOGIN}?email=true`);
             openSnackbar(strings.signUpSuccess, "success");
           }
@@ -132,7 +136,7 @@ const OtpForm: FC = () => {
           };
           setOtpData(newOtpData as OtpObject);
           setTimerEnded(false);
-          setData("otpData", newOtpData);
+          setCookie("otpData", newOtpData);
         }
       })
       .catch((error) => {

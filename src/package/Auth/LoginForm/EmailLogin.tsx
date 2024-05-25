@@ -12,8 +12,8 @@ import { useRouter } from "next/navigation";
 import { useSnackbar } from "@/contexts/snackbar-context/snackbar-context";
 import { request } from "@/services/api";
 import { useAuth } from "@/contexts/auth-context/authContext";
-import { getData, removeData } from "@/services/storage/storage";
 import { getUpdatedParams } from "@/utils/getUpdatedParams";
+import { deleteCookie, getCookie } from "@/services/cookieService/cookies";
 
 const EmailLogin: FC = () => {
   const [errorFields, setErrorFields] = useState<LoginWithEmail>({
@@ -22,7 +22,7 @@ const EmailLogin: FC = () => {
   });
 
   const [formData, setFormData] = useState<LoginWithEmail>({
-    email: getData("email") || "",
+    email: getCookie("email") || "",
     password: "",
   });
 
@@ -61,7 +61,7 @@ const EmailLogin: FC = () => {
       request(apiEndpoints.emailLogin, apiMethods.POST, {}, data)
         .then((data: any) => {
           if (data.resultInfo.code === constants.SUCCCESS) {
-            removeData("email");
+            deleteCookie("email");
             login(data?.data?.token, data?.data?.refreshToken, "email");
           }
         })
