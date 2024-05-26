@@ -32,7 +32,7 @@ const AuthSkeleton = () => {
         width="100%"
         height="30px"
         variant="rounded"
-        className="w-full pt-[50px] pb-[24px]"
+        className="w-full pt-[50px] pb-[24px] "
       />
     </div>
   );
