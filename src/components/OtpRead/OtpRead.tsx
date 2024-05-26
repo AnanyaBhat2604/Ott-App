@@ -20,9 +20,9 @@ const OtpRead: FC<{ onChange: (data: { [key: string]: string }) => void }> = ({
         renderSeparator={<span> </span>}
         renderInput={(props) => <input {...props} />}
         inputStyle={
-          "!w-[80px] !h-[80px] bg-black rounded-[5px] border !border-gray-light focus:!border-dodger-blue focus:!outline-none"
+          "!w-[80px] !h-[80px] bg-cod-gray rounded-[5px] border !border-gray-light focus:!border-dodger-blue focus:!outline-none max-sm:!h-[58px] max-sm:!w-[58px] max-[446px]:!h-[36px] max-[446px]:!w-[36px] "
         }
-        containerStyle={"gap-[6px] justify-center w-[523px]"}
+        containerStyle={"gap-[6px] justify-center max-sm:flex-wrap "}
       />
     </div>
   );

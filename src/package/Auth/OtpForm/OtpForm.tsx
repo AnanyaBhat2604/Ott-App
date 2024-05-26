@@ -153,7 +153,7 @@ const OtpForm: FC = () => {
       <div className="font-medium text-[20px] leading-tight mt-[40px]">
         {strings.verification}
       </div>
-      <div className="text-sm pt-[10px]  text-light-grey-1">
+      <div className="text-sm pt-[10px]  text-light-grey-1 text-center">
         {strings.codeSentMessage} {otpData?.destination || ""}
       </div>
 
@@ -162,7 +162,7 @@ const OtpForm: FC = () => {
       </form>
 
       <div
-        className="mt-[100px] flex gap-[4px] text-gray "
+        className="mt-[100px] flex gap-[4px] text-gray max-sm:mt-[26px]"
         key={String(otpData.targetTimeStamp)}
       >
         {timerEnded ? (
