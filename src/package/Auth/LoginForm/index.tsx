@@ -19,7 +19,7 @@ const LoginForm: FC = () => {
         {loginWithEmail === constants.TRUE ? <EmailLogin /> : <PhoneLogin />}
         <MoreOptions />
       </div>
-      <div className="mt-[100px] text-sm ">
+      <div className="mt-[100px] text-sm flex-grow max-sm:mt-[30px] max-sm:flex max-sm:items-end max-sm:pb-[16px]">
         <span className="opacity-70">{strings.dontHaveAccount}</span>{" "}
         <Link href={frontendRoutes.SIGN_UP} className="font-thick">
           {strings.signUp}
