@@ -19,7 +19,7 @@ const Header = () => {
   const logger = new ErrorLogger();
   const [menuData, setMenuData] = useState({});
 
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, logout } = useAuth();
 
   const fetchMenuData = async () => {
     try {
@@ -38,19 +38,29 @@ const Header = () => {
   useEffect(() => {
     const option = isLoggedIn ? strings.signOut : strings.signIn;
     const url = isLoggedIn ? "" : frontendRoutes.LOGIN;
+    const func = isLoggedIn ? logout : undefined;
 
-    addSignInOption(option, url);
+    addSignInOption(option, url, func);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoggedIn]);
 
-  const addSignInOption = (option: string, url: string) => {
+  const addSignInOption = (option: string, url: string, func?: () => void) => {
     const signInOutIndex = profileOptions.children.findIndex(
       (item) => item.title === strings.signIn || item.title === strings.signOut
     );
 
     if (signInOutIndex !== -1) {
-      profileOptions.children[signInOutIndex] = { title: option, url: url };
+      profileOptions.children[signInOutIndex] = {
+        title: option,
+        url: url,
+        function: func,
+      };
     } else {
-      profileOptions.children.unshift({ title: option, url: url });
+      profileOptions.children.unshift({
+        title: option,
+        url: url,
+        function: func,
+      });
     }
   };
 
@@ -60,7 +70,7 @@ const Header = () => {
         <Logo />
         {menuData && <MenuItems menuData={menuData} />}
 
-        <div className=" font-sans font-semibold text-20px leading-26.4px text-light-grey-1 flex gap-[20px] items-center">
+        <div className=" font-sans font-semibold text-20 leading-26.4px text-light-grey-1 flex gap-[20px] items-center">
           <div
             className={` px-[10px] h-[64px] flex items-center hover:bg-dark-grey text-white cursor-pointer
             `}

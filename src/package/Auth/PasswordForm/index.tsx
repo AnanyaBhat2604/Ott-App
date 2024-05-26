@@ -120,9 +120,11 @@ const PasswordForm: FC = () => {
 
   return (
     <>
-      <div className="text-lg font-bold">{strings.createNewPassword}</div>
+      <div className="text-lg font-bold max-sm:text-24">
+        {strings.createNewPassword}
+      </div>
       <div className="text-sm pt-[10px]">{strings.askForthisPassword}</div>
-      <div className="w-card-container">
+      <div className="w-card-container max-sm:w-full">
         <form className="pt-[32px] w-full" onSubmit={onSubmit}>
           <div className="pt-medium">
             <InputComponent

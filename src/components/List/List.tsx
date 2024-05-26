@@ -7,7 +7,14 @@ const List = ({ options }: any) => {
       {options?.children &&
         options.children.map((option: any, index: number) => (
           <Link
-            href={(options?.url || "") + (option?.url || "")}
+            href={
+              !option.function ? (options?.url || "") + (option?.url || "") : ""
+            }
+            onClick={() => {
+              if (option?.function) {
+                option.function();
+              }
+            }}
             key={index}
             className="px-[20px] py-[10px] hover:bg-white hover:text-black"
           >

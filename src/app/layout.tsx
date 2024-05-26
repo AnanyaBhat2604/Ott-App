@@ -17,9 +17,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`bg-black`}>
         <Providers>
-          <Header />
+          {/* <Header /> */}
           {children}
-          <FooterBlock />
+          {/* <FooterBlock /> */}
         </Providers>
       </body>
     </html>

@@ -72,7 +72,7 @@ const InputComponent = ({
         value={inputValue}
         type={inputType}
         onChange={handleChange}
-        className={`text-white text-sm !border-normal !border-solid !rounded-sm ${
+        className={`text-white text-sm !border-normal !border-solid !rounded-sm max-sm:bg-cod-gray ${
           focus
             ? "!border-dodger-blue"
             : error

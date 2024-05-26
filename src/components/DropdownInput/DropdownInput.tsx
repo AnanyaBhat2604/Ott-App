@@ -123,7 +123,7 @@ const InputWithDropdown = ({
   return (
     <div className="relative flex flex-col">
       <div
-        className={`border-gray-light border-normal rounded-sm flex ${
+        className={`border-gray-light border-normal rounded-sm flex max-sm:bg-cod-gray ${
           focus && "!border-dodger-blue"
         } ${error && "!border-cinnabar"}`}
         ref={inputRef}
@@ -131,7 +131,7 @@ const InputWithDropdown = ({
         <Select
           value={inputdata.dropdownValue}
           renderValue={(p) => p}
-          className={`w-[130px] border-gray-light border-r !rounded-none !text-white text-sm`}
+          className={`w-[130px] border-gray-light border-r !rounded-none !text-white text-sm max-sm:!text-xs `}
           onOpen={handleFocus}
           sx={selectStyles}
           onChange={handleSelect}
@@ -184,7 +184,7 @@ const InputWithDropdown = ({
           type={inputType}
           autoComplete="off"
           onChange={handleInputChange}
-          className=" text-white text-sm"
+          className=" text-white text-sm w-full"
           inputProps={{
             style: {
               padding: "15px 20px",

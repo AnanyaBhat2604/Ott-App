@@ -76,8 +76,10 @@ const PasswordAssistanceForm: FC = () => {
         <Image src={BackArrow} alt="" />
         <span className="text-gray text-sm">{strings.back}</span>
       </Link>
-      <div className="text-lg font-bold">{strings.passwordAssistance}</div>
-      <div className="text-sm pt-[10px] w-card-container text-center">
+      <div className="text-lg font-bold max-sm:text-24">
+        {strings.passwordAssistance}
+      </div>
+      <div className="text-sm pt-[10px] w-card-container text-center max-sm:w-full">
         {strings.passwordAssistanceInfo}
       </div>
       <form onSubmit={onSubmit} className="mt-[40px] w-full">

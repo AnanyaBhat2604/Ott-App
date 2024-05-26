@@ -4,7 +4,6 @@ import { apiMethods, constants } from "@/assets/constants/constants";
 import { frontendRoutes } from "@/assets/constants/frontend-routes";
 import strings from "@/assets/strings/strings.json";
 import { request } from "@/services/api";
-import { getData, removeData, setData } from "@/services/storage/storage";
 import {
   redirect,
   usePathname,
@@ -19,6 +18,13 @@ import React, {
   useState,
 } from "react";
 import { useSnackbar } from "../snackbar-context/snackbar-context";
+import {
+  checkCookie,
+  deleteCookie,
+  getCookie,
+  setCookie,
+} from "@/services/cookieService/cookies";
+import { getUpdatedParams } from "@/utils/getUpdatedParams";
 
 interface AuthContextType {
   isLoggedIn: boolean;
@@ -49,14 +55,16 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
   const login = (token: string, refreshToken: string, type: string) => {
     setIsLoggedIn(true);
-    setData("token", { token: token, auth: true });
-    setData("refreshToken", refreshToken);
+
+    setCookie("token", { token: token, auth: true });
+    setCookie("refreshToken", refreshToken);
 
     router.replace(redirectPath ? redirectPath : frontendRoutes.DASHBOARD);
+    router.refresh();
   };
 
   const logout = () => {
-    const tokenData: { token: string; auth: boolean } = getData("token") || {
+    const tokenData: { token: string; auth: boolean } = getCookie("token") || {
       token: "",
       auth: false,
     };
@@ -71,18 +79,22 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     request(apiEndpoints.logout, apiMethods.GET, headers)
       .then((data: any) => {
         if (data.resultInfo.code === constants.SUCCCESS) {
-          removeData("token");
-          redirect(frontendRoutes.LOGIN);
+          deleteCookie("token");
+          deleteCookie("refreshToken");
+
+          // router.refresh();
+          // router.push(frontendRoutes.LOGIN);
+          window.location.reload();
         }
       })
-      .catch((error) => {
+      .catch((error: any) => {
         openSnackbar(error.message || strings.logoutFailed, "error");
       })
       .finally(() => {});
   };
 
   useEffect(() => {
-    const tokenData: { token: string; auth: boolean } = getData("token") || {
+    const tokenData: { token: string; auth: boolean } = getCookie("token") || {
       token: "",
       auth: false,
     };

@@ -1,14 +1,44 @@
+import { apiEndpoints } from "@/assets/constants/api-endpoints";
 import strings from "@/assets/strings/strings.json";
+import { getCookie, setCookie } from "../cookieService/cookies";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL_AUTH;
+
+const refreshToken = async () => {
+  const response = await fetch(`${baseUrl}${apiEndpoints.refreshToken}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "refresh-token": getCookie("refreshToken"),
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(strings.somethingWentWrong);
+  }
+
+  const data = await response.json();
+  const token = data?.data?.token;
+  if (token) {
+    setCookie("token", { token: token, auth: true });
+    return token;
+  } else {
+    throw new Error(strings.somethingWentWrong);
+  }
+};
 
 export const request = async (
   url: string,
   method: string,
   headers: Record<string, string> = {},
   body: any = null
-) => {
-  try {
+): Promise<any> => {
+  const makeRequest = async (
+    url: string,
+    method: string,
+    headers: Record<string, string>,
+    body: any
+  ): Promise<any> => {
     const response = await fetch(`${baseUrl}${url}`, {
       method,
       headers: {
@@ -18,16 +48,31 @@ export const request = async (
       body: body ? JSON.stringify(body) : null,
     });
 
-    if (!response.ok) {
-      const errorData = await response.json();
+    const responseData = await response.json();
 
-      throw new Error(
-        errorData?.resultInfo?.message || strings.somethingWentWrong
-      );
+    if (!response.ok) {
+      if (
+        response.status === 401 &&
+        responseData.code === "UNAUTHORIZED_ACCESS_IN_APPLICATIONS"
+      ) {
+        const newToken = await refreshToken();
+        headers.Authorization = `Bearer ${newToken}`;
+
+        // Retry the request with the new token
+        return makeRequest(url, method, headers, body);
+      } else {
+        throw new Error(
+          responseData?.resultInfo?.message || strings.somethingWentWrong
+        );
+      }
     }
 
-    return await response.json();
-  } catch (error: any) {
+    return responseData;
+  };
+
+  try {
+    return await makeRequest(url, method, headers, body);
+  } catch (error) {
     throw error;
   }
 };

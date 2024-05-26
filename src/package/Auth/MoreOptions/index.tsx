@@ -45,7 +45,7 @@ const MoreOptions: FC = () => {
                   width={0}
                   style={{ width: "22px", height: "auto" }}
                 />
-                <div className="flex-grow text-center pr-[22px]">
+                <div className="flex-grow text-center pr-[22px]  max-sm:text-xs">
                   {item.text}
                 </div>
               </div>

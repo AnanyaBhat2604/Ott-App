@@ -10,7 +10,7 @@ const SignUpForm = dynamic(() => import("@/package/Auth/SignUpForm"), {
 
 const SignUp: FC = () => {
   return (
-    <div className="flex flex-col text-white items-center">
+    <div className="flex flex-col text-white items-center h-full">
       <SignUpForm />
     </div>
   );

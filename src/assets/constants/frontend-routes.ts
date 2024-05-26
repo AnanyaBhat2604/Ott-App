@@ -28,8 +28,4 @@ export const authRoutes = [
   frontendRoutes.PASSWORD_EMAIL_SENT,
 ];
 
-export const openRoutes = [
-  ...authRoutes,
-  frontendRoutes.DASHBOARD,
-  frontendRoutes.GLOBAL_404,
-];
+export const protectedRoutesBasePath = [frontendRoutes.HOME];

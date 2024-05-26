@@ -3,7 +3,7 @@ import FacebookIcon from "@/assets/icons/facebook.svg";
 import AppleIcon from "@/assets/icons/apple.svg";
 import GoogleIcon from "@/assets/icons/google.svg";
 import EmailIcon from "@/assets/icons/email.svg";
-import { LoginOption } from "@/interfaces/interfaces";
+import { LoginOption, ProfileOptions } from "@/interfaces/interfaces";
 
 export const constants = {
   SEARCH: "search",
@@ -16,9 +16,10 @@ export const constants = {
   SUCCCESS: "SUCCESS",
   ROUTE_PERMISSIONS: "routePermissions",
   OTP_LENGTH: 6,
+  UNAUTHORIZED_ACCESS_IN_APPLICATIONS: "UNAUTHORIZED_ACCESS_IN_APPLICATIONS",
 };
 
-export const profileOptions = {
+export const profileOptions: ProfileOptions = {
   children: [
     {
       title: "Help",

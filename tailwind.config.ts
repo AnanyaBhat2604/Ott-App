@@ -33,6 +33,8 @@ const config: Config = {
         "auth-pattern": "url('/assets/images/background-poster.png')",
         "auth-gradient":
           "linear-gradient(90deg, rgba(23, 32, 63, 0.8) 0%, rgba(18, 23, 47, 0.5) 59.5%, rgba(17, 25, 56, 0.9) 100%), linear-gradient(0.04deg, rgba(0, 0, 0, 0) 0.04%, rgba(0, 0, 0, 0.5) 26.74%, #262626 92.11%)",
+        "auth-gradient-mobile":
+          "linear-gradient(90deg, rgb(23 32 63 / 81%) 0%, rgb(18 23 47 / 88%) 91%, rgba(17, 25, 56, 0.9) 100%), linear-gradient(0.04deg, #000000 0.04%, rgb(0 0 0 / 28%) 23.54%, #262626 92.11%)",
       },
       height: {
         // @ts-ignore
@@ -44,6 +46,7 @@ const config: Config = {
       padding: {
         small: "14px 20px",
         normal: "60px 40px",
+        mobile: "36px 16px",
         medium: "16px",
       },
       borderRadius: {
@@ -55,8 +58,8 @@ const config: Config = {
         xs: "14px",
         sm: "16px",
         lg: "32px",
-        "24px": "24px",
-        "20px": "20px",
+        "24": "24px",
+        "20": "20px",
       },
 
       fontWeight: {
@@ -78,6 +81,12 @@ const config: Config = {
       fontFamily: {
         "open-sans": ["Open Sans", "sans-serif"],
       },
+    },
+    screens: {
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1280px",
     },
   },
   plugins: [],

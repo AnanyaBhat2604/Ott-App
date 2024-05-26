@@ -8,7 +8,9 @@ const InfoUI: FC<{ param: string }> = ({ param }) => {
   return (
     <div className="flex flex-col text-white items-center">
       <Image src={MailIcon} alt="" className="mb-[40px]" />
-      <div className="text-lg font-bold">{strings.checkYourEmail}</div>
+      <div className="text-lg font-bold max-sm:text-24">
+        {strings.checkYourEmail}
+      </div>
       <div className="text-sm pt-[10px]  text-center">
         {strings.codeSentMessage} {param} {strings.infoToSetPassword}
       </div>

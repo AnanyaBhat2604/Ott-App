@@ -14,12 +14,12 @@ const LoginForm: FC = () => {
 
   return (
     <>
-      <div className="text-lg font-bold">{strings.login}</div>
-      <div className="flex flex-col items-center w-full">
+      <div className="text-lg font-bold max-sm:text-24">{strings.login}</div>
+      <div className="flex flex-col items-center w-card-container max-sm:w-full">
         {loginWithEmail === constants.TRUE ? <EmailLogin /> : <PhoneLogin />}
         <MoreOptions />
       </div>
-      <div className="mt-[100px] text-sm ">
+      <div className="mt-[100px] text-sm flex-grow max-sm:mt-[30px] max-sm:flex max-sm:items-end max-sm:pb-[16px] max-sm:gap-[4px]">
         <span className="opacity-70">{strings.dontHaveAccount}</span>{" "}
         <Link href={frontendRoutes.SIGN_UP} className="font-thick">
           {strings.signUp}
