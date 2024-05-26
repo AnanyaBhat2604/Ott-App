@@ -70,7 +70,7 @@ const Header = () => {
         <Logo />
         {menuData && <MenuItems menuData={menuData} />}
 
-        <div className=" font-sans font-semibold text-20px leading-26.4px text-light-grey-1 flex gap-[20px] items-center">
+        <div className=" font-sans font-semibold text-20 leading-26.4px text-light-grey-1 flex gap-[20px] items-center">
           <div
             className={` px-[10px] h-[64px] flex items-center hover:bg-dark-grey text-white cursor-pointer
             `}

@@ -3,7 +3,7 @@ import React from "react";
 
 const AuthSkeleton = () => {
   return (
-    <div className="w-card-container flex flex-col items-center">
+    <div className="w-card-container flex flex-col items-center mx-auto max-sm:w-full">
       <SkeletonLoader
         width="100px"
         height="40px"

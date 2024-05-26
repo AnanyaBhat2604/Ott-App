@@ -69,7 +69,9 @@ const UserDetailsForm: FC = () => {
 
   return (
     <>
-      <div className="text-lg font-bold">{strings.yourDetails}</div>
+      <div className="text-lg font-bold max-sm:text-24">
+        {strings.yourDetails}
+      </div>
       <form onSubmit={onSubmit}>
         <div className="pt-medium">
           <InputComponent

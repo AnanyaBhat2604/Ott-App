@@ -14,8 +14,8 @@ const LoginForm: FC = () => {
 
   return (
     <>
-      <div className="text-lg font-bold">{strings.login}</div>
-      <div className="flex flex-col items-center w-full">
+      <div className="text-lg font-bold max-sm:text-24">{strings.login}</div>
+      <div className="flex flex-col items-center w-card-container max-sm:w-full">
         {loginWithEmail === constants.TRUE ? <EmailLogin /> : <PhoneLogin />}
         <MoreOptions />
       </div>

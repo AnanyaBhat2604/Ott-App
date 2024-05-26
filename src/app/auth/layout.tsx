@@ -1,9 +1,7 @@
 "use client";
-import { useAuth } from "@/contexts/auth-context/authContext";
 import AuthSkeleton from "@/package/SkeletonLoaders/AuthSkeleton";
 import dynamic from "next/dynamic";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect } from "react";
+import React from "react";
 
 const Children = dynamic(() => import("@/components/Children/Children"), {
   loading: () => <AuthSkeleton />,
@@ -12,8 +10,8 @@ const Children = dynamic(() => import("@/components/Children/Children"), {
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="auth-bg center-div">
-      <div className="custom-card  z-[1] relative max-h-[90vh] overflow-y-auto scrollbar-custom">
+    <div className="auth-bg center-div max-sm:block">
+      <div className="custom-card  z-[1] relative max-h-[90vh] overflow-y-auto scrollbar-custom max-sm:h-full max-sm:max-h-full">
         <Children childData={children} />
       </div>
     </div>

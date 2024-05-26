@@ -11,11 +11,11 @@
 
 @layer components {
   .auth-bg {
-    @apply bg-auth-pattern relative before:bg-auth-gradient before:absolute before:inset-0 h-screen z-0;
+    @apply bg-auth-pattern relative before:bg-auth-gradient before:absolute before:inset-0 h-screen z-0 max-md:before:!bg-auth-gradient-mobile;
   }
 
   .custom-card {
-    @apply bg-outer-space p-normal rounded-normal border-normal border-dove-gray;
+    @apply bg-outer-space p-normal rounded-normal border-normal border-dove-gray max-sm:!bg-transparent max-sm:border-none max-sm:p-mobile;
   }
 
   .center-div {

@@ -9,7 +9,7 @@ const InfoUI = dynamic(() => import("@/package/Auth/InfoUI/InfoUI"), {
 const page = () => {
   const email = "abcd@gmail.com";
   return (
-    <div className="w-card-container">
+    <div className="w-card-container max-sm:w-full">
       <InfoUI param={email} />
     </div>
   );

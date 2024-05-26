@@ -149,7 +149,7 @@ const OtpForm: FC = () => {
 
   return (
     <>
-      <div className="text-lg font-bold">{strings.signUp}</div>
+      <div className="text-lg font-bold max-sm:text-24">{strings.signUp}</div>
       <div className="font-medium text-[20px] leading-tight mt-[40px]">
         {strings.verification}
       </div>
@@ -157,7 +157,7 @@ const OtpForm: FC = () => {
         {strings.codeSentMessage} {otpData?.destination || ""}
       </div>
 
-      <form className="w-card-container">
+      <form className="w-card-container max-sm:w-full">
         <OtpRead onChange={onChange} />
       </form>
 

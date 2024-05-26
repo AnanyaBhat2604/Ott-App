@@ -14,8 +14,8 @@ const SignUpForm: FC = () => {
 
   return (
     <>
-      <div className="text-lg font-bold">{strings.signUp}</div>
-      <div className="flex flex-col items-center w-card-container">
+      <div className="text-lg font-bold max-sm:text-24">{strings.signUp}</div>
+      <div className="flex flex-col items-center w-card-container max-sm:w-full">
         {signUpWithEmail === constants.TRUE ? <EmailSignup /> : <PhoneSignup />}
         <MoreOptions />
       </div>
