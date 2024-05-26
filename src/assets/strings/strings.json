@@ -64,5 +64,8 @@
   "resendOtpText": "Resend OTP",
   "loginSuccess": "Login successful",
   "logoutSuccess": "Logout successful",
-  "logoutFailed": "Failed to Logout"
+  "logoutFailed": "Failed to Logout",
+  "RoboOTTLogin": "Robo OTT - Login",
+  "RoboOTTSignup": "Robo OTT - Sign up",
+  "RoboOTTOTPVerification": "Robo OTT - OTP Verification"
 }

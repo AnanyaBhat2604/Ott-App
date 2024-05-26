@@ -1,3 +1,5 @@
+"use client";
+
 import React, { FC } from "react";
 import { useSearchParams } from "next/navigation";
 import { constants } from "@/assets/constants/constants";

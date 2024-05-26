@@ -1,3 +1,4 @@
+"use client";
 import React, { FC, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSnackbar } from "@/contexts/snackbar-context/snackbar-context";
