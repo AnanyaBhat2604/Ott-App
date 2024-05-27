@@ -1,10 +1,9 @@
 import React from "react";
 import Image from "next/image";
-import Logo from "../../assets/icons/logo.png";
-import strings from "@/assets/strings/strings.json";
 import Link from "next/link";
+import { FooterProps, LinkItem } from "@/interfaces/interfaces";
 
-const Footer = ({ data }: any) => {
+const Footer = ({ data }: FooterProps) => {
   return (
     <div className="bg-black text-white py-8 flex items-center flex-col gap-[12px] pt-[150px]">
       <div>
@@ -16,7 +15,7 @@ const Footer = ({ data }: any) => {
         />{" "}
       </div>
       <div className="flex justify-center text-blue-500  gap-[20px]">
-        {data.links.map((item: any, i: number) => (
+        {data.links.map((item: LinkItem, i: number) => (
           <Link href={item.link} key={i}>
             {item.name}
           </Link>

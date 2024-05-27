@@ -80,15 +80,52 @@ export interface MenuItem {
   id: string;
   title: string;
   url: string;
-  // Could be a boolean based on its usage, but set as string to match your example
-  children: MenuItem[]; // Recursive type reference for nested children
+  visibility: string;
+  children: MenuItem[];
 }
 
-interface Menu {
+export interface Menu {
   name: string;
   items: MenuItem[];
 }
 
-interface MenuDataProps {
+export interface MenuItemsProps {
   menuData: Menu[];
+}
+
+export interface Option {
+  id: string;
+  title: string;
+  url: string;
+  visibility: string;
+  children: Option[];
+}
+
+export interface ListProps {
+  options: Option;
+}
+
+// interfaces.ts
+export interface Logo {
+  src: string;
+  alt: string;
+}
+
+export interface LinkItem {
+  id: string;
+  name: string;
+  link: string;
+}
+
+export interface Copyright {
+  text: string;
+}
+
+export interface FooterData {
+  logo: Logo;
+  links: LinkItem[];
+  copyright: Copyright;
+}
+export interface FooterProps {
+  data: FooterData;
 }

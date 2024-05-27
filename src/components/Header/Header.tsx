@@ -11,16 +11,16 @@ import List from "../List/List";
 import { request } from "@/services/fetchData";
 import { URL } from "@/assets/constants/apiRequest";
 import { ErrorLogger } from "@/services/ErrorLogger";
-import strings from "@/assets/strings/strings.json";
 
 const Header = () => {
   const logger = new ErrorLogger();
-  const [menuData, setMenuData] = useState({});
+  const [menuData, setMenuData] = useState([]);
 
   const fetchMenuData = async () => {
     try {
       const data = await request(URL.GET_MENU, constants.GET);
       setMenuData(data?.data?.menus);
+      console.log(menuData);
     } catch (error: any) {
       logger.logError("Menu", error.message, new Date().toISOString());
     }

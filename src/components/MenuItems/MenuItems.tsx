@@ -1,12 +1,13 @@
 import React from "react";
 import DropdownItem from "../DropdownItem/DropdownItem";
+import { Menu, MenuItem, MenuItemsProps } from "@/interfaces/interfaces";
 
-const MenuItems = ({ menuData }: any) => {
+const MenuItems: React.FC<MenuItemsProps> = ({ menuData }) => {
   return (
     <div className="relative font-sans font-semibold text-20px leading-26.4px text-light-grey flex">
       {menuData.length > 0 &&
-        menuData.map((menu: any) =>
-          menu.items.map((item: any, index: number) => (
+        menuData.map((menu: Menu) =>
+          menu.items.map((item: MenuItem, index: number) => (
             <div key={index}>
               <DropdownItem item={item} />
             </div>
