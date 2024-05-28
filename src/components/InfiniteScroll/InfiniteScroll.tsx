@@ -1,10 +1,11 @@
 import React, { useState, useEffect, ReactElement, useCallback } from "react";
+import CircularLoader from "@/components/CircularLoader/CircularLoader";
 
 interface Props {
   fetchData: (start: number, limit: number) => Promise<any[]>;
   children: ReactElement;
   limit?: number;
-  totalItems?: number;
+  totalItems: number;
   containerClassName?: string;
 }
 
@@ -12,6 +13,7 @@ const InfiniteScroll: React.FC<Props> = ({
   fetchData,
   children,
   limit = 10,
+  totalItems,
   containerClassName = "",
 }) => {
   const [data, setData] = useState<any[]>([]);
@@ -26,13 +28,13 @@ const InfiniteScroll: React.FC<Props> = ({
       window.innerHeight + document.documentElement.scrollTop ===
         document.documentElement.offsetHeight
     ) {
-      setLoading(true);
       setPage((prevPage: number) => prevPage + 1);
     }
   }, [loading, hasMore]);
 
   useEffect(() => {
     const fetchDataAndUpdateState = async () => {
+      setLoading(true);
       try {
         const newData = await fetchData((page - 1) * limit, limit);
         setData((prevData: any[]) => [...prevData, ...newData]);
@@ -43,8 +45,10 @@ const InfiniteScroll: React.FC<Props> = ({
         setLoading(false);
       }
     };
-
-    fetchDataAndUpdateState();
+    if (data.length < totalItems) {
+      fetchDataAndUpdateState();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchData, limit, page]);
 
   useEffect(() => {
@@ -59,7 +63,7 @@ const InfiniteScroll: React.FC<Props> = ({
           {React.cloneElement(children, { item })}
         </React.Fragment>
       ))}
-      {loading && <div className="bg-slate-400">Loading...</div>}
+      {loading && <CircularLoader height={62} width={62} />}
     </div>
   );
 };
