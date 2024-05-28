@@ -16,11 +16,7 @@ import { frontendRoutes } from "@/assets/constants/frontend-routes";
 import { useAuth } from "@/contexts/auth-context/authContext";
 import dynamic from "next/dynamic";
 import SkeletonLoader from "@/components/SkeletonLoader/SkeletonLoader";
-import {
-  deleteCookie,
-  getCookie,
-  setCookie,
-} from "@/services/cookieService/cookies";
+import { cookieStorageAPI } from "@/services/storages";
 
 const Timer = dynamic(() => import("@/components/Timer/Timer"), {
   loading: () => <SkeletonLoader width="200px" height="20px" />,
@@ -47,7 +43,7 @@ const OtpForm: FC = () => {
   const { openSnackbar } = useSnackbar();
 
   useEffect(() => {
-    const data = getCookie("otpData");
+    const data = cookieStorageAPI.get("otpData");
     if (data as OtpObject) {
       setOtpData(data as OtpObject);
     }
@@ -84,15 +80,15 @@ const OtpForm: FC = () => {
       .then((data: any) => {
         if (data.resultInfo.code === constants.SUCCCESS) {
           if (otpData.type === apiConstants.SMS) {
-            deleteCookie("otpData");
+            cookieStorageAPI.remove("otpData");
             login(
               data?.data?.tokenInfo?.token,
               data?.data?.tokenInfo?.refreshToken,
               "phone"
             );
           } else {
-            setCookie("email", otpData.destination);
-            deleteCookie("otpData");
+            cookieStorageAPI.set("email", otpData.destination);
+            cookieStorageAPI.remove("otpData");
             router.push(`${frontendRoutes.LOGIN}?email=true`);
             openSnackbar(strings.signUpSuccess, "success");
           }
@@ -137,7 +133,7 @@ const OtpForm: FC = () => {
           };
           setOtpData(newOtpData as OtpObject);
           setTimerEnded(false);
-          setCookie("otpData", newOtpData);
+          cookieStorageAPI.set("otpData", newOtpData);
         }
       })
       .catch((error) => {
