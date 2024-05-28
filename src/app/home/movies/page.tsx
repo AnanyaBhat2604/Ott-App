@@ -5,7 +5,7 @@ import InfiniteScroll from "@/components/InfiniteScroll/InfiniteScroll";
 import Rails from "@/package/Rails/Rails";
 import { ErrorLogger } from "@/services/ErrorLogger";
 import { request } from "@/services/fetchData";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 const Movies = () => {
   const logger = new ErrorLogger();
