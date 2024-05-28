@@ -3,21 +3,19 @@ import React from "react";
 import InfiniteScroll from "@/components/InfiniteScroll/InfiniteScroll";
 
 const ParentComponent: React.FC = () => {
-  const limit: number = 10; // Number of items per page
-
   const fetchDataFromApi = async (
     skip: number,
     limit: number
-  ): Promise<any[]> => {
+  ): Promise<{ responseData: any[]; totalPages: number }> => {
     try {
       const response = await fetch(
         `https://jsonplaceholder.typicode.com/posts?_start=${skip}&_limit=${limit}`
       );
       const newData = await response.json();
-      return newData;
+      return { responseData: newData, totalPages: 0 };
     } catch (error) {
       console.error("Error fetching data from API:", error);
-      return [];
+      return { responseData: [], totalPages: 0 };
     }
   };
 
@@ -25,8 +23,8 @@ const ParentComponent: React.FC = () => {
     <div>
       <h1>Infinite Scroll Example</h1>
       <InfiniteScroll
-        fetchData={(page) => fetchDataFromApi(page, limit)}
-        totalItems={50}
+        fetchData={fetchDataFromApi}
+        limit={5}
         containerClassName={""}
       >
         <ItemRenderer />

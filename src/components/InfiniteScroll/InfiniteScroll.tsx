@@ -2,10 +2,12 @@ import React, { useState, useEffect, ReactElement, useCallback } from "react";
 import CircularLoader from "@/components/CircularLoader/CircularLoader";
 
 interface Props {
-  fetchData: (start: number, limit: number) => Promise<any[]>;
+  fetchData: (
+    start: number,
+    limit: number
+  ) => Promise<{ responseData: any[]; totalPages: number }>;
   children: ReactElement;
   limit?: number;
-  totalItems: number;
   containerClassName?: string;
 }
 
@@ -13,7 +15,7 @@ const InfiniteScroll: React.FC<Props> = ({
   fetchData,
   children,
   limit = 10,
-  totalItems,
+  // totalPages,
   containerClassName = "",
 }) => {
   const [data, setData] = useState<any[]>([]);
@@ -30,24 +32,28 @@ const InfiniteScroll: React.FC<Props> = ({
     ) {
       setPage((prevPage: number) => prevPage + 1);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, hasMore]);
 
   useEffect(() => {
     const fetchDataAndUpdateState = async () => {
       setLoading(true);
       try {
-        const newData = await fetchData((page - 1) * limit, limit);
-        setData((prevData: any[]) => [...prevData, ...newData]);
-        setHasMore(newData.length > 0);
+        const { responseData, totalPages } = await fetchData(
+          (page - 1) * limit,
+          limit
+        );
+        setData((prevData: any[]) => [...prevData, ...responseData]);
+        setHasMore(data.length < totalPages);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
         setLoading(false);
       }
     };
-    if (data.length < totalItems) {
-      fetchDataAndUpdateState();
-    }
+
+    fetchDataAndUpdateState();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchData, limit, page]);
 
