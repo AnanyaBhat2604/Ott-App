@@ -14,6 +14,17 @@ const refreshToken = async () => {
   });
 
   if (!response.ok) {
+    const responseData = await response.json();
+    if (
+      response.status === 401 &&
+      responseData.resultInfo.code === "UNAUTHORIZED_ACCESS_IN_APPLICATIONS"
+    ) {
+      cookieStorageAPI.remove("token");
+      cookieStorageAPI.remove("refreshToken");
+      window.location.reload();
+      throw new Error(strings.somethingWentWrong);
+    }
+
     throw new Error(strings.somethingWentWrong);
   }
 
