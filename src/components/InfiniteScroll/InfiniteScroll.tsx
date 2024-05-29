@@ -1,4 +1,10 @@
-import React, { useState, useEffect, ReactElement, useCallback } from "react";
+import React, {
+  useState,
+  useEffect,
+  ReactElement,
+  useCallback,
+  useRef,
+} from "react";
 import CircularLoader from "@/components/CircularLoader/CircularLoader";
 
 interface Props {
@@ -23,18 +29,6 @@ const InfiniteScroll: React.FC<Props> = ({
   const [loading, setLoading] = useState<boolean>(false);
   const [hasMore, setHasMore] = useState<boolean>(true);
 
-  const handleScroll = useCallback(() => {
-    if (
-      !loading &&
-      hasMore &&
-      window.innerHeight + document.documentElement.scrollTop ===
-        document.documentElement.offsetHeight
-    ) {
-      setPage((prevPage: number) => prevPage + 1);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loading, hasMore]);
-
   useEffect(() => {
     const fetchDataAndUpdateState = async () => {
       setLoading(true);
@@ -58,10 +52,28 @@ const InfiniteScroll: React.FC<Props> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchData, limit, page]);
 
+  const [isIntersecting, setIsIntersecting] = useState(false);
+  const ref = useRef(null);
+
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [handleScroll]);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsIntersecting(entry.isIntersecting);
+      },
+      { rootMargin: "-300px" }
+    );
+
+    if (isIntersecting && hasMore) {
+      setPage((prevPage: number) => prevPage + 1);
+    }
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isIntersecting]);
 
   return (
     <div className={containerClassName}>
@@ -70,7 +82,11 @@ const InfiniteScroll: React.FC<Props> = ({
           {React.cloneElement(children, { item })}
         </React.Fragment>
       ))}
-      {loading && <CircularLoader height={62} width={62} />}
+      {
+        <div ref={ref}>
+          {loading && <CircularLoader height={62} width={62} />}
+        </div>
+      }
     </div>
   );
 };
