@@ -84,7 +84,7 @@ const InfiniteScroll: React.FC<Props> = ({
       ))}
       {
         <div ref={ref}>
-          {loading && <CircularLoader height={62} width={62} />}
+          <CircularLoader height={62} width={62} loading={hasMore && loading} />
         </div>
       }
     </div>
