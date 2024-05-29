@@ -22,7 +22,9 @@ const TvShows = () => {
 
       return {
         responseData: response?.curation?.packages,
-        totalPages: Math.floor(response?.pagination?.totalItems / limit),
+        totalPages: Math.ceil(
+          response?.pagination?.totalItems / constants.API_DATA_LIMIT - 1
+        ),
       };
     } catch (error) {
       logger.logError("Menu", error, new Date().toISOString());

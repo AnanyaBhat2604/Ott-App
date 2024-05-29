@@ -44,6 +44,7 @@ const InfiniteScroll: React.FC<Props> = ({
           limit
         );
         setData((prevData: any[]) => [...prevData, ...responseData]);
+
         setHasMore(data.length < totalPages);
         setLoading(false);
       } catch (error) {

@@ -16,13 +16,15 @@ const Movies = () => {
   ): Promise<{ responseData: any[]; totalPages: number }> => {
     try {
       const response = await request(
-        `${URL?.GET_ALL_MOVIES}?skip=${skip}&limit=${limit}`,
+        `${URL?.GET_ALL_MOVIES}?skip=${skip}&limit=${constants.API_DATA_LIMIT}`,
         constants.GET
       );
 
       return {
         responseData: response?.curation?.packages,
-        totalPages: Math.floor(response?.pagination?.totalItems / limit),
+        totalPages: Math.ceil(
+          response?.pagination?.totalItems / constants.API_DATA_LIMIT - 1
+        ),
       };
     } catch (error) {
       logger.logError("Menu", error, new Date().toISOString());
@@ -34,7 +36,7 @@ const Movies = () => {
     <>
       <InfiniteScroll
         fetchData={fetchDataFromApi}
-        limit={5}
+        limit={constants.API_DATA_LIMIT}
         containerClassName={""}
       >
         <ItemRenderer />
