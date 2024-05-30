@@ -14,12 +14,14 @@ import { ErrorLogger } from "@/services/ErrorLogger";
 import { useAuth } from "@/contexts/auth-context/authContext";
 import { frontendRoutes } from "@/assets/constants/frontend-routes";
 import strings from "@/assets/strings/strings.json";
+import useBreakpoint from "@/hooks/useBreakpoint";
+import SideMenu from "../SideMenu/SideMenu";
 
 const Header = () => {
   const logger = new ErrorLogger();
   const [menuData, setMenuData] = useState({});
-
   const { isLoggedIn, logout } = useAuth();
+  const breakpoint = useBreakpoint();
 
   const fetchMenuData = async () => {
     try {
@@ -66,11 +68,23 @@ const Header = () => {
 
   return (
     <div className="bg-black">
-      <div className="container mx-auto flex gap-[50px] justify-between items-center relative">
-        <Logo />
-        {menuData && <MenuItems menuData={menuData} />}
+      <div className="container mx-auto flex gap-[50px] justify-between items-center relative max-sm:gap-[3px]">
+        {breakpoint === "sm" ||
+        breakpoint === "md" ||
+        breakpoint === "default" ? (
+          <SideMenu menuData={menuData} />
+        ) : (
+          <Logo />
+        )}
+        {breakpoint === "sm" ||
+        breakpoint === "md" ||
+        breakpoint === "default" ? (
+          <Logo />
+        ) : (
+          menuData && <MenuItems menuData={menuData} />
+        )}
 
-        <div className=" font-sans font-semibold text-20 leading-26.4px text-light-grey-1 flex gap-[20px] items-center">
+        <div className=" font-sans font-semibold text-20 leading-26.4px text-light-grey-1 flex gap-[20px] items-center max-sm:gap-[3px]">
           <div
             className={` px-[10px] h-[64px] flex items-center hover:bg-dark-grey text-white cursor-pointer
             `}

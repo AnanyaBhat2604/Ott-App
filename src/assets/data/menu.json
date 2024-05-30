@@ -1,74 +1,58 @@
 {
-  "menus": [
+  "id": "1",
+  "title": "Menu",
+  "url": "",
+  "visibility": "true",
+  "children": [
     {
-      "name": "nav-menu",
-      "items": [
+      "id": "1",
+      "title": "Home",
+      "url": "/home",
+      "visibility": "true",
+      "children": [
         {
-          "id": "1",
-          "title": "Home",
-          "url": "/home",
+          "id": "1.1",
+          "title": "All",
+          "url": "/",
           "visibility": "true",
-          "children": [
-            {
-              "id": "1",
-              "title": "All",
-              "url": "/all",
-              "visibility": "true",
-              "children": []
-            },
-            {
-              "id": "2",
-              "title": "TV Shows",
-              "url": "/tvShows",
-              "visibility": "true",
-              "children": []
-            },
-            {
-              "id": "3",
-              "title": "Movies",
-              "url": "/Movies",
-              "visibility": "true",
-              "children": []
-            }
-          ]
+          "children": []
         },
         {
-          "id": "2",
-          "title": "Store",
-          "url": "/store",
+          "id": "1.2",
+          "title": "TV Shows",
+          "url": "/tv-shows",
           "visibility": "true",
-          "children": [
-            {
-              "id": "1",
-              "title": "All",
-              "url": "/all",
-              "visibility": "true",
-              "children": []
-            },
-            {
-              "id": "2",
-              "title": "Rent",
-              "url": "/rent",
-              "visibility": "true",
-              "children": []
-            },
-            {
-              "id": "3",
-              "title": "Channel",
-              "url": "/channel",
-              "visibility": "true",
-              "children": []
-            }
-          ]
+          "children": []
         },
         {
-          "id": "3",
-          "title": "Live TV",
-          "url": "/liveTV",
+          "id": "1.3",
+          "title": "Movies",
+          "url": "/movies",
           "visibility": "true",
           "children": []
         }
       ]
+    },
+    {
+      "id": "2",
+      "title": "Store",
+      "url": "/store",
+      "visibility": "true",
+      "children": []
+    },
+    {
+      "id": "3",
+      "title": "Category",
+      "url": "/category",
+      "visibility": "true",
+      "children": []
+    },
+    {
+      "id": "4",
+      "title": "Live TV",
+      "url": "/live-tv",
+      "visibility": "true",
+      "children": []
     }
   ]
 }
