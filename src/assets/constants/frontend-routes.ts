@@ -9,6 +9,8 @@ export const frontendRoutes = {
   HOME: "/home",
   MOVIES: "/home/movies",
   TV_SHOWS: "/home/tv-shows",
+  MOVIES_PAGE: "/movies",
+  TV_SHOWS_PAGE: "/tv-shows",
   GLOBAL_404: "/404",
 };
 
@@ -28,4 +30,8 @@ export const authRoutes = [
   frontendRoutes.PASSWORD_EMAIL_SENT,
 ];
 
-export const protectedRoutesBasePath = [frontendRoutes.HOME];
+export const protectedRoutesBasePath = [
+  frontendRoutes.HOME,
+  frontendRoutes.MOVIES_PAGE,
+  frontendRoutes.TV_SHOWS_PAGE,
+];
