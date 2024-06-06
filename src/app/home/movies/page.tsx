@@ -4,6 +4,7 @@ import { constants } from "@/assets/constants/constants";
 import InfiniteScroll from "@/components/InfiniteScroll/InfiniteScroll";
 import Rails from "@/package/Rails/Rails";
 import { ErrorLogger } from "@/services/ErrorLogger";
+import getComponent from "@/services/PackageSelector";
 import { request } from "@/services/fetchData";
 import React from "react";
 
@@ -47,11 +48,15 @@ const Movies = () => {
 
 const ItemRenderer: React.FC<{ item?: any }> = ({ item }) => (
   <div key={item._id}>
-    {item?.items?.contents?.map((content: any, i: number) => (
-      <div key={i}>
-        <Rails data={content.items} title={content?.title} />
-      </div>
-    ))}
+    {item?.items?.contents?.map((content: any, i: number) => {
+      const Component = getComponent(content.packageType);
+
+      return (
+        <div key={i}>
+          <Component data={content.items} title={content?.title} />
+        </div>
+      );
+    })}
   </div>
 );
 

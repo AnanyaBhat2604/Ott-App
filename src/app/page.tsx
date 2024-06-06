@@ -3,9 +3,9 @@ import { request } from "@/services/fetchData";
 import { constants } from "@/assets/constants/constants";
 import type { Metadata } from "next";
 import { URL } from "@/assets/constants/apiRequest";
-import getComponent from "@/services/packageSelector";
 import { useEffect, useState } from "react";
 import { ErrorLogger } from "@/services/ErrorLogger";
+import getComponent from "@/services/PackageSelector";
 
 // export const metadata: Metadata = {
 //   title: "Home Page",
