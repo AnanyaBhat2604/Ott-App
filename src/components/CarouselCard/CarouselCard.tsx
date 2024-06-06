@@ -15,11 +15,8 @@ const CarouselCard = ({ actualData }: any) => {
     <Link
       href={jawSummary.target.path}
       className={` bg-dark-blue backdrop-filter backdrop-blur-md bg-cover bg-center border border-white border-opacity-25 rounded-lg p-6 shadow-lg flex flex-col items-center justify-center text-center  transition-all
-       ${
-        isHovered && "scale-110 max-h-[450px]"
-      }
-      `
-    }
+       ${isHovered && "scale-110 max-h-[450px]"}
+      `}
     >
       <div
         className="w-full relative overflow-visible "
