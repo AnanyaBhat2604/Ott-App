@@ -18,7 +18,7 @@ const getActiveBreakpoint = (): Breakpoint => {
 };
 
 const useBreakpoint = (): Breakpoint => {
-  const [breakpoint, setBreakpoint] = useState<Breakpoint>("default");
+  const [breakpoint, setBreakpoint] = useState<Breakpoint>("lg");
 
   useEffect(() => {
     const handleResize = () => {
