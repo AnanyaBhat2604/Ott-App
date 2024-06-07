@@ -4,13 +4,13 @@ import { useState, useEffect } from "react";
 type Breakpoint = "xl" | "lg" | "md" | "sm" | "default";
 
 const getActiveBreakpoint = (): Breakpoint => {
-  if (window.matchMedia("(min-width: 1280px)").matches) {
+  if (window?.matchMedia("(min-width: 1280px)").matches) {
     return "xl";
-  } else if (window.matchMedia("(min-width: 1024px)").matches) {
+  } else if (window?.matchMedia("(min-width: 1024px)").matches) {
     return "lg";
-  } else if (window.matchMedia("(min-width: 768px)").matches) {
+  } else if (window?.matchMedia("(min-width: 768px)").matches) {
     return "md";
-  } else if (window.matchMedia("(min-width: 640px)").matches) {
+  } else if (window?.matchMedia("(min-width: 640px)").matches) {
     return "sm";
   } else {
     return "default";
@@ -18,9 +18,7 @@ const getActiveBreakpoint = (): Breakpoint => {
 };
 
 const useBreakpoint = (): Breakpoint => {
-  const [breakpoint, setBreakpoint] = useState<Breakpoint>(
-    getActiveBreakpoint()
-  );
+  const [breakpoint, setBreakpoint] = useState<Breakpoint>("default");
 
   useEffect(() => {
     const handleResize = () => {
