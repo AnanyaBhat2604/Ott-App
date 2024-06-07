@@ -13,7 +13,7 @@ import { useSnackbar } from "@/contexts/snackbar-context/snackbar-context";
 import { request } from "@/services/api";
 import { useAuth } from "@/contexts/auth-context/authContext";
 import { getUpdatedParams } from "@/utils/getUpdatedParams";
-import { deleteCookie, getCookie } from "@/services/cookieService/cookies";
+import { cookieStorageAPI } from "@/services/storages";
 
 const EmailLogin: FC = () => {
   const [errorFields, setErrorFields] = useState<LoginWithEmail>({
@@ -22,7 +22,7 @@ const EmailLogin: FC = () => {
   });
 
   const [formData, setFormData] = useState<LoginWithEmail>({
-    email: getCookie("email") || "",
+    email: cookieStorageAPI.get("email") || "",
     password: "",
   });
 
@@ -61,7 +61,7 @@ const EmailLogin: FC = () => {
       request(apiEndpoints.emailLogin, apiMethods.POST, {}, data)
         .then((data: any) => {
           if (data.resultInfo.code === constants.SUCCCESS) {
-            deleteCookie("email");
+            cookieStorageAPI.remove("email");
             login(data?.data?.token, data?.data?.refreshToken, "email");
           }
         })

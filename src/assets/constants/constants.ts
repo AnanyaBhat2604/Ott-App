@@ -17,6 +17,7 @@ export const constants = {
   ROUTE_PERMISSIONS: "routePermissions",
   OTP_LENGTH: 6,
   UNAUTHORIZED_ACCESS_IN_APPLICATIONS: "UNAUTHORIZED_ACCESS_IN_APPLICATIONS",
+  API_DATA_LIMIT: 5,
 };
 
 export const profileOptions: ProfileOptions = {

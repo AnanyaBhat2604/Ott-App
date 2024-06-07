@@ -18,13 +18,9 @@ import React, {
   useState,
 } from "react";
 import { useSnackbar } from "../snackbar-context/snackbar-context";
-import {
-  checkCookie,
-  deleteCookie,
-  getCookie,
-  setCookie,
-} from "@/services/cookieService/cookies";
+
 import { getUpdatedParams } from "@/utils/getUpdatedParams";
+import { cookieStorageAPI } from "@/services/storages";
 
 interface AuthContextType {
   isLoggedIn: boolean;
@@ -56,15 +52,17 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const login = (token: string, refreshToken: string, type: string) => {
     setIsLoggedIn(true);
 
-    setCookie("token", { token: token, auth: true });
-    setCookie("refreshToken", refreshToken);
+    cookieStorageAPI.set("token", { token: token, auth: true });
+    cookieStorageAPI.set("refreshToken", refreshToken);
 
     router.replace(redirectPath ? redirectPath : frontendRoutes.DASHBOARD);
     router.refresh();
   };
 
   const logout = () => {
-    const tokenData: { token: string; auth: boolean } = getCookie("token") || {
+    const tokenData: { token: string; auth: boolean } = cookieStorageAPI.get(
+      "token"
+    ) || {
       token: "",
       auth: false,
     };
@@ -79,8 +77,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     request(apiEndpoints.logout, apiMethods.GET, headers)
       .then((data: any) => {
         if (data.resultInfo.code === constants.SUCCCESS) {
-          deleteCookie("token");
-          deleteCookie("refreshToken");
+          cookieStorageAPI.remove("token");
+          cookieStorageAPI.remove("refreshToken");
 
           // router.refresh();
           // router.push(frontendRoutes.LOGIN);
@@ -94,7 +92,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   useEffect(() => {
-    const tokenData: { token: string; auth: boolean } = getCookie("token") || {
+    const tokenData: { token: string; auth: boolean } = cookieStorageAPI.get(
+      "token"
+    ) || {
       token: "",
       auth: false,
     };
