@@ -6,7 +6,7 @@ const Logo = () => {
   return (
     <Link
       href={"/"}
-      className="font-sans font-semibold text-24 leading-26.4px text-white"
+      className="font-sans font-semibold text-24 leading-26.4px text-white max-sm:text-20"
     >
       {strings.primeVideo}
     </Link>

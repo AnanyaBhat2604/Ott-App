@@ -60,6 +60,7 @@ const config: Config = {
         lg: "32px",
         "24": "24px",
         "20": "20px",
+        "18": "18px",
       },
 
       fontWeight: {

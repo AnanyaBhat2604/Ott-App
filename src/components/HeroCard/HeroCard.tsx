@@ -10,7 +10,7 @@ const HeroCard: FC<{ heroData: HeroDataProps }> = ({ heroData }) => {
 
   return (
     <div
-      className={`flex px-32 py-24 gap-5 justify-center items-center border-b-[2px] border-dark-grey max-w-[1800px] mx-auto ${
+      className={`flex px-32 py-24 gap-5 justify-center items-center border-b-[2px] border-dark-grey max-w-[1800px] mx-auto max-sm:flex-col max-sm:px-[40px] ${
         heroData.orientation === "right" ? "flex-row-reverse" : ""
       } }
       `}
