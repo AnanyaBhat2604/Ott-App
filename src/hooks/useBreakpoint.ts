@@ -28,6 +28,7 @@ const useBreakpoint = (): Breakpoint => {
     const debouncedHandleResize = debounce(handleResize, 200);
 
     window.addEventListener("resize", debouncedHandleResize);
+    handleResize();
 
     return () => {
       window.removeEventListener("resize", debouncedHandleResize);
